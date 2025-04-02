@@ -1,0 +1,106 @@
+<div class="w-full h-screen flex flex-wrap">
+
+    <!-- Form Section -->
+    <div class="w-full md:w-1/2 flex flex-col justify-center bg-white p-8 md:p-24 lg:p-32">
+
+        <!-- Logo -->
+        <div class="flex justify-center md:justify-start pt-12 md:pl-12">
+            <a href="#" class="bg-black text-white font-bold text-xl p-4">Logo</a>
+        </div>
+
+        <div class="flex flex-col justify-center md:justify-start pt-8 md:pt-0">
+            <!-- Title -->
+            <h2 class="text-center text-3xl">Inscription</h2>
+
+            <!-- Form -->
+            <form [formGroup]="registrationForm" (ngSubmit)="submitForm()" class="flex flex-col pt-3 md:pt-8 space-y-4 gap-3">
+
+                <label for="lastname" class="relative">
+                    <input type="text" id="lastname" placeholder="" formControlName="lastname" 
+                        class="peer mt-0.5 w-full rounded border-gray-300 
+                        shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)] sm:text-sm p-2" />
+                    <span class="absolute inset-y-0 left-3 transform-translate-y-5 bg-white text-sm font-medium 
+                    text-gray-700 transition-transform peer-placeholder-shown:translate-y-0 peer-focus:-translate-y-5">
+                        Nom
+                    </span>
+                </label>
+
+                <!-- Prénom -->
+                <label for="firstname" class="relative">
+                    <input type="text" id="firstname" placeholder="" formControlName="firstname" 
+                        class="peer mt-0.5 w-full rounded border-gray-300 
+                        shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)] sm:text-sm p-2" />
+                    <span class="absolute inset-y-0 left-3 transform-translate-y-5 bg-white text-sm font-medium 
+                    text-gray-700 transition-transform peer-placeholder-shown:translate-y-0 peer-focus:-translate-y-5">
+                        Prénom
+                    </span>
+                </label>
+
+                <!-- Pseudonyme -->
+                <label for="pseudonym" class="relative">
+                    <input type="text" id="pseudonym" placeholder="" formControlName="pseudonym" 
+                        class="peer mt-0.5 w-full rounded border-gray-300 
+                        shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)] sm:text-sm p-2" />
+                    <span class="absolute inset-y-0 left-3 transform-translate-y-5 bg-white text-sm font-medium 
+                    text-gray-700 transition-transform peer-placeholder-shown:translate-y-0 peer-focus:-translate-y-5">
+                        Pseudonyme
+                    </span>
+                </label>
+
+                <!-- Mot de passe -->
+                <label for="password" class="relative">
+                    <input type="password" id="password" placeholder="" formControlName="password" 
+                        class="peer mt-0.5 w-full rounded border-gray-300 
+                        shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)] sm:text-sm p-2" />
+                    <span class="absolute inset-y-0 left-3 transform-translate-y-5 bg-white text-sm font-medium 
+                    text-gray-700 transition-transform peer-placeholder-shown:translate-y-0 peer-focus:-translate-y-5">
+                        Mot de passe
+                    </span>
+                </label>
+
+                <!-- Email -->
+                <label for="email" class="relative">
+                    <input type="email" id="email" placeholder="" formControlName="email" 
+                        class="peer mt-0.5 w-full rounded border-gray-300 
+                        shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)] sm:text-sm p-2" />
+                    <span class="absolute inset-y-0 left-3 transform-translate-y-5 bg-white text-sm font-medium 
+                    text-gray-700 transition-transform peer-placeholder-shown:translate-y-0 peer-focus:-translate-y-5">
+                        Email
+                    </span>
+                </label>
+
+                <!-- Adresse -->
+                <label for="address" class="relative">
+                    <input type="text" id="address" placeholder="" formControlName="address" 
+                        class="peer mt-0.5 w-full rounded border-gray-300 
+                        shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)] sm:text-sm p-2" />
+                    <span class="absolute inset-y-0 left-3 transform-translate-y-5 bg-white text-sm font-medium 
+                    text-gray-700 transition-transform peer-placeholder-shown:translate-y-0 peer-focus:-translate-y-5">
+                        Adresse complète
+                    </span>
+                </label>
+
+                <!-- Sélection résidence -->
+                <div class="flex space-x-4">
+                    <p>Où habitez vous ?</p>
+                    <label class="flex items-center">
+                        <input type="radio" formControlName="residence" value="ville" class="mr-2" /> Ville
+                    </label>
+                    <label class="flex items-center">
+                        <input type="radio" formControlName="residence" value="campagne" class="mr-2" /> Campagne
+                    </label>
+                </div>
+
+                <!-- Bouton Soumettre -->
+                <button type="submit" [disabled]="!registrationForm.valid" class="mt-4 px-4 py-2 bg-black text-white rounded-lg hover:bg-blue-600">
+                    Soumettre
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Image Section -->
+    <div class="w-1/2">
+        <img src="../../../public/pictures/registration-illustration.jpg" alt="">
+    </div>
+</div>
