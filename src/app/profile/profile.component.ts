@@ -12,7 +12,7 @@ import { TabsSectionComponent } from './tabs-section/tabs-section.component';
 })
 export class ProfileComponent {
 
-  illustrationPath: string = '/public/pictures/ex-illustration.jpg';
+  illustrationPath: string = '/ex-illustration.jpg';
 
   /*
   updateIllustration(event: any) {
