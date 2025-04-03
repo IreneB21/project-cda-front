@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
+import { HeaderComponent } from './header/header.component';
+import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-landing',
-  imports: [],
+  imports: [HeaderComponent, RouterOutlet],
   templateUrl: './landing.component.html',
   styleUrl: './landing.component.css'
 })

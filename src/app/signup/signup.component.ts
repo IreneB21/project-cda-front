@@ -1,14 +1,15 @@
 import { Component } from '@angular/core';
+import { HeaderAuthentificationComponent } from '../header-authentification/header-authentification.component';
 import {FormControl, FormGroup, ReactiveFormsModule} from '@angular/forms';
 
 @Component({
-  selector: 'app-form',
-  standalone: true,
-  imports: [ReactiveFormsModule],
-  templateUrl: './form.component.html',
-  styleUrl: './form.component.css'
+  selector: 'app-signup',
+  imports: [HeaderAuthentificationComponent, ReactiveFormsModule],
+  templateUrl: './signup.component.html',
+  styleUrl: './signup.component.css'
 })
-export class FormComponent {
+export class SignupComponent {
+
   registrationForm = new FormGroup({
     lastname: new FormControl(''),
     firstname: new FormControl(''),
