@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { InfosComponent } from './infos/infos.component';
-import { NavbarComponent } from '../navbar/navbar.component';
 import { TabsSectionComponent } from './tabs-section/tabs-section.component';
+import { NavbarComponent } from '../../shared/navbar/navbar.component';
 
 @Component({
   selector: 'app-profile',

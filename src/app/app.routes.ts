@@ -1,8 +1,8 @@
 import { Routes } from '@angular/router';
-import { LandingComponent } from './landing/landing.component';
-import { ProfileComponent } from './profile/profile.component';
-import { SignupComponent } from './signup/signup.component';
-import { LoginComponent } from './login/login.component';
+import { SignupComponent } from './components/member/signup/signup.component';
+import { LoginComponent } from './components/shared/login/login.component';
+import { LandingComponent } from './components/shared/landing/landing.component';
+import { ProfileComponent } from './components/member/profile/profile.component';
 
 export const routes: Routes = [
     { path: 'hello/neighbors', component: LandingComponent },
