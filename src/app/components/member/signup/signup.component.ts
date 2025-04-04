@@ -50,7 +50,7 @@ export class SignupComponent {
     this.authService.register(registrationData).subscribe({
       next: () => {
         console.log('Inscription réussie');
-        this.router.navigate(['/hello/neighbors/login']); 
+        this.router.navigate(['/hello/neighbors/profile']); 
       },
       error: err => console.error('Erreur inscription :', err)
     });

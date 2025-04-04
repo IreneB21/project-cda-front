@@ -17,16 +17,8 @@
                 Faites de votre quartier un lieu plus vivant, solidaire et collaboratif. Parce qu’ensemble, on est plus forts !
                 Inscrivez-vous dès maintenant et dites bonjour à vos voisins !
             </p>
-
-            <div class="mt-6 sm:-mx-2">
-                <a href="#" class="inline-flex items-center justify-center w-full px-4 text-sm py-2.5 overflow-hidden text-white 
-                transition-colors duration-300 bg-gray-900 rounded-lg shadow sm:w-auto sm:mx-2 hover:bg-gray-700 dark:bg-gray-800 
-                dark:hover:bg-gray-700 focus:ring focus:ring-gray-300 focus:ring-opacity-80">
-                    <span class="mx-10">
-                        C'est parti !
-                    </span>
-                </a>
-            </div>
+            
+            <app-button (onClick)="functioncall($event)" [label]="label"></app-button>
         </div>
     </div>
 </section>

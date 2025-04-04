@@ -15,4 +15,8 @@ export class AuthService {
   register(user: RegistrationDto): Observable<any> {
     return this.http.post(`${this.apiUrl}/register`, user);
   }
+
+  login() {
+    
+  }
 }

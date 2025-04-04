@@ -1,1 +1,20 @@
-<p>infos works!</p>
+<div class="flex justify-center items-center relative">
+    <div class="w-54 h-54 rounded-full overflow-hidden border-1 absolute -top-28">
+        <img src="/ex-avatar.jpg" class="w-full h-full object-cover" alt="avatar">
+    </div>
+</div>
+
+<div class="text-center mt-33">
+    <!-- Nom + prénom -->
+    <h1 class="text-1xl font-bold">
+      {{ user.firstname }} {{ user.lastname }}
+    </h1>
+    <!-- Pseudo, affiché seulement s'il existe -->
+    <p class="text-base text-gray-700 mt-1">
+        {{ displayPseudonym }}
+      </p>
+    <!-- Date d'inscription -->
+    <p class="text-sm text-gray-400 mt-1">
+      Membre depuis le {{ formattedDate }}
+    </p>
+</div>
