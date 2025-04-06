@@ -1,37 +1,39 @@
-<div class="flex overflow-x-auto gap-4 overflow-y-hidden border-b border-gray-200 whitespace-nowrap dark:border-gray-700">
-    <button 
-        class="inline-flex items-center h-10 px-15 -mb-px text-sm text-center bg-transparent border-b-2 sm:text-base whitespace-nowrap focus:outline-none"
-        [ngClass]="selectedTab === 'informations' ? 'text-black border-black dark:border-blue-400 dark:text-blue-300' : 'text-gray-500 border-transparent dark:text-gray-400 cursor-pointer hover:border-gray-400'"
-        (click)="setTab('informations')">
-        Informations
-    </button>
-
-    <button 
-        class="inline-flex items-center h-10 px-15 -mb-px text-sm text-center bg-transparent border-b-2 sm:text-base whitespace-nowrap focus:outline-none"
-        [ngClass]="selectedTab === 'activite' ? 'text-black border-black dark:border-blue-400 dark:text-blue-300' : 'text-gray-500 border-transparent dark:text-gray-400 cursor-pointer hover:border-gray-400'"
-        (click)="setTab('activite')">
-        Activité
-    </button>
-
-    <button 
-        class="inline-flex items-center h-10 px-15 -mb-px text-sm text-center bg-transparent border-b-2 sm:text-base whitespace-nowrap focus:outline-none"
-        [ngClass]="selectedTab === 'notifications' ? 'text-black border-black dark:border-blue-400 dark:text-blue-300' : 'text-gray-500 border-transparent dark:text-gray-400 cursor-pointer hover:border-gray-400'"
-        (click)="setTab('notifications')">
-        Notifications
-    </button>
-</div>
-
-<!-- Contenu des onglets -->
-<div class="p-4">
-    <div *ngIf="selectedTab === 'informations'">
-        <app-infos-tab></app-infos-tab>
+<div class="">
+    <div class="flex overflow-x-auto gap-4 overflow-y-hidden border-b border-gray-200 whitespace-nowrap dark:border-gray-700">
+        <button 
+            class="inline-flex items-center h-10 px-15 -mb-px text-sm text-center bg-transparent border-b-2 sm:text-base whitespace-nowrap focus:outline-none"
+            [ngClass]="selectedTab === 'informations' ? 'text-black border-black dark:border-blue-400 dark:text-blue-300' : 'text-gray-500 border-transparent dark:text-gray-400 cursor-pointer hover:border-gray-400'"
+            (click)="setTab('informations')">
+            Informations
+        </button>
+    
+        <button 
+            class="inline-flex items-center h-10 px-15 -mb-px text-sm text-center bg-transparent border-b-2 sm:text-base whitespace-nowrap focus:outline-none"
+            [ngClass]="selectedTab === 'activite' ? 'text-black border-black dark:border-blue-400 dark:text-blue-300' : 'text-gray-500 border-transparent dark:text-gray-400 cursor-pointer hover:border-gray-400'"
+            (click)="setTab('activite')">
+            Activité
+        </button>
+    
+        <button 
+            class="inline-flex items-center h-10 px-15 -mb-px text-sm text-center bg-transparent border-b-2 sm:text-base whitespace-nowrap focus:outline-none"
+            [ngClass]="selectedTab === 'notifications' ? 'text-black border-black dark:border-blue-400 dark:text-blue-300' : 'text-gray-500 border-transparent dark:text-gray-400 cursor-pointer hover:border-gray-400'"
+            (click)="setTab('notifications')">
+            Notifications
+        </button>
     </div>
-
-    <div *ngIf="selectedTab === 'activite'">
-        <app-activity-tab></app-activity-tab>
-    </div>
-
-    <div *ngIf="selectedTab === 'notifications'">
-        <app-notifications-tab></app-notifications-tab>
+    
+    <!-- Contenu des onglets -->
+    <div class="p-4">
+        <div *ngIf="selectedTab === 'informations'">
+            <app-infos-tab></app-infos-tab>
+        </div>
+    
+        <div *ngIf="selectedTab === 'activite'">
+            <app-activity-tab></app-activity-tab>
+        </div>
+    
+        <div *ngIf="selectedTab === 'notifications'">
+            <app-notifications-tab></app-notifications-tab>
+        </div>
     </div>
 </div>

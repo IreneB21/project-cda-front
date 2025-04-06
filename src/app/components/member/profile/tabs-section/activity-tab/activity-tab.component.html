@@ -1,1 +1,18 @@
-<p>activity-tab works!</p>
+<div class="flex-col justify-content-center align-items-center">
+    @if (publications == null) {
+        <div>
+            <h6>Vous n'avez encore rien publié ^^</h6>
+            <img src="/desert.jpg" class="my-8 w-80" alt="">
+        </div>
+    } @else {
+        <div>
+            <div class="feed">
+                @for (publication of publications; track publication.id) {
+                    <app-publication
+                        [data]="publication">
+                    </app-publication>
+                }
+            </div>
+        </div>
+    }
+</div>
