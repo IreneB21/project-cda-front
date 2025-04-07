@@ -1,5 +1,7 @@
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { PublicationCreateDto } from '../models/publication-create.dto';
+import { catchError, Observable, of } from 'rxjs';
 
 export interface Publication {
   id: number;
@@ -21,8 +23,7 @@ export interface Publication {
 })
 export class PublicationService {
 
-  constructor() { }
-
+  private apiUrl = 'http://localhost:8080/api/rest/hello/neighbors/publication';
   private mockPublications: Publication[] = [
     {
       id: 1,
@@ -52,8 +53,29 @@ export class PublicationService {
       comments: 5
     }
   ];
+  private httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type':  'application/json',
+      Authorization: `Bearer ${sessionStorage.getItem('token')}`
+    })
+  };
+
+  constructor(private http: HttpClient) {}
 
   getPublications(): Observable<Publication[]> {
+  
+    /*
+    http.get<Config>('/api/config').subscribe(config => {
+      // process the configuration.
+    });
+    */
     return of(this.mockPublications);
+  }
+
+  savePublication(newPublication: PublicationCreateDto): Observable<any> {
+    return this.http.post(`${this.apiUrl}/create`, newPublication, this.httpOptions)
+      .pipe(
+        //catchError()
+      );
   }
 }

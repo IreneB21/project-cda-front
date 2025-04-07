@@ -1,22 +1,49 @@
-<!-- component -->
-<div class="heading text-center font-bold text-2xl m-5 text-gray-800">New Post</div>
-<style>
-  body {background:white !important;}
-</style>
-  <div class="editor mx-auto w-10/12 flex flex-col text-gray-800 border border-gray-300 p-4 shadow-lg max-w-2xl">
-    <input class="title bg-gray-100 border border-gray-300 p-2 mb-4 outline-none" spellcheck="false" placeholder="Title" type="text">
-    <textarea class="description bg-gray-100 sec p-3 h-60 border border-gray-300 outline-none" spellcheck="false" placeholder="Describe everything about this post here"></textarea>
-    
-    <!-- icons -->
-    <div class="icons flex text-gray-500 m-2">
-      <svg class="mr-2 cursor-pointer hover:text-gray-700 border rounded-full p-1 h-7" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
-      <svg class="mr-2 cursor-pointer hover:text-gray-700 border rounded-full p-1 h-7" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-      <svg class="mr-2 cursor-pointer hover:text-gray-700 border rounded-full p-1 h-7" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13" /></svg>
-      <div class="count ml-auto text-gray-400 text-xs font-semibold">0/300</div>
+<form [formGroup]="postMakingForm" (ngSubmit)="onSubmit()"
+  class="flex flex-col text-gray-800 font-sans rounded-md border px-6 py-4 max-w-md bg-white">
+
+  <!-- Type de publication -->
+  <select #type formControlName="publicationType" class="bg-gray-100 border border-gray-300 p-2 mb-4 outline-none">
+    <option value="" disabled>Choisissez un type de publication</option>
+    @for (type of publicationTypes; track type.id) {
+      <option [value]="type.id">{{ type.label }}</option>
+    }
+  </select>
+
+  <!-- Inputs spécifiques aux évènements -->
+  @if (type.value == "EVENT") {
+    <div class ="flex gap-2 mb-4">
+      <input type="date" formControlName="startDate" class="bg-gray-100 border border-gray-300 p-2 w-1/2 outline-none" />
+      <input type="date" formControlName="endDate" class="bg-gray-100 border border-gray-300 p-2 w-1/2 outline-none" />
     </div>
-    <!-- buttons -->
-    <div class="buttons flex">
-      <div class="btn border border-gray-300 p-1 px-4 font-semibold cursor-pointer text-gray-500 ml-auto">Cancel</div>
-      <div class="btn border border-indigo-500 p-1 px-4 font-semibold cursor-pointer text-gray-200 ml-2 bg-indigo-500">Post</div>
+    <input placeholder="Capacité maximale" type="number" formControlName="maxCapacity"class="bg-gray-100 border border-gray-300 p-2 mb-4 outline-none" />
+  }
+
+  @if (type.value != '') {
+    <!-- Inputs communs aux autres types -->
+    <input placeholder="Titre" type="text" formControlName="title"
+      class="bg-gray-100 border border-gray-300 p-2 mb-4 outline-none" />
+    <textarea 
+      formControlName="description" 
+      rows="3"
+      placeholder="Décrivez votre publication ici"
+      class="description bg-gray-100 sec p-3 border border-gray-300 outline-none mb-4">
+    </textarea>
+    <input placeholder="Adresse" type="text" formControlName="localisation" 
+      class="bg-gray-100 border border-gray-300 p-2 mb-4 outline-none" />
+    <!-- Illustrations -->
+    <div class="flex overflow-hidden bg-white border divide-x rounded-lg rtl:flex-row-reverse dark:bg-gray-900 dark:border-gray-700 dark:divide-gray-700">
+      <button class="flex items-center px-4 py-2 text-sm font-medium text-gray-600 transition-colors duration-200 sm:text-base sm:px-6 dark:hover:bg-gray-800 dark:text-gray-300 gap-x-3 hover:bg-gray-100">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 sm:w-6 sm:h-6">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 16.5V9.75m0 0l3 3m-3-3l-3 3M6.75 19.5a4.5 4.5 0 01-1.41-8.775 5.25 5.25 0 0110.233-2.33 3 3 0 013.758 3.848A3.752 3.752 0 0118 19.5H6.75z" />
+          </svg>
+          <span>Ajouter des illustrations</span>
+      </button>
     </div>
+  }
+
+  <!-- Boutons -->
+  <div class="buttons flex mt-2 gap-3">
+    <button class="btn border border-gray-300 p-1 px-4 font-semibold cursor-pointer text-gray-500 ml-auto" (click)="reset()">Annuler</button>
+    <button type="submit" [disabled]="!postMakingForm.valid" class="btn bg-black p-1 px-4 font-semibold cursor-pointer text-white ml-2">Publier</button>
   </div>
+</form>

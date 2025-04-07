@@ -13,6 +13,7 @@ export class InfosComponent {
     lastname: 'Dupont',
     pseudonym: 'Lili',
     createdAt: '2023-09-12T10:15:00Z',
+    bio: "Moi c'est Alice. J'ai emménagé dans le quartier il y a trois ans, et je suis en quête de bonnes adresses et d'entraide !"
   };
 
   get displayPseudonym(): string | null {

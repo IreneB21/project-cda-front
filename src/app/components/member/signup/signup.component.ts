@@ -14,6 +14,8 @@ import { Router } from '@angular/router';
 })
 export class SignupComponent {
 
+  constructor(private authService: AuthService, private router: Router) {}
+
   registrationForm = new FormGroup({
     lastname: new FormControl(''),
     firstname: new FormControl(''),
@@ -25,8 +27,6 @@ export class SignupComponent {
   });
 
   imageUrl: string = 'assets/pictures/registration-illustration.jpg';
-
-  constructor(private authService: AuthService, private router: Router) {}
 
   submitForm() {
     const formValue = this.registrationForm.value;
@@ -48,9 +48,9 @@ export class SignupComponent {
     };
 
     this.authService.register(registrationData).subscribe({
-      next: () => {
-        console.log('Inscription réussie');
-        this.router.navigate(['/hello/neighbors/profile']); 
+      next: (data) => {
+        sessionStorage.setItem('token', data.accessToken);
+        this.router.navigate(['/hello/neighbors/login']); 
       },
       error: err => console.error('Erreur inscription :', err)
     });
@@ -67,7 +67,6 @@ export class SignupComponent {
         city: match[3]
       };
     }
-  
     return { street: '', postalCode: '', city: '' };
   }
 }

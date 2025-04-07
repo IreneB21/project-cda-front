@@ -4,7 +4,8 @@
     </div>
 </div>
 
-<div class="text-center mt-33">
+<div class="px-3">
+  <div class="text-center mt-33">
     <h1 class="text-1l font-bold">
       {{ user.firstname }} {{ user.lastname }}
     </h1>
@@ -14,4 +15,8 @@
     <p class="text-sm text-gray-400 mt-1">
       Membre depuis le {{ formattedDate }}
     </p>
+  </div>
+  <div class="p-3 border-1 border-zinc-800 mt-4">
+    <p>{{ user.bio }}</p>
+  </div>
 </div>
