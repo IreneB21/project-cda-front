@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { RegistrationDto } from '../models/registration.dto';
 import { Observable } from 'rxjs';
+import { LoginDto } from '../models/login.dto';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +17,7 @@ export class AuthService {
     return this.http.post(`${this.apiUrl}/register`, user);
   }
 
-  login() {
-    
+  login(user: LoginDto): Observable<any> {
+    return this.http.post(`${this.apiUrl}/authenticate`, user);
   }
 }

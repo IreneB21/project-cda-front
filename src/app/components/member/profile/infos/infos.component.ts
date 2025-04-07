@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
+import { UserService } from '../../../../services/user.service';
 
 @Component({
   selector: 'app-infos',
@@ -7,14 +8,27 @@ import { Component } from '@angular/core';
   templateUrl: './infos.component.html',
   styleUrl: './infos.component.css'
 })
-export class InfosComponent {
-  user = {
-    firstname: 'Alice',
-    lastname: 'Dupont',
-    pseudonym: 'Lili',
-    createdAt: '2023-09-12T10:15:00Z',
-    bio: "Moi c'est Alice. J'ai emménagé dans le quartier il y a trois ans, et je suis en quête de bonnes adresses et d'entraide !"
-  };
+export class InfosComponent implements OnInit {
+  
+  private userService = inject(UserService);
+
+  user: any;
+
+  avatars: Array<string> = [
+    '/avatar1.jpg',
+    '/avatar2.jpg',
+    '/avatar3.jpg',
+    '/avatar4.jpg'
+  ]
+
+  ngOnInit(): void {
+    this.userService.getUserInfos().subscribe((data) => {
+      this.user = data;
+      if (this.user.picture === null) {
+        this.user.picture = this.avatars[Math.floor(Math.random() * this.avatars.length)];
+      }
+    });
+  }
 
   get displayPseudonym(): string | null {
     return this.user.pseudonym ? `@${this.user.pseudonym}` : null;

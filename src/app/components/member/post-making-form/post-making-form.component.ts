@@ -53,7 +53,6 @@ export class PostMakingFormComponent {
 
   onSubmit() {
     const formValue = this.postMakingForm.value;
-
     const address = formValue.localisation ?? '';
     const { street, city, postalCode } = this.splitAddress(address);
 

@@ -11,10 +11,10 @@ import { PostMakingFormComponent } from '../../../post-making-form/post-making-f
   styleUrl: './activity-tab.component.css'
 })
 export class ActivityTabComponent implements OnInit {
-  
-  publications: Publication[] = [];
 
   private publicationService = inject(PublicationService);
+
+  publications: Publication[] = [];
 
   ngOnInit(): void {
     this.publicationService.getPublications().subscribe((data) => {

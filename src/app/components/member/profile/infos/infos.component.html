@@ -1,6 +1,6 @@
 <div class="flex justify-center items-center relative">
     <div class="w-54 h-54 rounded-full overflow-hidden border-1 absolute -top-28">
-        <img src="/ex-avatar.jpg" class="w-full h-full object-cover" alt="avatar">
+        <img [src]="user.picture" class="w-full h-full object-cover" alt="avatar">
     </div>
 </div>
 
@@ -17,6 +17,6 @@
     </p>
   </div>
   <div class="p-3 border-1 border-zinc-800 mt-4">
-    <p>{{ user.bio }}</p>
+    <p>{{ user.introduction }}</p>
   </div>
 </div>

@@ -1,1 +1,44 @@
-<p>login works!</p>
+<app-header-authentification></app-header-authentification>
+
+<div class="w-full flex justify-content-center align-items-center">
+    <!-- Form Section -->
+    <div class="w-full md:w-1/2 flex flex-col justify-center bg-white py-1 px-8 md:p-24 lg:p-32">
+        <div class="flex flex-col justify-center md:justify-start pt-8 md:pt-0">
+            <!-- Title -->
+            <h2 class="text-center text-3xl">Connexion</h2>
+
+            <!-- Form -->
+            <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="flex flex-col pt-3 md:pt-8 space-y-4 gap-3">
+                <!-- Email -->
+                <label class="relative">
+                    <input formControlName="email" type="email" placeholder="" formControlName="email" 
+                        class="peer mt-0.5 w-full rounded border-gray-300 
+                        shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)] sm:text-sm p-2" />
+                    <span class="absolute inset-y-0 left-3 transform-translate-y-5 bg-white text-sm font-medium 
+                    text-gray-700 transition-transform peer-placeholder-shown:translate-y-0 peer-focus:-translate-y-5">
+                        Email
+                    </span>
+                </label>
+                <!-- Password -->
+                <label class="relative">
+                    <input formControlName="password" type="password" placeholder="" formControlName="password" 
+                        class="peer mt-0.5 w-full rounded border-gray-300 
+                        shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)] sm:text-sm p-2" />
+                    <span class="absolute inset-y-0 left-3 transform-translate-y-5 bg-white text-sm font-medium 
+                    text-gray-700 transition-transform peer-placeholder-shown:translate-y-0 peer-focus:-translate-y-5">
+                        Mot de passe
+                    </span>
+                </label>
+                <!-- Submit Button -->
+                <button type="submit" [disabled]="!loginForm.valid" class="mt-4 px-4 py-2 bg-black text-white rounded-lg hover:bg-blue-600">
+                    Soumettre
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Image Section -->
+    <div class="w-1/2">
+        <img src="/registration-illustration.jpg" alt="">
+    </div>
+</div>
