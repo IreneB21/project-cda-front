@@ -24,6 +24,14 @@ export class UserService {
   }
 
   updateIntroduction(bio: BioUpdateDto): void {
-    this.http.put(`${this.apiUrl}/profile/update/bio`, bio, this.httpOptions);
+    console.log(bio);
+    this.http.put(`${this.apiUrl}/update/bio`, bio, this.httpOptions).subscribe(
+      response => {
+        console.log('Resource updated successfully', response);
+      },
+      error => {
+        console.error('Error updating resource', error);
+      }
+    );
   }
 }

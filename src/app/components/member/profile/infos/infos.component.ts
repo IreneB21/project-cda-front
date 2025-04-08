@@ -38,10 +38,10 @@ export class InfosComponent implements OnInit {
   }
 
   saveIntroduction() {
-    //this.user.introduction = this.introductionForm;
+    this.user.introduction = this.introductionForm;
     const userBio: BioUpdateDto = {
       userId: this.user.id,
-      bio: this.introductionForm
+      body: this.introductionForm
     }
     this.isEditing = false;
     this.userService.updateIntroduction(userBio);

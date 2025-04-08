@@ -19,9 +19,9 @@
   <div class="py-3 px-4 border-1 border-gray-300 rounded-md relative">
     @if (isEditing) {
       <textarea [(ngModel)]="introductionForm" rows="4" class="w-full border border-gray-300 rounded-md p-2"></textarea>
-      <div class="flex justify-end gap-2 mt-2">
-        <button (click)="saveIntroduction()" class="text-blue-600 font-medium">Enregistrer</button>
-        <button (click)="cancelEditing()" class="text-gray-500">Annuler</button>
+      <div class="flex justify-center gap-3 mt-2">
+        <button (click)="saveIntroduction()" class="btn bg-black p-1 px-4 font-semibold cursor-pointer text-white ml-2">Enregistrer</button>
+        <button (click)="cancelEditing()" class="btn border border-gray-300 p-1 px-4 font-semibold cursor-pointer text-gray-500 ml-auto">Annuler</button>
       </div>
     } @else {
       @if (user.introduction === null) {

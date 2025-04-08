@@ -1,4 +1,4 @@
 export interface BioUpdateDto {
     userId: number;
-    bio: string;
+    body: string;
 }
