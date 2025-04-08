@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Publication } from '../../../services/publication.service';
+import { PublicationGetDto } from '../../../models/publication-get.dto';
 
 @Component({
   selector: 'app-publication',
@@ -9,5 +9,5 @@ import { Publication } from '../../../services/publication.service';
   styleUrl: './publication.component.css'
 })
 export class PublicationComponent {
-  @Input() data!: Publication;
+  @Input() data!: PublicationGetDto;
 }

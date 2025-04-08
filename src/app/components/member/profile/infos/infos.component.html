@@ -7,16 +7,31 @@
 <div class="px-3">
   <div class="text-center mt-33">
     <h1 class="text-1l font-bold">
-      {{ user.firstname }} {{ user.lastname }}
+      {{ user.firstname }} <br /> {{ user.lastname }}
     </h1>
     <p class="text-base text-gray-700 mt-1">
         {{ displayPseudonym }}
       </p>
     <p class="text-sm text-gray-400 mt-1">
-      Membre depuis le {{ formattedDate }}
+      Membre depuis le {{ user.registrationDate }}
     </p>
   </div>
-  <div class="p-3 border-1 border-zinc-800 mt-4">
-    <p>{{ user.introduction }}</p>
+  <div class="py-3 px-4 border-1 border-gray-300 rounded-md relative">
+    @if (isEditing) {
+      <textarea [(ngModel)]="introductionForm" rows="4" class="w-full border border-gray-300 rounded-md p-2"></textarea>
+      <div class="flex justify-end gap-2 mt-2">
+        <button (click)="saveIntroduction()" class="text-blue-600 font-medium">Enregistrer</button>
+        <button (click)="cancelEditing()" class="text-gray-500">Annuler</button>
+      </div>
+    } @else {
+      @if (user.introduction === null) {
+        <p class="text-center">Dites-nous en plus sur vous !</p>
+      } @else {
+        <p>{{ user.introduction }}</p>
+      }
+      <div class="flex justify-end absolute top-2 right-2 cursor-pointer" (click)="editIntroduction()">
+        <i class="fa-solid fa-pencil text-gray-500 hover:text-black"></i>
+      </div>
+    }
   </div>
 </div>

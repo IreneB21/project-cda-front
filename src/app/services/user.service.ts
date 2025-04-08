@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { BioUpdateDto } from '../models/bio-update.dto';
 
 @Injectable({
   providedIn: 'root'
@@ -20,5 +21,9 @@ export class UserService {
 
   getUserInfos(): Observable<any> {
     return this.http.get(`${this.apiUrl}/user/${this.userId}/infos`, this.httpOptions);
+  }
+
+  updateIntroduction(bio: BioUpdateDto): void {
+    this.http.put(`${this.apiUrl}/profile/update/bio`, bio, this.httpOptions);
   }
 }

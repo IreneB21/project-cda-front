@@ -8,6 +8,7 @@ export interface RegistrationDto {
     city: string;
     street: string;
     postalCode: string;
+    picture: string;
     isInCity: boolean;
 }
   

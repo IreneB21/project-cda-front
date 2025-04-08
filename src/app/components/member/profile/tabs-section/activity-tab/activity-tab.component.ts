@@ -1,5 +1,5 @@
 import { Component, inject, OnInit } from '@angular/core';
-import {Publication, PublicationService } from '../../../../../services/publication.service';
+import {PublicationService } from '../../../../../services/publication.service';
 import { PublicationComponent } from '../../../publication/publication.component';
 import { PostMakingFormComponent } from '../../../post-making-form/post-making-form.component';
 
@@ -14,7 +14,8 @@ export class ActivityTabComponent implements OnInit {
 
   private publicationService = inject(PublicationService);
 
-  publications: Publication[] = [];
+  //publications: Publication[] = [];
+  publications!: Array<any>
 
   ngOnInit(): void {
     this.publicationService.getPublications().subscribe((data) => {

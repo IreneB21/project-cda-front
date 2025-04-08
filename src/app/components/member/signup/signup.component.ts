@@ -33,6 +33,12 @@ export class SignupComponent {
 
     const address = formValue.address ?? '';
     const { street, city, postalCode } = this.splitAddress(address);
+    const avatars: Array<string> = [
+      '/avatar1.jpg',
+      '/avatar2.jpg',
+      '/avatar3.jpg',
+      '/avatar4.jpg'
+    ]
 
     const registrationData: RegistrationDto = {
       lastname: formValue.lastname ?? '',
@@ -44,6 +50,7 @@ export class SignupComponent {
       street,
       city,
       postalCode,
+      picture: avatars[Math.floor(Math.random() * avatars.length)],
       isInCity: formValue.residence === 'ville'
     };
 
