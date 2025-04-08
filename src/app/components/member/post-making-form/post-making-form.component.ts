@@ -14,6 +14,7 @@ import { Router } from '@angular/router';
 export class PostMakingFormComponent {  
 
   private formBuilder = inject(FormBuilder);
+  private userId = sessionStorage.getItem("userId");
 
   constructor(private publicationService: PublicationService, private router: Router) {}
 
@@ -64,7 +65,7 @@ export class PostMakingFormComponent {
         street: street ?? '',
         description: formValue.description ?? '',
         illustrations: [],
-        authorId: 1,
+        authorId: Number(this.userId),
         category: formValue.publicationType ?? '',
       }
 
@@ -73,6 +74,7 @@ export class PostMakingFormComponent {
       this.publicationService.savePublication(publicationData).subscribe({
         next: (data) => {
           console.log(data);
+          window.location.reload();
         }
       });
     }

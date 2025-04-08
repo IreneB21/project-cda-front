@@ -1,20 +1,18 @@
-<div class="flex-col justify-content-center align-items-center">
-    @if (publications == null) {
-        <div>
-            <h6>Vous n'avez encore rien publié ^^</h6>
-            <img src="/desert.jpg" class="my-8 w-80" alt="">
-        </div>
+@if (publications.length === 0) {
+    <div class="w-full">
+        <img src="/desert.jpg" class="my-8 w-80" alt="">
+        <h6>Vous n'avez encore rien publié, lancez-vous !</h6>
+    </div>
+    <app-post-making-form></app-post-making-form>
+} @else {
+    <div class="flex flex-col gap-3 w-full">
         <app-post-making-form></app-post-making-form>
-    } @else {
-        <div class="flex flex-column gap-3">
-            <app-post-making-form></app-post-making-form>
-            <div class="flex flex-column gap-3">
-                @for (publication of publications; track publication.id) {
-                    <app-publication
-                        [data]="publication">
-                    </app-publication>
-                }
-            </div>
+        <div class="flex flex-col gap-3">
+            @for (publication of publications; track publication.id) {
+                <app-publication
+                    [data]="publication">
+                </app-publication>
+            }
         </div>
-    }
-</div>
+    </div>
+}
