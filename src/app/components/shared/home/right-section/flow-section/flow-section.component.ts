@@ -24,7 +24,6 @@ export class FlowSectionComponent implements OnInit {
   events: Array<EventGetDto> = [];
 
   ngOnInit(): void {
-    console.log("posts = " + this.posts);
 
     forkJoin({
       publications: this.publicationService.getAllPublications(),
@@ -32,7 +31,6 @@ export class FlowSectionComponent implements OnInit {
     }).subscribe(({ publications, events }) => {
       this.publications = publications;
       this.events = events;
-  
       this.posts = [...this.publications, ...this.events];
   
       console.log("posts:", this.posts);
