@@ -19,8 +19,12 @@ export class PublicationService {
 
   constructor(private http: HttpClient) {}
 
-  getPublications(): Observable<any> {
+  getUserPublications(): Observable<any> {
     return this.http.get(`${this.apiUrl}/user/${this.userId}/publications`, this.httpOptions);
+  }
+
+  getAllPublications(): Observable<any> {
+    return this.http.get(`${this.apiUrl}/all/publications`, this.httpOptions);
   }
 
   savePublication(newPublication: PublicationCreateDto): Observable<any> {

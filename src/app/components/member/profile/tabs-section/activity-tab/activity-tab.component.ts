@@ -19,7 +19,7 @@ export class ActivityTabComponent implements OnInit {
   publications!: Array<PublicationGetDto>
 
   ngOnInit(): void {
-    this.publicationService.getPublications().subscribe((data) => {
+    this.publicationService.getUserPublications().subscribe((data) => {
       this.publications = data;
     });
   }

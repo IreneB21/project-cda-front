@@ -5,8 +5,8 @@
     </div>
     <app-post-making-form></app-post-making-form>
 } @else {
+    <app-post-making-form></app-post-making-form>
     <div class="flex flex-col gap-3 w-full">
-        <app-post-making-form></app-post-making-form>
         <div class="flex flex-col gap-3">
             @for (publication of publications; track publication.id) {
                 <app-publication

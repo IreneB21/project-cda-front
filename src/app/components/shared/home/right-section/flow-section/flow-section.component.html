@@ -1,5 +1,5 @@
 <div class="mb-2">
-    <div class="flex justify-center overflow-x-auto gap-4 overflow-y-hidden border-b border-gray-200 whitespace-nowrap dark:border-gray-700">
+    <div class="flex justify-center overflow-x-auto gap-1 overflow-y-hidden border-b border-gray-200 whitespace-nowrap dark:border-gray-700">
         <button 
             class="inline-flex items-center h-10 px-15 -mb-px text-sm text-center bg-transparent 
             border-b-2 sm:text-base whitespace-nowrap focus:outline-none">
@@ -32,7 +32,24 @@
     </div>
     
     <!-- Contenu des onglets -->
-    <div class="p-4 flex align-items-center justify-content-center w-full">
-        
+    <div class="w-full py-4 px-5 flex flex-col justify-center items-center gap-3">
+        @if (posts.length === 0) {
+            <div class="flex justify-center items-center gap-5">
+                <img src="/desert.jpg" class="my-8 w-80" alt="">
+                <h4 class="">
+                    On dirait que la communauté n'a encore rien publié. 
+                    <br>Alors, à vous de jouer !
+                </h4>
+            </div>
+            <app-post-making-form></app-post-making-form>
+        } @else {
+            @for (post of posts; track post.id) {
+                @if (post.category) {
+                    <app-publication-card [data]="post"></app-publication-card>
+                } @else {
+                    <app-event-card [data]="post"></app-event-card>
+                }
+            }
+        }
     </div>
 </div>
