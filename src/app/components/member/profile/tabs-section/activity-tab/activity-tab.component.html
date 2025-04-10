@@ -1,9 +1,12 @@
 @if (publications.length === 0) {
-    <div class="w-full">
-        <img src="/desert.jpg" class="my-8 w-80" alt="">
-        <h6>Vous n'avez encore rien publié, lancez-vous !</h6>
+    <div class="w-full flex flex-col justify-center items-center pt-3 pb-5">
+        <img src="/no-publications.png" class="my-8 w-80" alt="">
+        <h6>
+            Vous n'avez encore rien publié, lancez-vous ! 
+            <i class="fa-regular fa-circle-down animate-bounce"></i>
+        </h6>
     </div>
-    <app-post-making-form></app-post-making-form>
+    <app-post-making-form class="w-full"></app-post-making-form>
 } @else {
     <app-post-making-form></app-post-making-form>
     <div class="flex flex-col gap-3 w-full">

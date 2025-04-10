@@ -3,6 +3,7 @@ import { SideEventCardComponent } from './side-event-card/side-event-card.compon
 import { PostMakingFormComponent } from '../../../../member/post-making-form/post-making-form.component';
 import { EventGetDto } from '../../../../../models/event-get.dto';
 import { EventService } from '../../../../../services/event.service';
+import { HomeService } from '../../../../../services/home.service';
 
 @Component({
   selector: 'app-side-section',
@@ -14,11 +15,16 @@ import { EventService } from '../../../../../services/event.service';
 export class SideSectionComponent implements OnInit {
 
   private eventService = inject(EventService);
+  private homeService = inject(HomeService);
+
   events: Array<EventGetDto> = [];
+  randomPics: Array<string> = [];
   
   ngOnInit(): void {
-    this.eventService.getAllEvents().subscribe((data) => {
-      this.events = data;
+    this.homeService.getRandomUserPictures().subscribe((data) => {
+      this.randomPics = data;
     })
+    this.homeService.getAllPosts();
+    this.homeService.lastEvents$.subscribe((data) => console.log(data));
   }
 }

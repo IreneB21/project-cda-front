@@ -1,18 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { FlowSectionComponent } from './flow-section.component';
 
-import { TabsSectionComponent } from './flow-section.component';
-
-describe('TabsSectionComponent', () => {
-  let component: TabsSectionComponent;
-  let fixture: ComponentFixture<TabsSectionComponent>;
+describe('FlowSectionComponent', () => {
+  let component: FlowSectionComponent;
+  let fixture: ComponentFixture<FlowSectionComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [TabsSectionComponent]
+      imports: [FlowSectionComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(TabsSectionComponent);
+    fixture = TestBed.createComponent(FlowSectionComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
