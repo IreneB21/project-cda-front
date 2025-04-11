@@ -4,6 +4,8 @@ export interface PublicationGetDto {
     city: string;
     postalCode: string;
     street: string;
+    latitude: number;
+    longitude: number;
     description: string;
     publicationDate: Date;
     author: {

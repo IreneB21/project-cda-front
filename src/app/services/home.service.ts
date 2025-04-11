@@ -37,11 +37,13 @@ export class HomeService {
         return eventValue >= todayValue;
       });
 
-      this.lastEventsSubject.next(filteredEvents);
-        /*data.events
-          .filter((event: any) => new Date(event.startDate) > today));
-        //.sort((a, b) => a.))
-      //items.sort((a, b) => a.value - b.value);*/
+      const lastEvents = filteredEvents.sort((a: any, b: any) => {
+        return a.eventDate - b.eventDate;
+      });
+      
+      this.lastEventsSubject.next(filteredEvents.sort((a: any, b: any) => {
+        return a.eventDate - b.eventDate;
+      }));
     });
   }
 

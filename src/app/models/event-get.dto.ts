@@ -4,6 +4,8 @@ export interface EventGetDto {
     city: string;
     postalCode: string;
     street: string;
+    latitude: number;
+    longitude: number;
     startDate: Date;
     endDate: Date;
     description: string;

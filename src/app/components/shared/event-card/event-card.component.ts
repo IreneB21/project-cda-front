@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { EventGetDto } from '../../../models/event-get.dto';
+import { PublicationGetDto } from '../../../models/publication-get.dto';
 
 @Component({
   selector: 'app-event-card',

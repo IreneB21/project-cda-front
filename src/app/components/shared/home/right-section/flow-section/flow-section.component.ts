@@ -7,6 +7,7 @@ import { EventService } from '../../../../../services/event.service';
 import { PublicationGetDto } from '../../../../../models/publication-get.dto';
 import { EventGetDto } from '../../../../../models/event-get.dto';
 import { forkJoin } from 'rxjs';
+import { HomeService } from '../../../../../services/home.service';
 
 @Component({
   selector: 'app-flow-section',
@@ -16,24 +17,13 @@ import { forkJoin } from 'rxjs';
 })
 export class FlowSectionComponent implements OnInit {
 
-  private publicationService = inject(PublicationService);
-  private eventService = inject(EventService);
+  private homeService = inject(HomeService);
 
   posts: Array<any> = [];
-  publications: Array<PublicationGetDto> = [];
-  events: Array<EventGetDto> = [];
 
   ngOnInit(): void {
 
-    forkJoin({
-      publications: this.publicationService.getAllPublications(),
-      events: this.eventService.getAllEvents()
-    }).subscribe(({ publications, events }) => {
-      this.publications = publications;
-      this.events = events;
-      this.posts = [...this.publications, ...this.events];
-  
-      console.log("posts:", this.posts);
-    });
+    this.homeService.getAllPosts();
+    this.homeService.allPosts$.subscribe((data) => this.posts = data);
   }
 }
