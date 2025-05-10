@@ -28,11 +28,12 @@
         </label>
     </div>
     <!-- Adresse complète -->
-    <label for="fullAddress" class="relative">
-        <input type="text" id="fullAddress" formControlName="fullAddress" class="peer mt-0.5 w-full rounded bg-white border-gray-300 
-        shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)] 
-        sm:text-sm p-2" placeholder="Adresse complète" />
-    </label>
+    <app-autofill-address-input
+        formControlName="fullAddress"
+        class="relative bg-white"
+        placeholder="Adresse complète"
+        (addressSelected)="onAddressSelected($event)"
+    ></app-autofill-address-input>
     <!-- Résidence -->
     <div class="flex gap-16 mb-2">
         <p class="">Où habitez-vous ?</p>
@@ -64,8 +65,8 @@
         </label>
     </div>
     <!-- Préférences de notification -->
-    <div class="flex gap-6 mb-2">
-        <p class="">Préférences de notification</p>
+    <div class="flex flex-col mb-2">
+        <p class="">Préférences de notification :</p>
         <ul class="items-center w-full text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg sm:flex dark:bg-gray-700 dark:border-gray-600 dark:text-white">
           <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600">
               <div class="flex items-center ps-3">

@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { AddressSuggestion, AutofillAddressInputComponent } from '../../../../shared/autofill-address-input/autofill-address-input.component';
 
 @Component({
   selector: 'app-infos-tab',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, AutofillAddressInputComponent],
   templateUrl: './infos-tab.component.html',
   styleUrl: './infos-tab.component.css'
 })
@@ -33,6 +34,11 @@ export class InfosTabComponent implements OnInit {
       isInCity: [null, [Validators.required]],
       notificationPreferences: [0],
     });
+  }
+
+  onAddressSelected(event: any) {
+      const selected = event as AddressSuggestion;
+      this.profileInfosTabForm.get('fullAddress')?.setValue(selected.formatted);
   }
 
   submitForm(): void {

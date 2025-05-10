@@ -38,6 +38,36 @@ export class PostMakingFormComponent {
     illustrations: [''],
   });
 
+  selectedFiles: File[] = [];
+  cloudName = 'dghkyleie';
+  uploadPreset = 'hello_neighbors_upload_preset';
+  uploadedImageUrls: string[] = [];
+
+  onFileSelected(event: Event): void {
+    const target = event.target as HTMLInputElement;
+    if (target.files) {
+      const files = Array.from(target.files);
+  
+      files.forEach(file => {
+        const formData = new FormData();
+        formData.append('file', file);
+        formData.append('upload_preset', this.uploadPreset);
+  
+        fetch(`https://api.cloudinary.com/v1_1/${this.cloudName}/image/upload`, {
+          method: 'POST',
+          body: formData
+        })
+        .then(res => res.json())
+        .then(data => {
+          this.uploadedImageUrls.push(data.secure_url);
+        })
+        .catch(err => {
+          console.error('Erreur upload Cloudinary:', err);
+        });
+      });
+    }
+  }  
+
   reset() {
     /*
     this.postMakingForm = {
@@ -64,7 +94,7 @@ export class PostMakingFormComponent {
         zipCode: postalCode ?? '',
         street: street ?? '',
         description: formValue.description ?? '',
-        illustrations: [],
+        illustrations: this.uploadedImageUrls,
         authorId: Number(this.userId),
         category: formValue.publicationType ?? '',
       }

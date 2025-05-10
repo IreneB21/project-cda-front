@@ -39,6 +39,17 @@
           <span>Ajouter des illustrations</span>
       </button>
     </div>
+
+    <input 
+      type="file" 
+      (change)="onFileSelected($event)" 
+      multiple 
+      accept="image/*"
+      class="bg-gray-100 border border-gray-300 p-2 mb-4 outline-none"
+    />
+    <div class="flex flex-wrap gap-2 mb-4">
+      <img *ngFor="let url of uploadedImageUrls" [src]="url" class="w-24 h-24 object-cover rounded" />
+    </div>    
   }
 
   <!-- Boutons -->

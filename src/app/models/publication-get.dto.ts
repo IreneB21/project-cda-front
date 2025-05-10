@@ -8,6 +8,7 @@ export interface PublicationGetDto {
     longitude: number;
     description: string;
     publicationDate: Date;
+    illustrations: string[];
     author: {
         id: number;
         lastname: string;

@@ -4,11 +4,12 @@ import {FormControl, FormGroup, ReactiveFormsModule} from '@angular/forms';
 import { AuthService } from '../../../services/auth.service';
 import { RegistrationDto } from '../../../models/registration.dto';
 import { Router } from '@angular/router';
+import { AddressSuggestion, AutofillAddressInputComponent } from '../../shared/autofill-address-input/autofill-address-input.component';
 
 @Component({
   selector: 'app-signup',
   standalone: true,
-  imports: [HeaderAuthentificationComponent, ReactiveFormsModule],
+  imports: [HeaderAuthentificationComponent, ReactiveFormsModule, AutofillAddressInputComponent],
   templateUrl: './signup.component.html',
   styleUrl: './signup.component.css'
 })
@@ -62,6 +63,12 @@ export class SignupComponent {
       error: err => console.error('Erreur inscription :', err)
     });
   }
+
+  onAddressSelected(event: any) {
+    const selected = event as AddressSuggestion;
+    this.registrationForm.get('address')?.setValue(selected.formatted);
+  }
+  
 
   private splitAddress(address: string): { street: string; city: string; postalCode: string } {
     const postalCodeRegex = /\b\d{5}\b/;
