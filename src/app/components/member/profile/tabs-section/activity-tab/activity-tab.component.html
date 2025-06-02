@@ -12,9 +12,9 @@
     <div class="flex flex-col gap-3 w-full">
         <div class="flex flex-col gap-3">
             @for (publication of publications; track publication.id) {
-                <app-publication
+                <app-publication-card
                     [data]="publication">
-                </app-publication>
+                </app-publication-card>
             }
         </div>
     </div>

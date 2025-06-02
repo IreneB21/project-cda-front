@@ -1,24 +1,35 @@
 <app-header></app-header>
 
 <section class="bg-white dark:bg-gray-900">
-    <div class="container flex flex-col items-center px-4 py-12 mx-auto xl:flex-row">
-        <div class="flex justify-center xl:w-1/2">
-            <img class="h-80 w-80 sm:w-[28rem] sm:h-[28rem] flex-shrink-0 object-cover rounded-full" src="/landing-illustration.jpg" alt="">
-        </div>
-
-        <div class="flex flex-col items-center mt-6 xl:items-start xl:w-1/2 xl:mt-0">
-            <h2 class="text-2xl font-semibold tracking-tight text-gray-800 xl:text-3xl dark:text-white">
-                Hello Neighbors - Le réseau social de votre quartier
-            </h2>
-
-            <p class="block max-w-2xl mt-4 text-gray-500 dark:text-gray-300">
-                Rejoignez Hello Neighbors, la plateforme qui connecte les habitants de votre quartier ! 
-                Échangez des infos, partagez des conseils, postez des alertes, organisez des événements et donnez ou troquez des objets en toute simplicité. <br>
-                Faites de votre quartier un lieu plus vivant, solidaire et collaboratif. Parce qu’ensemble, on est plus forts !
-                Inscrivez-vous dès maintenant et dites bonjour à vos voisins !
-            </p>
-            
-            <app-button routerLink="/hello/neighbors/signup" [label]="label"></app-button>
-        </div>
+  <div class="container mx-auto flex flex-col lg:flex-row items-center gap-10 px-4 py-12">
+    
+    <!-- Illustration -->
+    <div class="flex justify-center lg:w-1/2">
+      <img
+        src="/landing-illustration.jpg"
+        alt=""
+        class="h-60 w-60 sm:h-72 sm:w-72 md:h-80 md:w-80 lg:h-[28rem] lg:w-[28rem] object-cover rounded-full"
+      />
     </div>
+
+    <!-- Text -->
+    <div class="flex flex-col items-center text-center lg:items-start lg:text-left lg:w-1/2">
+      <h2 class="text-2xl sm:text-3xl font-semibold tracking-tight text-gray-800 dark:text-white">
+        Hello Neighbors - Le réseau social de votre quartier
+      </h2>
+
+      <p class="mt-4 max-w-2xl text-gray-500 dark:text-gray-300">
+        Rejoignez Hello Neighbors, la plateforme qui connecte les habitants de votre quartier !
+        Échangez des infos, partagez des conseils, postez des alertes, organisez des événements
+        et donnez ou troquez des objets en toute simplicité. <br />
+        Faites de votre quartier un lieu plus vivant, solidaire et collaboratif.
+        Parce qu’ensemble, on est plus forts ! Inscrivez-vous dès maintenant et dites bonjour à vos voisins !
+      </p>
+
+      <div class="mt-6">
+        <app-button routerLink="/hello/neighbors/signup" [label]="label"></app-button>
+      </div>
+    </div>
+
+  </div>
 </section>

@@ -12,22 +12,57 @@
 			<span class="text-xs dark:text-gray-600">{{ data.publicationDate }}</span>
 		</div>
 	</div>
+    
 	<div>
-		<h4 class="mb-1 text-lg font-semibold">{{ data.title }}</h4>
-		<p class="text-sm dark:text-gray-600">{{ data.description}}</p>
-        
-        @if ((data.illustrations ?? []).length > 0) {   
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
-                @for (img of data.illustrations; track img) {
-                  <img 
-                    [src]="img" 
-                    alt="Illustration de la publication" 
-                    class="object-cover w-full h-48 sm:h-64 rounded-md" 
-                  />
-                }
-            </div>
+        <h4 class="mb-1 text-lg font-semibold">{{ data.title }}</h4>
+        <p class="text-sm dark:text-gray-600">{{ data.description }}</p>
+      
+        @if ((data.illustrations ?? []).length === 1) {
+          <div class="w-full mb-4">
+            <img 
+              [src]="data.illustrations[0]" 
+              alt="Illustration" 
+              class="object-cover w-full h-64 sm:h-96 rounded-md" 
+            />
+          </div>
         }
-	</div>
+      
+        @if ((data.illustrations ?? []).length === 2) {
+          <div class="grid grid-cols-3 gap-2 mb-4">
+            <img 
+              [src]="data.illustrations[0]" 
+              class="col-span-2 object-cover h-64 w-full rounded-md" 
+              alt="Illustration principale" 
+            />
+            <img 
+              [src]="data.illustrations[1]" 
+              class="col-span-1 object-cover h-64 w-full rounded-md" 
+              alt="Illustration secondaire" 
+            />
+          </div>
+        }
+      
+        @if ((data.illustrations ?? []).length === 3) {
+          <div class="grid grid-cols-3 gap-2 mb-4">
+            <img 
+              [src]="data.illustrations[0]" 
+              class="col-span-2 row-span-2 object-cover h-96 w-full rounded-md" 
+              alt="Illustration principale" 
+            />
+            <img 
+              [src]="data.illustrations[1]" 
+              class="object-cover h-48 w-full rounded-md" 
+              alt="Illustration 2" 
+            />
+            <img 
+              [src]="data.illustrations[2]" 
+              class="object-cover h-48 w-full rounded-md" 
+              alt="Illustration 3" 
+            />
+          </div>
+        }
+    </div>
+      
     <div class="flex justify-end text-grey">
         <div class="flex items-center mr-4">
             <svg class="mr-2" width="24" height="24" viewBox="0 0 24 24">
