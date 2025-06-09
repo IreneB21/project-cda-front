@@ -1,9 +1,9 @@
 <app-header-authentification></app-header-authentification>
 
-<div class="w-full flex justify-content-center align-items-center">
+<div class="min-h-screen relative w-full flex flex-col lg:flex-row">
     <!-- Form Section -->
-    <div class="w-full md:w-1/2 flex flex-col justify-center bg-white py-1 px-8 md:p-24 lg:p-32">
-        <div class="flex flex-col justify-center md:justify-start pt-8 md:pt-0">
+    <div class="relative w-full lg:w-1/2 flex flex-col justify-center py-4 px-8 md:p-24 lg:p-32 bg-white/90 lg:bg-white z-10">
+        <div class="relative z-10 flex flex-col justify-center md:justify-start pt-8 md:pt-0">
             <!-- Title -->
             <h2 class="text-center text-3xl">Connexion</h2>
 
@@ -29,8 +29,12 @@
         </div>
     </div>
 
-    <!-- Image Section -->
-    <div class="w-1/2">
-        <img src="/registration-illustration.jpg" alt="">
+    <!-- Illustration section -->
+    <div class="hidden lg:block w-full lg:w-1/2">
+        <img
+        src="/registration-illustration.jpg"
+        alt=""
+        class="h-full w-full object-cover"
+        />
     </div>
 </div>

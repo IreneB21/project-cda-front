@@ -1,15 +1,16 @@
 import { Component } from '@angular/core';
 import { HeaderAuthentificationComponent } from '../../shared/header-authentification/header-authentification.component';
-import {FormControl, FormGroup, ReactiveFormsModule} from '@angular/forms';
+import {FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import { AuthService } from '../../../services/auth.service';
 import { RegistrationDto } from '../../../models/registration.dto';
 import { Router } from '@angular/router';
 import { AddressSuggestion, AutofillAddressInputComponent } from '../../shared/autofill-address-input/autofill-address-input.component';
+import { CommonModule, NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-signup',
   standalone: true,
-  imports: [HeaderAuthentificationComponent, ReactiveFormsModule, AutofillAddressInputComponent],
+  imports: [HeaderAuthentificationComponent, ReactiveFormsModule, AutofillAddressInputComponent, CommonModule, NgIf],
   templateUrl: './signup.component.html',
   styleUrl: './signup.component.css'
 })
@@ -18,13 +19,32 @@ export class SignupComponent {
   constructor(private authService: AuthService, private router: Router) {}
 
   registrationForm = new FormGroup({
-    lastname: new FormControl(''),
-    firstname: new FormControl(''),
-    pseudonym: new FormControl(''),
-    password: new FormControl(''),
-    email: new FormControl(''),
-    address: new FormControl(''),
-    residence: new FormControl('ville'), // Par défaut sur "ville"
+    lastname: new FormControl('', [
+      Validators.required,
+      Validators.pattern(/^[A-Za-zÀ-ÖØ-öø-ÿ' -]{2,50}$/)
+    ]),
+    firstname: new FormControl('', [
+      Validators.required,
+      Validators.pattern(/^[A-Za-zÀ-ÖØ-öø-ÿ' -]{2,50}$/)
+    ]),
+    pseudonym: new FormControl('', [
+      Validators.pattern(/^[a-zA-Z0-9_.-]{3,20}$/)
+    ]),
+    password: new FormControl('', [
+      Validators.required,
+      Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z\d]).{8,}$/)
+    ]),
+    email: new FormControl('', [
+      Validators.required,
+      Validators.pattern(/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/)
+    ]),
+    address: new FormControl('', [
+      Validators.required,
+      Validators.pattern(/^.{5,100}$/)
+    ]),
+    residence: new FormControl('ville', [
+      Validators.required
+    ])
   });
 
   imageUrl: string = 'assets/pictures/registration-illustration.jpg';

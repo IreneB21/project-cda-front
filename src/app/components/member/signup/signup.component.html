@@ -1,68 +1,74 @@
 <app-header-authentification></app-header-authentification>
 
-<div class="relative w-full flex flex-col lg:flex-row">
-  
-  <!-- Formulaire - image en fond en mobile/tablette -->
-  <div
-    class="relative w-full lg:w-1/2 flex flex-col justify-center py-4 px-8 md:p-24 lg:p-32 bg-white/90 lg:bg-white z-10"
-  >
-    <!-- Image en fond (mobile) -->
-    <img
-      src="/registration-illustration.jpg"
-      alt=""
-      class="absolute inset-0 h-full w-full object-cover brightness-50 lg:hidden z-0"
-      aria-hidden="true"
-    />
-
+<div class="min-h-screen relative w-full flex flex-col lg:flex-row">
+  <!-- Form Section -->
+  <div class="relative w-full lg:w-1/2 flex flex-col justify-center py-4 px-8 md:p-24 lg:p-32 bg-white/90 lg:bg-white z-10">
     <div class="relative z-10 flex flex-col justify-center md:justify-start pt-8 md:pt-0">
+      <!-- Title -->
       <h2 class="text-center text-3xl">Inscription</h2>
 
       <!-- Form -->
       <form [formGroup]="registrationForm" (ngSubmit)="submitForm()" class="flex flex-col pt-3 md:pt-8 space-y-4 gap-3">
-
+        <!-- Lastname -->
         <label for="lastname" class="relative">
             <input type="text" id="lastname" placeholder="Nom" formControlName="lastname" 
                 class="peer mt-0.5 w-full rounded border-gray-300 
                 shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)] sm:text-sm p-2" />
         </label>
-
-        <!-- Prénom -->
+        <div *ngIf="registrationForm.get('lastname')?.touched || registrationForm.get('lastname')?.dirty">
+          <p *ngIf="registrationForm.get('lastname')?.hasError('required')" class="text-red-500 text-sm">Le nom est requis.</p>
+          <p *ngIf="registrationForm.get('lastname')?.hasError('pattern')" class="text-red-500 text-sm">Lettres, tirets et apostrophes uniquement (2–50 caractères).</p>
+        </div>
+        <!-- Firstname -->
         <label for="firstname" class="relative">
             <input type="text" id="firstname" placeholder="Prénom" formControlName="firstname" 
                 class="peer mt-0.5 w-full rounded border-gray-300 
                 shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)] sm:text-sm p-2" />
         </label>
-
-        <!-- Pseudonyme -->
+        <div *ngIf="registrationForm.get('firstname')?.touched || registrationForm.get('firstname')?.dirty">
+          <p *ngIf="registrationForm.get('firstname')?.hasError('required')" class="text-red-500 text-sm">Le prénom est requis.</p>
+          <p *ngIf="registrationForm.get('firstname')?.hasError('pattern')" class="text-red-500 text-sm">Lettres, tirets et apostrophes uniquement (2–50 caractères).</p>
+        </div>
+        <!-- Pseudonym -->
         <label for="pseudonym" class="relative">
             <input type="text" id="pseudonym" placeholder="Pseudonyme" formControlName="pseudonym" 
                 class="peer mt-0.5 w-full rounded border-gray-300 
                 shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)] sm:text-sm p-2" />
         </label>
-
-        <!-- Mot de passe -->
+        <div *ngIf="registrationForm.get('pseudonym')?.value && (registrationForm.get('pseudonym')?.touched || registrationForm.get('pseudonym')?.dirty)">
+          <p *ngIf="registrationForm.get('pseudonym')?.hasError('pattern')" class="text-red-500 text-sm">3–20 caractères. Lettres, chiffres, tirets, points ou underscore.</p>
+        </div>
+        <!-- Email -->
+        <label for="email" class="relative">
+          <input type="email" id="email" placeholder="Email" formControlName="email" 
+              class="peer mt-0.5 w-full rounded border-gray-300 
+              shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)] sm:text-sm p-2" />
+        </label>
+        <div *ngIf="registrationForm.get('email')?.touched || registrationForm.get('email')?.dirty">
+          <p *ngIf="registrationForm.get('email')?.hasError('required')" class="text-red-500 text-sm">L’email est requis.</p>
+          <p *ngIf="registrationForm.get('email')?.hasError('pattern')" class="text-red-500 text-sm">Format d’email invalide.</p>
+        </div>
+        <!-- Password -->
         <label for="password" class="relative">
             <input type="password" id="password" placeholder="Mot de passe" formControlName="password" 
                 class="peer mt-0.5 w-full rounded border-gray-300 
                 shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)] sm:text-sm p-2" />
         </label>
-
-        <!-- Email -->
-        <label for="email" class="relative">
-            <input type="email" id="email" placeholder="Email" formControlName="email" 
-                class="peer mt-0.5 w-full rounded border-gray-300 
-                shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)] sm:text-sm p-2" />
-        </label>
-
-        <!-- Adresse -->
-       <app-autofill-address-input
-            formControlName="address"
-            placeholder="Adresse complète"
-            (addressSelected)="onAddressSelected($event)"
+        <div *ngIf="registrationForm.get('password')?.touched || registrationForm.get('password')?.dirty">
+          <p *ngIf="registrationForm.get('password')?.hasError('required')" class="text-red-500 text-sm">Le mot de passe est requis.</p>
+          <p *ngIf="registrationForm.get('password')?.hasError('pattern')" class="text-red-500 text-sm">Min. 8 caractères, avec majuscule, minuscule, chiffre et symbole.</p>
+        </div>
+        <!-- Address -->
+        <app-autofill-address-input
+              formControlName="address"
+              placeholder="Adresse complète"
+              (addressSelected)="onAddressSelected($event)"
         ></app-autofill-address-input>
-       
-
-        <!-- Sélection résidence -->
+        <div *ngIf="registrationForm.get('address')?.touched || registrationForm.get('address')?.dirty">
+          <p *ngIf="registrationForm.get('address')?.hasError('required')" class="text-red-500 text-sm">L’adresse est requise.</p>
+          <p *ngIf="registrationForm.get('address')?.hasError('pattern')" class="text-red-500 text-sm">L’adresse semble trop courte ou incorrecte.</p>
+        </div>
+        <!-- City or countryside -->
         <div class="flex space-x-4">
             <p>Où habitez vous ?</p>
             <label class="flex items-center">
@@ -72,8 +78,7 @@
                 <input type="radio" formControlName="residence" value="campagne" class="mr-2" /> Campagne
             </label>
         </div>
-
-        <!-- Bouton Soumettre -->
+        <!-- Submit button -->
         <button type="submit" [disabled]="!registrationForm.valid" class="mt-4 px-4 py-2 bg-black text-white rounded-lg hover:bg-blue-600">
             Soumettre
         </button>
@@ -81,7 +86,7 @@
     </div>
   </div>
 
-  <!-- Image à droite sur desktop -->
+  <!-- Illustration section -->
   <div class="hidden lg:block w-full lg:w-1/2">
     <img
       src="/registration-illustration.jpg"
