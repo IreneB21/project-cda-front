@@ -1,21 +1,21 @@
 <div class="mb-2">
-    <div class="flex justify-center overflow-x-auto gap-4 overflow-y-hidden border-b border-gray-200 whitespace-nowrap dark:border-gray-700">
+    <div class="flex justify-center overflow-x-auto lg:gap-4 gap-0 overflow-y-hidden border-b border-gray-200 whitespace-nowrap dark:border-gray-700">
         <button 
-            class="inline-flex items-center h-10 px-15 -mb-px text-sm text-center bg-transparent border-b-2 sm:text-base whitespace-nowrap focus:outline-none"
+            class="inline-flex items-center h-10 lg:px-15 px-3 -mb-px text-sm text-center bg-transparent border-b-2 sm:text-base whitespace-nowrap focus:outline-none"
             [ngClass]="selectedTab === 'informations' ? 'text-black border-black dark:border-blue-400 dark:text-blue-300' : 'text-gray-500 border-transparent dark:text-gray-400 cursor-pointer hover:border-gray-400'"
             (click)="setTab('informations')">
             Informations
         </button>
     
         <button 
-            class="inline-flex items-center h-10 px-15 -mb-px text-sm text-center bg-transparent border-b-2 sm:text-base whitespace-nowrap focus:outline-none"
+            class="inline-flex items-center h-10 lg:px-15 px-3 -mb-px text-sm text-center bg-transparent border-b-2 sm:text-base whitespace-nowrap focus:outline-none"
             [ngClass]="selectedTab === 'activite' ? 'text-black border-black dark:border-blue-400 dark:text-blue-300' : 'text-gray-500 border-transparent dark:text-gray-400 cursor-pointer hover:border-gray-400'"
             (click)="setTab('activite')">
             Activité
         </button>
     
         <button 
-            class="inline-flex items-center h-10 px-15 -mb-px text-sm text-center bg-transparent border-b-2 sm:text-base whitespace-nowrap focus:outline-none"
+            class="inline-flex items-center h-10 lg:px-15 px-3 -mb-px text-sm text-center bg-transparent border-b-2 sm:text-base whitespace-nowrap focus:outline-none"
             [ngClass]="selectedTab === 'notifications' ? 'text-black border-black dark:border-blue-400 dark:text-blue-300' : 'text-gray-500 border-transparent dark:text-gray-400 cursor-pointer hover:border-gray-400'"
             (click)="setTab('notifications')">
             Notifications

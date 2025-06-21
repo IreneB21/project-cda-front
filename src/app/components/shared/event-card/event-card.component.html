@@ -26,6 +26,12 @@
         <p class="px-2">{{ data.street }} {{ data.city }} {{ data.postalCode }}</p>
     </div>
 
+    <button (click)="participateToEvent(data.id)"
+        class="px-4 py-2 text-white bg-green-600 rounded hover:bg-green-700">
+        Participer
+    </button>
+
+
     <div class="flex justify-end space-x-2 text-sm dark:text-gray-600">
         <button type="button" class="flex items-center p-1 space-x-1.5">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" aria-label="Number of comments" class="w-4 h-4 fill-current dark:text-violet-600">

@@ -22,10 +22,12 @@
                         shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)] sm:text-sm p-2" />
                 </label>
                 <!-- Submit Button -->
-                <button type="submit" [disabled]="!loginForm.valid" class="mt-4 px-4 py-2 bg-black text-white rounded-lg hover:bg-blue-600">
+                <button type="submit" [disabled]="!loginForm.valid" class="mb-3 px-4 py-2 bg-black text-white rounded-lg hover:bg-blue-600">
                     Soumettre
                 </button>
             </form>
+
+            <div class="text-center">Pas encore membre ? <em><a routerLink="/hello/neighbors/signup">Inscrivez-vous</a></em></div>
         </div>
     </div>
 

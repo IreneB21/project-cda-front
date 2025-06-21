@@ -11,4 +11,8 @@ import { PublicationGetDto } from '../../../models/publication-get.dto';
 })
 export class EventCardComponent {
   @Input() data!: EventGetDto;
+
+  participateToEvent(eventId: number) {
+    
+  }
 }

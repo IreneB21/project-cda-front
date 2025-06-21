@@ -3,14 +3,14 @@ import { HeaderAuthentificationComponent } from '../../shared/header-authentific
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import { AuthService } from '../../../services/auth.service';
 import { RegistrationDto } from '../../../models/registration.dto';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { AddressSuggestion, AutofillAddressInputComponent } from '../../shared/autofill-address-input/autofill-address-input.component';
 import { CommonModule, NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-signup',
   standalone: true,
-  imports: [HeaderAuthentificationComponent, ReactiveFormsModule, AutofillAddressInputComponent, CommonModule, NgIf],
+  imports: [HeaderAuthentificationComponent, ReactiveFormsModule, AutofillAddressInputComponent, CommonModule, NgIf, RouterLink],
   templateUrl: './signup.component.html',
   styleUrl: './signup.component.css'
 })

@@ -2,13 +2,13 @@ import { Component, inject } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService } from '../../../services/auth.service';
 import { LoginDto } from '../../../models/login.dto';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { HeaderAuthentificationComponent } from '../header-authentification/header-authentification.component';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [ReactiveFormsModule, HeaderAuthentificationComponent],
+  imports: [ReactiveFormsModule, HeaderAuthentificationComponent, RouterLink],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })

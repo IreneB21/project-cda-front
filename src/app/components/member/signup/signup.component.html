@@ -79,10 +79,12 @@
             </label>
         </div>
         <!-- Submit button -->
-        <button type="submit" [disabled]="!registrationForm.valid" class="mt-4 px-4 py-2 bg-black text-white rounded-lg hover:bg-blue-600">
+        <button type="submit" [disabled]="!registrationForm.valid" class="mb-3 px-4 py-2 bg-black text-white rounded-lg hover:bg-blue-600">
             Soumettre
         </button>
       </form>
+
+      <div class="text-center">Déjà inscrit ? <em><a routerLink="/hello/neighbors/login">Connectez-vous</a></em></div>
     </div>
   </div>
 

@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { EventCreateDto } from '../models/event-create.dto';
 
 @Injectable({
   providedIn: 'root'
@@ -20,5 +21,12 @@ export class EventService {
 
   getAllEvents(): Observable<any> {
     return this.http.get(`${this.apiUrl}/all/events`, this.httpOptions);
+  }
+
+  saveEvent(eventData: EventCreateDto): Observable<any> {
+    return this.http.post(`${this.apiUrl}/create`, eventData, this.httpOptions)
+    .pipe(
+      //catchError()
+    );
   }
 }

@@ -1,22 +1,30 @@
-import { Component, inject } from '@angular/core';
-import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Component, inject, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { NgFor } from '@angular/common';
+import { AbstractControl, FormBuilder, ReactiveFormsModule, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
+
 import { PublicationCreateDto } from '../../../models/publication-create.dto';
 import { PublicationService } from '../../../services/publication.service';
-import { Router } from '@angular/router';
+import { EventCreateDto } from '../../../models/event-create.dto';
+import { EventService } from '../../../services/event.service';
 
 @Component({
   selector: 'app-post-making-form',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, NgFor],
   templateUrl: './post-making-form.component.html',
   styleUrl: './post-making-form.component.css'
 })
-export class PostMakingFormComponent {  
+export class PostMakingFormComponent implements OnInit {  
 
   private formBuilder = inject(FormBuilder);
   private userId = sessionStorage.getItem("userId");
 
-  constructor(private publicationService: PublicationService, private router: Router) {}
+  constructor(
+    private publicationService: PublicationService, 
+    private eventService: EventService,
+    private router: Router
+  ) {}
 
   publicationTypes = [
     { label: 'information', id: "INFO" },
@@ -27,6 +35,17 @@ export class PostMakingFormComponent {
     { label: 'évènement', id: "EVENT" },
   ];
 
+  private dateRangeValidator: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
+    const start = control.get('startDate')?.value;
+    const end = control.get('endDate')?.value;
+  
+    if (start && end && new Date(start) >= new Date(end)) {
+      return { invalidDateRange: true };
+    }
+  
+    return null;
+  };
+
   postMakingForm = this.formBuilder.group({
     publicationType: ['', Validators.required],
     startDate: [''],
@@ -34,9 +53,27 @@ export class PostMakingFormComponent {
     maxCapacity: [''],
     title: ['', Validators.required],
     description: ['', Validators.required],
-    localisation: [''],
+    localisation: ['', Validators.required],
     illustrations: [''],
-  });
+  }, { validators: this.dateRangeValidator });
+
+  ngOnInit(): void {
+    this.postMakingForm.get('publicationType')?.valueChanges.subscribe((type) => {
+      const startDateControl = this.postMakingForm.get('startDate');
+      const endDateControl = this.postMakingForm.get('endDate');
+  
+      if (type === 'EVENT') {
+        startDateControl?.addValidators(Validators.required);
+        endDateControl?.addValidators(Validators.required);
+      } else {
+        startDateControl?.clearValidators();
+        endDateControl?.clearValidators();
+      }
+  
+      startDateControl?.updateValueAndValidity();
+      endDateControl?.updateValueAndValidity();
+    });
+  }
 
   selectedFiles: File[] = [];
   cloudName = 'dghkyleie';
@@ -87,7 +124,37 @@ export class PostMakingFormComponent {
     const address = formValue.localisation ?? '';
     const { street, city, postalCode } = this.splitAddress(address);
 
-    if (formValue.publicationType != "EVENT") {
+    if (formValue.publicationType === "EVENT") {
+      if (!formValue.startDate || !formValue.endDate) {
+        alert("Les dates de début et de fin sont requises pour un événement.");
+        return;
+      }
+
+      const eventData: EventCreateDto = {
+        title: formValue.title ?? '',
+        city: city ?? '',
+        postalCode: postalCode ?? '',
+        street: street ?? '',
+        startDate: `${formValue.startDate}T00:00:00`,
+        endDate: `${formValue.endDate}T00:00:00`,
+        description: formValue.description ?? '',
+        illustrations: this.uploadedImageUrls,
+        authorId: Number(this.userId)
+      };
+
+      console.log("Nouvel événement :", eventData);
+
+      this.eventService.saveEvent(eventData).subscribe({
+        next: (data) => {
+          console.log("Événement enregistré :", data);
+          window.location.reload();
+        },
+        error: (err) => {
+          console.error("Erreur création événement :", err);
+        }
+      });
+
+    } else {
       const publicationData: PublicationCreateDto = {
         title: formValue.title ?? '',
         city: city ?? '',
@@ -97,9 +164,9 @@ export class PostMakingFormComponent {
         illustrations: this.uploadedImageUrls,
         authorId: Number(this.userId),
         category: formValue.publicationType ?? '',
-      }
+      };
 
-      console.log("Nouvelle publication : " + publicationData);
+      console.log("Nouvelle publication : " + JSON.stringify(publicationData));
 
       this.publicationService.savePublication(publicationData).subscribe({
         next: (data) => {
