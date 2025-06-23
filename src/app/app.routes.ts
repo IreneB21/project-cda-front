@@ -8,6 +8,7 @@ import { MapComponent } from './components/shared/map/map.component';
 
 export const routes: Routes = [
     { path: 'hello/neighbors', component: LandingComponent },
+    { path: '', redirectTo: 'hello/neighbors', pathMatch: 'full' },
     { path: 'hello/neighbors/signup', component: SignupComponent },
     { path: 'hello/neighbors/login', component: LoginComponent },
     { path: 'hello/neighbors/profile', component: ProfileComponent },
