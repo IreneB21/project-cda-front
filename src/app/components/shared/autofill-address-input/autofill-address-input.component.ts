@@ -1,8 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { ControlValueAccessor, FormControl, ReactiveFormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { debounceTime, distinctUntilChanged, filter, switchMap, map } from 'rxjs';
+import { debounceTime, distinctUntilChanged, switchMap, map, iif, of } from 'rxjs';
 
 export interface AddressSuggestion {
   formatted: string;
@@ -25,10 +25,7 @@ export interface AddressSuggestion {
 export class AutofillAddressInputComponent implements ControlValueAccessor {
   private http = inject(HttpClient);
 
-  @Input() placeholder = "Adresse complète";
-  @Output() addressSelected = new EventEmitter<AddressSuggestion>();
-
-  addressCtrl = new FormControl('');
+  addressControl = new FormControl('');
   suggestions: any[] = [];
   focusedIndex = -1;
   apiKey = '770c0643c64b4c979ee471a7b774bb87';
@@ -37,22 +34,19 @@ export class AutofillAddressInputComponent implements ControlValueAccessor {
   private onTouched = () => {};
 
   constructor() {
-    this.addressCtrl.valueChanges
+    const search$ = (value: string | null) => this.http.get<any>(
+                  `https://api.geoapify.com/v1/geocode/autocomplete?text=${encodeURIComponent(value as string)}&format=json&limit=5&apiKey=${this.apiKey}`
+                ).pipe(map((res) => res.results || []));
+
+    this.addressControl.valueChanges
       .pipe(
         debounceTime(300),
         distinctUntilChanged(),
-        filter((val): val is string => !!val && val.length >= 2),
-        switchMap((value) =>
-          this.http
-            .get<any>(
-              `https://api.geoapify.com/v1/geocode/autocomplete?text=${encodeURIComponent(
-                value
-              )}&format=json&limit=5&apiKey=${this.apiKey}`
-            )
-            .pipe(map((res) => res.results || []))
-        )
+        switchMap((val: string | null) => 
+          iif(() => !!val && val.length >= 2, search$(val), of([]))
+        ),
       )
-      .subscribe((results) => {
+      .subscribe((results: any) => {
         this.suggestions = results;
       });
   }
@@ -76,14 +70,13 @@ export class AutofillAddressInputComponent implements ControlValueAccessor {
   }
 
   select(item: any) {
-    this.addressCtrl.setValue(item.formatted);
+    this.addressControl.setValue(item.formatted, { emitEvent: false });
     this.suggestions = [];
-    this.addressSelected.emit({ formatted: item.formatted });
     this.onChange(item.formatted);
   }
 
-  writeValue(obj: any): void {
-    this.addressCtrl.setValue(obj);
+  writeValue(address: string): void {
+    this.addressControl.setValue(address, { emitEvent: false });
   }
 
   registerOnChange(fn: any): void {

@@ -85,12 +85,6 @@ export class SignupComponent {
     });
   }
 
-  onAddressSelected(event: any) {
-    const selected = event as AddressSuggestion;
-    this.registrationForm.get('address')?.setValue(selected.formatted);
-  }
-  
-
   private splitAddress(address: string): { street: string; city: string; postalCode: string } {
     const postalCodeRegex = /\b\d{5}\b/;
     const match = address.match(postalCodeRegex);

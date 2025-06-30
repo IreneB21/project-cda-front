@@ -61,9 +61,8 @@
         <!-- Address -->
         <app-autofill-address-input
               formControlName="address"
-              placeholder="Adresse complète"
-              (addressSelected)="onAddressSelected($event)"
         ></app-autofill-address-input>
+        {{ registrationForm.controls["address"].value }}
         <div *ngIf="registrationForm.get('address')?.touched || registrationForm.get('address')?.dirty">
           <p *ngIf="registrationForm.get('address')?.hasError('required')" class="text-red-500 text-sm">L’adresse est requise.</p>
           <p *ngIf="registrationForm.get('address')?.hasError('pattern')" class="text-red-500 text-sm">L’adresse semble trop courte ou incorrecte.</p>
