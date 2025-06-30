@@ -17,7 +17,7 @@
         <h4 class="mb-1 text-lg font-semibold">{{ data.title }}</h4>
         <p class="text-sm dark:text-gray-600">{{ data.description }}</p>
       
-        @if ((data.illustrations ?? []).length === 1) {
+        @if ((data.illustrations).length === 1) {
           <div class="w-full mb-4">
             <img 
               [src]="data.illustrations[0]" 
@@ -27,7 +27,7 @@
           </div>
         }
       
-        @if ((data.illustrations ?? []).length === 2) {
+        @if ((data.illustrations).length === 2) {
           <div class="grid grid-cols-3 gap-2 mb-4">
             <img 
               [src]="data.illustrations[0]" 
@@ -42,7 +42,7 @@
           </div>
         }
       
-        @if ((data.illustrations ?? []).length === 3) {
+        @if ((data.illustrations).length === 3) {
           <div class="grid grid-cols-3 gap-2 mb-4">
             <img 
               [src]="data.illustrations[0]" 

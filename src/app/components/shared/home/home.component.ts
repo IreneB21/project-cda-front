@@ -1,6 +1,6 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { NavbarComponent } from '../navbar/navbar.component';
-import { RightSectionComponent } from './right-section/right-section.component';
+import { RightSectionComponent } from './main-section/right-section.component';
 import { HomeService } from '../../../services/home.service';
 
 @Component({

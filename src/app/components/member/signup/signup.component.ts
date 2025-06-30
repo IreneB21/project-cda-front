@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
-import { HeaderAuthentificationComponent } from '../../shared/header-authentification/header-authentification.component';
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
+import { Router, RouterLink } from '@angular/router';
+import { CommonModule, NgIf } from '@angular/common';
+
+import { HeaderAuthentificationComponent } from '../../shared/header-authentification/header-authentification.component';
 import { AuthService } from '../../../services/auth.service';
 import { RegistrationDto } from '../../../models/registration.dto';
-import { Router, RouterLink } from '@angular/router';
 import { AddressSuggestion, AutofillAddressInputComponent } from '../../shared/autofill-address-input/autofill-address-input.component';
-import { CommonModule, NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-signup',

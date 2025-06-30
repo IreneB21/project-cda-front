@@ -7,11 +7,12 @@ import { PublicationCreateDto } from '../../../models/publication-create.dto';
 import { PublicationService } from '../../../services/publication.service';
 import { EventCreateDto } from '../../../models/event-create.dto';
 import { EventService } from '../../../services/event.service';
+import { AddressSuggestion, AutofillAddressInputComponent } from '../../shared/autofill-address-input/autofill-address-input.component';
 
 @Component({
   selector: 'app-post-making-form',
   standalone: true,
-  imports: [ReactiveFormsModule, NgFor],
+  imports: [ReactiveFormsModule, NgFor, AutofillAddressInputComponent],
   templateUrl: './post-making-form.component.html',
   styleUrl: './post-making-form.component.css'
 })
@@ -117,6 +118,11 @@ export class PostMakingFormComponent implements OnInit {
       localisation: '',
       illustrations: '',
     };*/
+  }
+
+  onAddressSelected(event: any) {
+      const selected = event as AddressSuggestion;
+      this.postMakingForm.get('localisation')?.setValue(selected.formatted);
   }
 
   onSubmit() {

@@ -1,4 +1,4 @@
-@if (publications.length === 0) {
+@if (posts.length === 0) {
     <div class="w-full flex flex-col justify-center items-center pt-3 pb-5">
         <img src="/no-publications.png" class="my-8 w-80" alt="">
         <h6>
@@ -11,10 +11,12 @@
     <app-post-making-form class="w-full mb-3"></app-post-making-form>
     <div class="flex flex-col gap-3 w-full">
         <div class="flex flex-col gap-3">
-            @for (publication of publications; track publication.id) {
-                <app-publication-card
-                    [data]="publication">
-                </app-publication-card>
+            @for (post of posts; track post.id) {
+                @if (post.category === 'event') {
+                    <app-event-card [data]="post"></app-event-card>
+                } @else {
+                    <app-publication-card [data]="post"></app-publication-card>
+                }
             }
         </div>
     </div>

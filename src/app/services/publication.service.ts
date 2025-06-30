@@ -1,8 +1,8 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { PublicationCreateDto } from '../models/publication-create.dto';
 import { Observable} from 'rxjs';
-import { EventCreateDto } from '../models/event-create.dto';
+
+import { PublicationCreateDto } from '../models/publication-create.dto';
 
 @Injectable({
   providedIn: 'root'
