@@ -52,11 +52,6 @@ export class InfosTabComponent implements OnInit {
     });
   }
 
-  onAddressSelected(event: any) {
-      const selected = event as AddressSuggestion;
-      this.profileInfosTabForm.get('fullAddress')?.setValue(selected.formatted);
-  }
-
   submitForm(): void {
     if (this.profileInfosTabForm.valid) {
       const formData = this.profileInfosTabForm.value;

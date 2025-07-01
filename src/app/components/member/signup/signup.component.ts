@@ -60,7 +60,7 @@ export class SignupComponent {
       '/avatar2.jpg',
       '/avatar3.jpg',
       '/avatar4.jpg'
-    ]
+    ];
 
     const registrationData: RegistrationDto = {
       lastname: formValue.lastname ?? '',

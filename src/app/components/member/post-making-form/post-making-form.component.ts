@@ -120,11 +120,6 @@ export class PostMakingFormComponent implements OnInit {
     };*/
   }
 
-  onAddressSelected(event: any) {
-      const selected = event as AddressSuggestion;
-      this.postMakingForm.get('localisation')?.setValue(selected.formatted);
-  }
-
   onSubmit() {
     const formValue = this.postMakingForm.value;
     const address = formValue.localisation ?? '';
