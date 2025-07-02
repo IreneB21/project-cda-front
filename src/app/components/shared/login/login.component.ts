@@ -34,7 +34,7 @@ export class LoginComponent {
       next: (data) => {
         sessionStorage.setItem('token', data.token);
         sessionStorage.setItem('userId', data.id);
-        this.router.navigate(['/hello/neighbors/profile']); 
+        this.router.navigate(['/hello/neighbors/profile/informations']); 
       },
       error: err => console.error('Erreur de connexion :', err)
     })

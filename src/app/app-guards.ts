@@ -7,3 +7,9 @@ export const authGuard: CanActivateFn = (route: ActivatedRouteSnapshot, state: R
   const router = inject(Router);
   return authService.isAuthenticated() || router.parseUrl("hello/neighbors");
 };
+
+export const notAuthGuard: CanActivateFn = (route: ActivatedRouteSnapshot, state: RouterStateSnapshot) => {
+  const authService = inject(AuthService);
+  const router = inject(Router);
+  return !authService.isAuthenticated() || router.parseUrl("hello/neighbors/profile/informations");
+};

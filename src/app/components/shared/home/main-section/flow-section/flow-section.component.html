@@ -1,35 +1,37 @@
 <div class="mb-2">
     <div class="flex justify-center overflow-x-auto gap-1 overflow-y-hidden border-b border-gray-200 whitespace-nowrap dark:border-gray-700">
         <button 
-            class="inline-flex items-center h-10 px-10 -mb-px text-sm text-center bg-transparent 
-            border-b-2 sm:text-base whitespace-nowrap focus:outline-none">
+            routerLink="all"
+            [class]="button">
             Tout
         </button>
     
         <button 
-            class="inline-flex items-center h-10 px-10 -mb-px text-sm text-center bg-transparent 
-            border-b-2 sm:text-base whitespace-nowrap focus:outline-none">
+            routerLink="info"
+            [class]="button">
             Informations
         </button>
     
         <button 
-            class="inline-flex items-center h-10 px-10 -mb-px text-sm text-center bg-transparent 
-            border-b-2 sm:text-base whitespace-nowrap focus:outline-none">
+            routerLink="alert"
+            [class]="button">
             Alertes
         </button>
 
         <button 
-            class="inline-flex items-center h-10 px-10 -mb-px text-sm text-center bg-transparent 
-            border-b-2 sm:text-base whitespace-nowrap focus:outline-none">
+            routerLink="help"
+            [class]="button">
             Entraide
         </button>
 
         <button 
-            class="inline-flex items-center h-10 px-10 -mb-px text-sm text-center bg-transparent 
-            border-b-2 sm:text-base whitespace-nowrap focus:outline-none">
+            routerLink="event"
+            [class]="button">
             Evènements
         </button>
     </div>
+
+    <router-outlet></router-outlet>
     
     <!-- Contenu des onglets -->
     <div class="w-full py-4 px-5 flex flex-col justify-center items-center gap-3">
