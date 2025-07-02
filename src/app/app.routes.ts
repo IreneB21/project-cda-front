@@ -5,15 +5,16 @@ import { LandingComponent } from './components/shared/landing/landing.component'
 import { ProfileComponent } from './components/member/profile/profile.component';
 import { HomeComponent } from './components/shared/home/home.component';
 import { MapComponent } from './components/shared/map/map.component';
+import { authGuard } from './app-guards';
 
 export const routes: Routes = [
     { path: 'hello/neighbors', component: LandingComponent },
     { path: '', redirectTo: 'hello/neighbors', pathMatch: 'full' },
     { path: 'hello/neighbors/signup', component: SignupComponent },
     { path: 'hello/neighbors/login', component: LoginComponent },
-    { path: 'hello/neighbors/profile', component: ProfileComponent },
-    { path: 'hello/neighbors/home', component: HomeComponent },
-    { path: 'hello/neighbors/map', component: MapComponent },
+    { path: 'hello/neighbors/profile', component: ProfileComponent, canActivate: [authGuard] },
+    { path: 'hello/neighbors/home', component: HomeComponent, canActivate: [authGuard] },
+    { path: 'hello/neighbors/map', component: MapComponent, canActivate: [authGuard] },
 ];
 
 /*
