@@ -7,7 +7,6 @@ import { RouterLink } from '@angular/router';
   selector: 'app-landing',
   imports: [HeaderComponent, ButtonComponent, RouterLink],
   templateUrl: './landing.component.html',
-  styleUrl: './landing.component.css'
 })
 export class LandingComponent {
   label = "C'est parti !"

@@ -12,10 +12,10 @@
     <div class="flex flex-col gap-3 w-full">
         <div class="flex flex-col gap-3">
             @for (post of posts; track post.id) {
-                @if (post.category === 'event') {
-                    <app-event-card [data]="post"></app-event-card>
-                } @else {
+                @if (post.category) {
                     <app-publication-card [data]="post"></app-publication-card>
+                } @else {
+                    <app-event-card [data]="post"></app-event-card>
                 }
             }
         </div>

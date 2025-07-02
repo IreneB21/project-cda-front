@@ -1,11 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
 
-import {PublicationService } from '../../../../../services/publication.service';
 import { PostMakingFormComponent } from '../../../post-making-form/post-making-form.component';
-import { PublicationGetDto } from '../../../../../models/publication-get.dto';
 import { PublicationCardComponent } from '../../../../shared/publication-card/publication-card.component';
-import { EventService } from '../../../../../services/event.service';
-import { EventGetDto } from '../../../../../models/event-get.dto';
 import { HomeService } from '../../../../../services/home.service';
 import { EventCardComponent } from '../../../../shared/event-card/event-card.component';
 

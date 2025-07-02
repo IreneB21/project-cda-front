@@ -9,7 +9,8 @@ export interface EventGetDto {
     startDate: Date;
     endDate: Date;
     description: string;
-    publicationDate: Date;
+    eventDate: Date;
+    illustrations: string[];
     author: {
         id: number;
         lastname: string;

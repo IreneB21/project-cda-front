@@ -1,15 +1,15 @@
 <div class="w-xl space-y-6 overflow-hidden font-sans rounded-md border px-6 py-4 bg-white">
-	<div class="flex items-center">
+	<div class="flex space-x-4">
         @if (data.author.picture !== null) {
-            <img alt="" [src]="data.author.picture" class="h-12 w-12 rounded-full">
+            <img alt="" [src]="data.author.picture" class="object-cover w-12 h-12 rounded-full shadow dark:bg-gray-500">
         }
 		<div class="flex flex-col space-y-1">
-            @if (data.author.pseudonym !== null) {
-                <a rel="noopener noreferrer" href="#" class="text-sm text-gray-400 mt-1">{{ data.author.pseudonym }}</a>
-            } @else {
-                <a rel="noopener noreferrer" href="#" class="text-sm text-gray-400 mt-1">{{ data.author.firstname }} {{ data.author.lastname }}</a>
-            }
-			<span class="text-xs dark:text-gray-600">{{ data.publicationDate }}</span>
+        @if (data.author.pseudonym !== null) {
+            <a rel="noopener noreferrer" href="#" class="text-sm font-semibold">{{ data.author.pseudonym }}</a>
+        } @else {
+            <a rel="noopener noreferrer" href="#" class="text-sm font-semibold">{{ data.author.firstname }} {{ data.author.lastname }}</a>
+        }
+			  <span class="text-xs dark:text-gray-600">{{ data.publicationDate }}</span>
 		</div>
 	</div>
     
