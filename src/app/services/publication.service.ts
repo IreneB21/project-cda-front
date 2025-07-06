@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable} from 'rxjs';
 
 import { PublicationCreateDto } from '../models/publication-create.dto';
+import { PublicationUpdateLikesDto } from '../models/publication-update-likes.dto';
 
 @Injectable({
   providedIn: 'root'
@@ -33,5 +34,13 @@ export class PublicationService {
       .pipe(
         //catchError()
       );
+  }
+
+  likePublication(likesData: PublicationUpdateLikesDto): Observable<any> {
+    return this.http.put(`${this.apiUrl}/like`, likesData, this.httpOptions);
+  }
+
+  dislikePublication(likesData: PublicationUpdateLikesDto): Observable<any> {
+    return this.http.put(`${this.apiUrl}/dislike`, likesData, this.httpOptions);
   }
 }

@@ -30,8 +30,6 @@ export class PostMakingFormComponent implements OnInit {
   publicationTypes = [
     { label: 'information', id: "INFO" },
     { label: 'alerte', id: "ALERT" },
-    { label: 'conseil', id: "RECOMMANDATION" },
-    { label: 'question', id: "QUESTION" },
     { label: 'aide', id: "HELP" },
     { label: 'évènement', id: "EVENT" },
   ];
@@ -55,7 +53,7 @@ export class PostMakingFormComponent implements OnInit {
     title: ['', Validators.required],
     description: ['', Validators.required],
     localisation: ['', Validators.required],
-    illustrations: [''],
+    illustrations: this.formBuilder.control<string[]>([], [])
   }, { validators: this.dateRangeValidator });
 
   ngOnInit(): void {
@@ -98,6 +96,7 @@ export class PostMakingFormComponent implements OnInit {
         .then(res => res.json())
         .then(data => {
           this.uploadedImageUrls.push(data.secure_url);
+          this.postMakingForm.get('illustrations')?.setValue(this.uploadedImageUrls);
         })
         .catch(err => {
           console.error('Erreur upload Cloudinary:', err);

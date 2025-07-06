@@ -4,6 +4,8 @@ import { Observable } from 'rxjs';
 
 import { EventCreateDto } from '../models/event-create.dto';
 import { EventUpdateParticipantsDto } from '../models/event-update-participants.dto';
+import { EventGetDto } from '../models/event-get.dto';
+import { EventUpdateLikesDto } from '../models/event-update-likes.dto';
 
 @Injectable({
   providedIn: 'root'
@@ -37,12 +39,18 @@ export class EventService {
   }
 
   participate(participationData: EventUpdateParticipantsDto): Observable<any> {
-    console.log(participationData);
-    
-    return this.http.post(`${this.apiUrl}/join`, participationData, this.httpOptions);
+    return this.http.put(`${this.apiUrl}/join`, participationData, this.httpOptions);
   } 
 
   cancelParticipation(participationData: EventUpdateParticipantsDto): Observable<any> {
-    return this.http.post(`${this.apiUrl}/leave`, participationData, this.httpOptions);
+    return this.http.put(`${this.apiUrl}/leave`, participationData, this.httpOptions);
+  }
+
+  likeEvent(likesData: EventUpdateLikesDto): Observable<any> {
+    return this.http.put(`${this.apiUrl}/like`, likesData, this.httpOptions);
+  }
+
+  dislikeEvent(likesData: EventUpdateLikesDto): Observable<any> {
+    return this.http.put(`${this.apiUrl}/dislike`, likesData, this.httpOptions);
   }
 }

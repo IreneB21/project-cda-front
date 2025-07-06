@@ -1,4 +1,4 @@
-<div class="mb-2">
+<div class="mb-2 w-full">
     <div class="flex justify-center overflow-x-auto lg:gap-4 gap-0 overflow-y-hidden border-b border-gray-200 whitespace-nowrap dark:border-gray-700">
         <button
             routerLink="informations"
@@ -9,7 +9,7 @@
         </button>
     
         <button 
-            routerLink="activite"
+            routerLink="activity"
             routerLinkActive
             #activite="routerLinkActive"
             [class]="button + (activite.isActive ? active : inactive)">

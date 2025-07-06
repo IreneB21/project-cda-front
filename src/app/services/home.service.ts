@@ -48,5 +48,6 @@ export class HomeService {
   }
 
   getRandomUserPictures(): Observable<any> {
-  return this.http.get(`${this.apiUrl}/display/random/user/pictures`, this.httpOptions);
-}}
+    return this.http.get(`${this.apiUrl}/display/random/user/pictures`, this.httpOptions);
+  }
+}

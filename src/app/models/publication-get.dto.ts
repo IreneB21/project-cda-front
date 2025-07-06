@@ -1,42 +1,17 @@
+import { AuthorDto } from "./event-author.dto";
+
 export interface PublicationGetDto {
     id: number;
     title: string;
+    category: string;
     city: string;
     postalCode: string;
     street: string;
     latitude: number;
     longitude: number;
     description: string;
-    publicationDate: Date;
     illustrations: string[];
-    author: {
-        id: number;
-        lastname: string;
-        firstname: string;
-        pseudonym: string;
-        roles: Array<Object>;
-        city: string;
-        postalCode: string;
-        street: string;
-        isInCity: boolean;
-        birthdate: any;
-        introduction: string;
-        phone: string;
-        picture: string;
-        notificationPreferences: boolean;
-        contacts: any;
-        registrationDate: Date;
-        withdrawalDate: null;
-        withdrawalReason: null;
-        lastActivityDate: any;
-        enabled: boolean;
-        authorities: Array<Object>;
-        username: string;
-        accountNonLocked: boolean;
-        accountNonExpired: boolean;
-        credentialsNonExpired: boolean;
-    };
-    category: string;
-    archived: boolean;
-    reported: boolean;
+    author: AuthorDto;
+    likes: number[];
+    publicationDate: Date;
 }

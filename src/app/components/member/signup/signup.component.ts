@@ -78,7 +78,7 @@ export class SignupComponent {
 
     this.authService.register(registrationData).subscribe({
       next: (data) => {
-        sessionStorage.setItem('token', data.accessToken);
+        //sessionStorage.setItem('token', data.accessToken);
         this.router.navigate(['/hello/neighbors/login']); 
       },
       error: err => console.error('Erreur inscription :', err)
@@ -94,14 +94,12 @@ export class SignupComponent {
       const parts = address.replace(postalCode, '').trim().split(/\s+/);
       const postalCodeIndex = address.indexOf(postalCode);
       
-      // On découpe autour du code postal
       const before = address.substring(0, postalCodeIndex).trim();
       const after = address.substring(postalCodeIndex + postalCode.length).trim();
   
       let street = before;
       let city = after;
   
-      // Au cas où la ville est aussi avant (rare mais bon)
       if (!city && parts.length > 0) {
         city = parts.slice(-1)[0];
       }

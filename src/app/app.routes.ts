@@ -25,7 +25,7 @@ export const routes: Routes = [
         canActivate: [authGuard],
         children: [
             { path: 'informations', component: InfosTabComponent },
-            { path: 'activite', component: ActivityTabComponent },
+            { path: 'activity', component: ActivityTabComponent },
             { path: 'notifications', component: NotificationsTabComponent },
         ]
     },
