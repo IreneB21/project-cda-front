@@ -29,6 +29,6 @@ export class AuthService {
   logout(): void {
     sessionStorage.removeItem('token');
     sessionStorage.removeItem('userId');
-    this.router.navigate(['/hello/neighbors']); 
+    this.router.navigate(['/hello/neighbors/landing']); 
   }
 }

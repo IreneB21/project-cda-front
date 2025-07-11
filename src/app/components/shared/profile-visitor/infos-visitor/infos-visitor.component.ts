@@ -4,50 +4,39 @@ import { FormsModule } from '@angular/forms';
 import { UserService } from '../../../../services/user.service';
 import { BioUpdateDto } from '../../../../models/bio-update.dto';
 import { ActivatedRoute } from '@angular/router';
+import { RouteService } from '../../../../services/route.service';
 
 @Component({
-  selector: 'app-infos',
+  selector: 'app-infos-visitor',
   standalone: true,
   imports: [FormsModule],
-  templateUrl: './infos.component.html',
+  templateUrl: './infos-visitor.component.html',
 })
-export class InfosComponent implements OnInit {
+export class InfosVisitorComponent implements OnInit {
 
   @Input() isOwner!: boolean;
   
   private userService = inject(UserService);
   private route = inject(ActivatedRoute);
+  private routeService = inject(RouteService);
 
   user: any;
-  isEditing: boolean = false;
   introductionForm: string = '';
 
   ngOnInit(): void {
-    this.userService.getUserInfosById().subscribe((data) => {
-      this.user = data;
+    this.route.parent?.paramMap.subscribe(params => {
+      const profileUserId = this.routeService.getProfileUserIdFromRoute(this.route);
+
+      if (!profileUserId) return;
+
+      this.userService.getUserInfosForVisitor(profileUserId).subscribe((data) => {
+        this.user = data;
+        console.log(data)
+      });
     });
   }
 
   get displayPseudonym(): string | null {
     return this.user.pseudonym ? `@${this.user.pseudonym}` : null;
-  }
-
-  editIntroduction() {
-    this.isEditing = true;
-    this.introductionForm = this.user.introduction || '';
-  }
-
-  cancelEditing() {
-    this.isEditing = false;
-  }
-
-  saveIntroduction() {
-    this.user.introduction = this.introductionForm;
-    const userBio: BioUpdateDto = {
-      userId: this.user.id,
-      body: this.introductionForm
-    }
-    this.isEditing = false;
-    this.userService.updateIntroduction(userBio);
   }
 }

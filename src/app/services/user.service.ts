@@ -1,7 +1,11 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
+
 import { BioUpdateDto } from '../models/bio-update.dto';
+import { UserGetForVisitorDto } from '../models/user-get-visitor.dto';
+import { EventGetDto } from '../models/event-get.dto';
+import { PublicationGetDto } from '../models/publication-get.dto';
 
 @Injectable({
   providedIn: 'root'
@@ -17,10 +21,19 @@ export class UserService {
   };
   private userId = sessionStorage.getItem("userId");
 
+  private allPostsSubject = new BehaviorSubject<Array<EventGetDto | PublicationGetDto>>([]);
+  allPosts$ = this.allPostsSubject.asObservable();
+  private lastEventsSubject = new BehaviorSubject<Array<EventGetDto>>([]);
+  lastEvents$ = this.lastEventsSubject.asObservable();
+
   constructor(private http: HttpClient) {}
 
-  getUserInfos(): Observable<any> {
+  getUserInfosById(): Observable<any> {
     return this.http.get(`${this.apiUrl}/user/${this.userId}/infos`, this.httpOptions);
+  }
+
+  getUserInfosForVisitor(id: string): Observable<UserGetForVisitorDto> {
+    return this.http.get<UserGetForVisitorDto>(`${this.apiUrl}/user/${id}/infos/visitor`, this.httpOptions);
   }
 
   updateIntroduction(bio: BioUpdateDto): void {
@@ -32,5 +45,27 @@ export class UserService {
         console.error('Error updating resource', error);
       }
     );
+  }
+
+  getUserPosts(id: string): void {
+    this.http.get(`${this.apiUrl}/user/${id}/posts`, this.httpOptions).subscribe((data: any) => {
+      this.allPostsSubject.next([...data.events, ...data.publications]);
+
+      const today = new Date();
+      const filteredEvents = data.events.filter((event: any) => {
+        const eventDate = new Date(event.startDate);
+        const eventValue = eventDate.valueOf();
+        const todayValue = today.valueOf();
+        return eventValue >= todayValue;
+      });
+
+      const lastEvents = filteredEvents.sort((a: any, b: any) => {
+        return a.eventDate - b.eventDate;
+      });
+      
+      this.lastEventsSubject.next(filteredEvents.sort((a: any, b: any) => {
+        return a.eventDate - b.eventDate;
+      }));
+    });
   }
 }

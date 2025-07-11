@@ -1,14 +1,6 @@
-<div class="flex flex-col lg:flex-row bg-gray-100 min-h-screen">
-    <!-- Navbar -->
-    <app-navbar></app-navbar>
-  
-    <!-- Main content -->
-    <div class="flex-1 flex flex-col pb-24">
-      <img [src]="illustrationPath" class="h-48 w-full object-cover mb-3" alt="" />
-        <div class="flex flex-col lg:flex-row">
-        <app-infos class="w-full lg:w-1/4"></app-infos>
-        <app-tabs-section class="flex-1"></app-tabs-section>
-      </div>
-    </div>
-  </div>
-  
+<img [src]="illustrationPath" class="h-48 w-100 object-cover mb-3" alt="">
+<!--<input type="file" (change)="updateIllustration($event)" accept="image/*">-->
+<div class="flex">
+    <app-infos class="w-1/4"></app-infos>
+    <app-tabs-section></app-tabs-section>
+</div>

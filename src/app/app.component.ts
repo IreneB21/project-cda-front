@@ -7,7 +7,7 @@ import { FooterComponent } from './components/shared/footer/footer.component';
   standalone: true,
   imports: [RouterOutlet, FooterComponent],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css',
+  styleUrl: './app.component.scss',
 })
 export class AppComponent {
   title = 'project-cda-front';

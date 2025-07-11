@@ -1,14 +1,13 @@
 import { Component } from '@angular/core';
 import { InfosComponent } from './infos/infos.component';
 import { TabsSectionComponent } from './tabs-section/tabs-section.component';
-import { NavbarComponent } from '../../shared/navbar/navbar.component';
 
 @Component({
   selector: 'app-profile',
   standalone: true,
-  imports: [InfosComponent, NavbarComponent, TabsSectionComponent],
+  imports: [InfosComponent, TabsSectionComponent],
   templateUrl: './profile.component.html',
-  styleUrl: './profile.component.css'
+  styleUrl: './profile.component.scss'
 })
 export class ProfileComponent {
 

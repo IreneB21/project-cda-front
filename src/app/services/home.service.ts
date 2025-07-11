@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
+
 import { EventGetDto } from '../models/event-get.dto';
 import { PublicationGetDto } from '../models/publication-get.dto';
 
@@ -25,7 +26,6 @@ export class HomeService {
   constructor(private http: HttpClient) {}
 
   getAllPosts(): void {
-    //  {events: Array<EventGetDto>, publications: Array<PublicationGetDto>}
     this.http.get(`${this.apiUrl}/display/all`, this.httpOptions).subscribe((data: any) => {
       this.allPostsSubject.next([...data.events, ...data.publications]);
 

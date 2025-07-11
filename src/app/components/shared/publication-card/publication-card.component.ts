@@ -1,11 +1,13 @@
 import { Component, inject, Input } from '@angular/core';
+import { DatePipe } from '@angular/common';
+
 import { PublicationGetDto } from '../../../models/publication-get.dto';
 import { PublicationService } from '../../../services/publication.service';
 
 @Component({
   selector: 'app-publication-card',
   standalone: true,
-  imports: [],
+  imports: [DatePipe],
   templateUrl: './publication-card.component.html',
   styleUrl: './publication-card.component.css'
 })

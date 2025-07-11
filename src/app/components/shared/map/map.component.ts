@@ -1,6 +1,5 @@
 import { AfterViewInit, Component, inject, OnInit } from '@angular/core';
 import * as L from 'leaflet';
-import { NavbarComponent } from '../navbar/navbar.component';
 import { HomeService } from '../../../services/home.service';
 
 L.Icon.Default.mergeOptions({
@@ -12,7 +11,7 @@ L.Icon.Default.mergeOptions({
 @Component({
   selector: 'app-map',
   standalone: true,
-  imports: [NavbarComponent],
+  imports: [],
   templateUrl: './map.component.html',
   styleUrl: './map.component.css'
 })

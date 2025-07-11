@@ -1,7 +1,6 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
+import { RouterOutlet, RouterLink } from '@angular/router';
 
-import { PostMakingFormComponent } from '../../../../member/post-making-form/post-making-form.component';
 import { PublicationCardComponent } from '../../../publication-card/publication-card.component';
 import { EventCardComponent } from '../../../event-card/event-card.component';
 import { HomeService } from '../../../../../services/home.service';
@@ -9,7 +8,7 @@ import { HomeService } from '../../../../../services/home.service';
 @Component({
   selector: 'app-flow-section',
   standalone: true,
-  imports: [PublicationCardComponent, EventCardComponent, PostMakingFormComponent, RouterOutlet, RouterLink, RouterLinkActive],
+  imports: [PublicationCardComponent, EventCardComponent, RouterOutlet, RouterLink],
   templateUrl: './flow-section.component.html'
 })
 export class FlowSectionComponent implements OnInit {

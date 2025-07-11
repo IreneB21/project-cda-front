@@ -1,7 +1,10 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { AddressSuggestion, AutofillAddressInputComponent } from '../../../../shared/autofill-address-input/autofill-address-input.component';
+
+import { AutofillAddressInputComponent } from '../../../../shared/autofill-address-input/autofill-address-input.component';
 import { UserService } from '../../../../../services/user.service';
+import { ActivatedRoute } from '@angular/router';
+import { RouteService } from '../../../../../services/route.service';
 
 @Component({
   selector: 'app-infos-tab',
@@ -16,7 +19,9 @@ export class InfosTabComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private userService: UserService
+    private userService: UserService,
+    private route: ActivatedRoute,
+    private routeService: RouteService
   ) {}
 
   /* A intégrer dans ngOnInit */
@@ -26,6 +31,11 @@ export class InfosTabComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    const profileUserId = this.routeService.getProfileUserIdFromRoute(this.route);
+    const connectedUserId = sessionStorage.getItem('userId');
+
+    if (!profileUserId) return;
+
     this.profileInfosTabForm = this.fb.group({
       lastname: ['', [Validators.required]],
       firstname: ['', [Validators.required]],
@@ -39,7 +49,7 @@ export class InfosTabComponent implements OnInit {
       notificationPreferences: [0],
     });
 
-    this.userService.getUserInfos().subscribe(userInfos => {
+    this.userService.getUserInfosById().subscribe(userInfos => {
       this.profileInfosTabForm.patchValue({
         lastname: userInfos.lastname,
         firstname: userInfos.firstname,
@@ -47,7 +57,7 @@ export class InfosTabComponent implements OnInit {
         birthdate: userInfos.birthdate,
         fullAddress: `${userInfos.street}, ${userInfos.postalCode} ${userInfos.city}`,
         isInCity: userInfos.isInCity,
-        phpne: userInfos.phone,
+        phone: userInfos.phone,
       })
     });
   }

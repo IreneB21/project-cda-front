@@ -1,0 +1,28 @@
+<div class="mb-2 w-full">
+    <div class="flex justify-center overflow-x-auto lg:gap-4 gap-0 overflow-y-hidden border-b border-gray-200 whitespace-nowrap dark:border-gray-700">
+        @if (posts.length === 0) {
+        <div class="w-full flex flex-col justify-center items-center pt-3 pb-5">
+            <img src="/no-publications.png" class="my-8 w-80" alt="">
+            <h6>
+                On dirait que cet utilisateur n'a encore rien publié... 
+            </h6>
+        </div>
+    } @else {
+        <div class="flex flex-col gap-3 w-full mt-2">
+            <div class="flex flex-col gap-3">
+                @for (post of posts; track post.id) {
+                    @if (post.category) {
+                        <app-publication-card [data]="post"></app-publication-card>
+                    } @else {
+                        <app-event-card [data]="post"></app-event-card>
+                    }
+                }
+            </div>
+        </div>
+    }
+    </div>
+    <!-- Contenu des onglets -->
+    <div class="p-4 flex align-items-center justify-content-center w-full">
+        <router-outlet></router-outlet>
+    </div>
+</div>
