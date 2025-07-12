@@ -44,7 +44,7 @@ export class MapComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
 
-    this.homeService.getAllPosts();
+    this.homeService.getNearbyposts();
 
     this.homeService.allPosts$.subscribe((data) => {
       this.posts = data;

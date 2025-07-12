@@ -78,7 +78,6 @@ export class SignupComponent {
 
     this.authService.register(registrationData).subscribe({
       next: (data) => {
-        //sessionStorage.setItem('token', data.accessToken);
         this.router.navigate(['/hello/neighbors/login']); 
       },
       error: err => console.error('Erreur inscription :', err)

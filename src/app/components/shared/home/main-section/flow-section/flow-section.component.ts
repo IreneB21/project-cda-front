@@ -22,7 +22,7 @@ export class FlowSectionComponent implements OnInit {
   inactive = "";
 
   ngOnInit(): void {
-    this.homeService.getAllPosts();
+    this.homeService.getNearbyposts();
     this.homeService.allPosts$.subscribe((data) => this.posts = data);
   }
 }

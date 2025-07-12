@@ -9,14 +9,10 @@ import { HomeService } from '../../../services/home.service';
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent {
 
   private homeService = inject(HomeService);
 
   posts: Array<any> = [];
   lastEvents: Array<any> = [];
-
-  ngOnInit(): void {
-
-  }
 }

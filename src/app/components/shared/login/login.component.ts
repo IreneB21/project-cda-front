@@ -32,8 +32,11 @@ export class LoginComponent {
 
     this.authService.login(loginData).subscribe({
       next: (data) => {
+        console.log(data);
         sessionStorage.setItem('token', data.token);
         sessionStorage.setItem('userId', data.id);
+        sessionStorage.setItem('latitude', data.latitude);
+        sessionStorage.setItem('longitude', data.longitude);
         this.router.navigate([`/hello/neighbors/profile/informations`]);
       },
       error: err => console.error('Erreur de connexion :', err)

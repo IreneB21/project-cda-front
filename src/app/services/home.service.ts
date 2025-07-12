@@ -13,7 +13,7 @@ export class HomeService {
   private apiUrl = 'http://localhost:8080/api/rest/hello/neighbors/home';
   private httpOptions = {
     headers: new HttpHeaders({
-      'Content-Type':  'application/json',
+      'Content-Type': 'application/json',
       Authorization: `Bearer ${sessionStorage.getItem('token')}`
     })
   };
@@ -23,7 +23,47 @@ export class HomeService {
   private lastEventsSubject = new BehaviorSubject<Array<EventGetDto>>([]);
   lastEvents$ = this.lastEventsSubject.asObservable();
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
+
+  getNearbyposts(): void {
+    console.log(`latitude ${sessionStorage.getItem('latitude')}`);
+    console.log(sessionStorage.getItem('longitude'));
+
+    const lat = sessionStorage.getItem('latitude');
+    const lng = sessionStorage.getItem('longitude');
+
+    if (!lat || !lng) {
+      console.warn("Latitude ou longitude absente du sessionStorage");
+      return;
+    }
+
+    this.http.get(`${this.apiUrl}/display/all/nearby`, {
+      headers: this.httpOptions.headers, // Reprendre les headers (auth, etc.)
+      params: {
+        lat: lat,
+        lng: lng,
+        radiusKm: "2"
+      }
+    }).subscribe((data: any) => {
+      this.allPostsSubject.next([...data.events, ...data.publications]);
+
+      const today = new Date();
+      const filteredEvents = data.events.filter((event: any) => {
+        const eventDate = new Date(event.startDate);
+        const eventValue = eventDate.valueOf();
+        const todayValue = today.valueOf();
+        return eventValue >= todayValue;
+      });
+
+      const lastEvents = filteredEvents.sort((a: any, b: any) => {
+        return a.eventDate - b.eventDate;
+      });
+
+      this.lastEventsSubject.next(filteredEvents.sort((a: any, b: any) => {
+        return a.eventDate - b.eventDate;
+      }));
+    });
+  }
 
   getAllPosts(): void {
     this.http.get(`${this.apiUrl}/display/all`, this.httpOptions).subscribe((data: any) => {
@@ -40,7 +80,7 @@ export class HomeService {
       const lastEvents = filteredEvents.sort((a: any, b: any) => {
         return a.eventDate - b.eventDate;
       });
-      
+
       this.lastEventsSubject.next(filteredEvents.sort((a: any, b: any) => {
         return a.eventDate - b.eventDate;
       }));

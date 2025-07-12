@@ -29,6 +29,8 @@ export class AuthService {
   logout(): void {
     sessionStorage.removeItem('token');
     sessionStorage.removeItem('userId');
+    sessionStorage.removeItem('latitude');
+    sessionStorage.removeItem('longitude');
     this.router.navigate(['/hello/neighbors/landing']); 
   }
 }
