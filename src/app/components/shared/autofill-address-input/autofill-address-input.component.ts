@@ -35,7 +35,8 @@ export class AutofillAddressInputComponent implements ControlValueAccessor {
 
   constructor() {
     const search$ = (value: string | null) => this.http.get<any>(
-                  `https://api.geoapify.com/v1/geocode/autocomplete?text=${encodeURIComponent(value as string)}&format=json&limit=5&apiKey=${this.apiKey}`
+                  `https://api.geoapify.com/v1/geocode/autocomplete?text=${encodeURIComponent(value as string)}
+                  &format=json&limit=5&apiKey=${this.apiKey}`
                 ).pipe(map((res) => res.results || []));
 
     this.addressControl.valueChanges

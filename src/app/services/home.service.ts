@@ -17,6 +17,7 @@ export class HomeService {
       Authorization: `Bearer ${sessionStorage.getItem('token')}`
     })
   };
+  private userId = sessionStorage.getItem("userId");
 
   private allPostsSubject = new BehaviorSubject<Array<EventGetDto | PublicationGetDto>>([]);
   allPosts$ = this.allPostsSubject.asObservable();
@@ -26,26 +27,10 @@ export class HomeService {
   constructor(private http: HttpClient) { }
 
   getNearbyposts(): void {
-    console.log(`latitude ${sessionStorage.getItem('latitude')}`);
-    console.log(sessionStorage.getItem('longitude'));
-
-    const lat = sessionStorage.getItem('latitude');
-    const lng = sessionStorage.getItem('longitude');
-
-    if (!lat || !lng) {
-      console.warn("Latitude ou longitude absente du sessionStorage");
-      return;
-    }
-
-    this.http.get(`${this.apiUrl}/display/all/nearby`, {
-      headers: this.httpOptions.headers, // Reprendre les headers (auth, etc.)
-      params: {
-        lat: lat,
-        lng: lng,
-        radiusKm: "2"
-      }
-    }).subscribe((data: any) => {
+    this.http.get(`${this.apiUrl}/display/all/nearby/${this.userId}`, this.httpOptions).subscribe((data: any) => {
       this.allPostsSubject.next([...data.events, ...data.publications]);
+
+      console.log(this.allPostsSubject);
 
       const today = new Date();
       const filteredEvents = data.events.filter((event: any) => {

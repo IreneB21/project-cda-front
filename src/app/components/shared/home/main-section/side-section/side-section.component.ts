@@ -24,8 +24,8 @@ export class SideSectionComponent implements OnInit {
     this.homeService.getRandomUserPictures().subscribe((data) => {
       this.randomPics = data;
     })
-    this.homeService.getNearbyposts();
+    /* this.homeService.getNearbyposts();
     //this.homeService.allPosts$.subscribe((data) => console.log(data));
-    this.homeService.lastEvents$.subscribe();
+    this.homeService.lastEvents$.subscribe(); */
   }
 }
