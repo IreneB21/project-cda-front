@@ -34,8 +34,6 @@ export class InfosTabComponent implements OnInit {
     const profileUserId = this.routeService.getProfileUserIdFromRoute(this.route);
     const connectedUserId = sessionStorage.getItem('userId');
 
-    if (!profileUserId) return;
-
     this.profileInfosTabForm = this.fb.group({
       lastname: ['', [Validators.required]],
       firstname: ['', [Validators.required]],

@@ -1,88 +1,97 @@
-<div class="w-xl space-y-6 overflow-hidden font-sans rounded-md border px-6 py-4 bg-white">
-  <div class="flex space-x-4">
-    @if (data.author.picture !== null) {
-    <img alt="" [src]="data.author.picture" class="object-cover w-12 h-12 rounded-full shadow dark:bg-gray-500">
-    }
-    <div class="flex flex-col space-y-1">
-      @if (data.author.pseudonym !== null) {
-      <a rel="noopener noreferrer" href="#" class="text-sm font-semibold">{{ data.author.pseudonym }}</a>
-      } @else {
-      <a rel="noopener noreferrer" href="#" class="text-sm font-semibold">{{ data.author.firstname }} {{
-        data.author.lastname }}</a>
-      }
-      <span class="text-xs dark:text-gray-600">{{ data.creationDate }}</span>
-    </div>
-  </div>
-
-  <div>
-    <h4 class="mb-1 text-xl font-semibold">{{ data.title }}</h4>
-    <p class="text-sm">{{ data.description}}</p>
-
-    @if ((data.illustrations).length === 1) {
-    <div class="w-full mb-4">
-      <img [src]="data.illustrations[0]" alt="Illustration" class="object-cover w-full h-64 sm:h-96 rounded-md" />
-    </div>
-    }
-
-    @if ((data.illustrations).length === 2) {
-    <div class="grid grid-cols-3 gap-2 mb-4">
-      <img [src]="data.illustrations[0]" class="col-span-2 object-cover h-64 w-full rounded-md"
-        alt="Illustration principale" />
-      <img [src]="data.illustrations[1]" class="col-span-1 object-cover h-64 w-full rounded-md"
-        alt="Illustration secondaire" />
-    </div>
-    }
-
-    @if ((data.illustrations).length === 3) {
-    <div class="grid grid-cols-3 gap-2 mb-4">
-      <img [src]="data.illustrations[0]" class="col-span-2 row-span-2 object-cover h-96 w-full rounded-md"
-        alt="Illustration principale" />
-      <img [src]="data.illustrations[1]" class="object-cover h-48 w-full rounded-md" alt="Illustration 2" />
-      <img [src]="data.illustrations[2]" class="object-cover h-48 w-full rounded-md" alt="Illustration 3" />
-    </div>
-    }
-  </div>
-
-  <div class="flex items-center mt-3 px-4">
-    <i class="fa-solid fa-calendar-days w-6 h-6"></i>
-    <p class="px-2">Du {{ data.startDate }} au {{ data.endDate }}</p>
-  </div>
-  <div class="flex items-center px-4">
-    <i class="fa-solid fa-map-pin w-6 h-6"></i>
-    <p class="px-2">{{ data.street }} {{ data.city }} {{ data.postalCode }}</p>
-  </div>
-
-  @if (data.participants && !isUserParticipating()) {
-  <button (click)="participateToEvent(data.id)" class="px-4 py-2 text-white bg-green-600 rounded hover:bg-green-700">
-    Participer
-  </button>
-  } @else if (data.participants && isUserParticipating()) {
-  <button (click)="leaveEvent(data.id)" class="px-4 py-2 text-white bg-red-600 rounded hover:bg-red-700">
-    Quitter
-  </button>
+<div class="flex space-x-4">
+  @if (data.author.picture !== null) {
+  <img alt="" [src]="data.author.picture" class="object-cover w-12 h-12 rounded-full shadow dark:bg-gray-500">
   }
-
-  <div class="flex justify-end text-grey">
-    <div class="flex items-center mr-4">
-      <i class="fa-regular fa-comment text-xl"></i>
-      <span class="ml-2 text-sm text-gray-600">Commentaires</span>
-    </div>
-    <div class="flex items-center">
-      @if (!isLikedByUser()) {
-      <button (click)="likeEvent(data.id)">
-        <i class="fa-regular fa-heart text-xl"></i>
-      </button>
-      <span class="ml-2 text-sm text-gray-600">
-        {{ data.likes.length }} Like{{ data.likes.length === 1 ? '' : 's' }}
-      </span>
-      } @else {
-      <button (click)="dislikeEvent(data.id)">
-        <i class="fa-solid fa-heart text-xl"></i>
-      </button>
-      <span class="ml-2 text-sm text-gray-600">
-        {{ data.likes.length }} Like{{ data.likes.length === 1 ? '' : 's' }}
-      </span>
-      }
-    </div>
+  <div class="flex flex-col space-y-1">
+    @if (data.author.pseudonym !== null) {
+    <a rel="noopener noreferrer" href="#" class="text-sm font-semibold">{{ data.author.pseudonym }}</a>
+    } @else {
+    <a rel="noopener noreferrer" href="#" class="text-sm font-semibold">{{ data.author.firstname }} {{
+      data.author.lastname }}</a>
+    }
+    <span class="text-xs dark:text-gray-600">{{ data.creationDate }}</span>
   </div>
 </div>
+
+<div>
+  <h4 class="mb-1 text-xl font-semibold">{{ data.title }}</h4>
+  <p class="text-sm">{{ data.description}}</p>
+
+  @if ((data.illustrations).length === 1) {
+  <div class="w-full mb-4">
+    <img [src]="data.illustrations[0]" alt="Illustration" class="object-cover w-full h-64 sm:h-96 rounded-md" />
+  </div>
+  }
+
+  @if ((data.illustrations).length === 2) {
+  <div class="grid grid-cols-3 gap-2 mb-4">
+    <img [src]="data.illustrations[0]" class="col-span-2 object-cover h-64 w-full rounded-md"
+      alt="Illustration principale" />
+    <img [src]="data.illustrations[1]" class="col-span-1 object-cover h-64 w-full rounded-md"
+      alt="Illustration secondaire" />
+  </div>
+  }
+
+  @if ((data.illustrations).length === 3) {
+  <div class="grid grid-cols-3 gap-2 mb-4">
+    <img [src]="data.illustrations[0]" class="col-span-2 row-span-2 object-cover h-96 w-full rounded-md"
+      alt="Illustration principale" />
+    <img [src]="data.illustrations[1]" class="object-cover h-48 w-full rounded-md" alt="Illustration 2" />
+    <img [src]="data.illustrations[2]" class="object-cover h-48 w-full rounded-md" alt="Illustration 3" />
+  </div>
+  }
+</div>
+
+<div class="flex items-center mt-3 px-4">
+  <i class="fa-solid fa-calendar-days w-6 h-6"></i>
+  <p class="px-2">Du {{ data.startDate }} au {{ data.endDate }}</p>
+</div>
+<div class="flex items-center px-4">
+  <i class="fa-solid fa-map-pin w-6 h-6"></i>
+  <p class="px-2">{{ data.street }} {{ data.city }} {{ data.postalCode }}</p>
+</div>
+
+@if (data.participants && !isUserParticipating()) {
+<button (click)="participateToEvent(data.id)" class="px-4 py-2 text-white bg-green-600 rounded hover:bg-green-700">
+  Participer
+</button>
+} @else if (data.participants && isUserParticipating()) {
+<button (click)="leaveEvent(data.id)" class="px-4 py-2 text-white bg-red-600 rounded hover:bg-red-700">
+  Quitter
+</button>
+}
+
+<div class="flex justify-end text-grey">
+  <div class="flex items-center mr-4" (click)="toggleCommentsDisplay()">
+    <i class="fa-regular fa-comment text-xl"></i>
+    <span class="ml-2 text-sm text-gray-600">
+    @if (!isCommentVIsible) {
+      Afficher
+    } @else {
+      Masquer
+    }
+     les commentaires
+    </span>
+  </div>
+  <div class="flex items-center">
+    @if (!isLikedByUser()) {
+    <button (click)="likeEvent(data.id)">
+      <i class="fa-regular fa-heart text-xl"></i>
+    </button>
+    <span class="ml-2 text-sm text-gray-600">
+      {{ data.likes.length }} Like{{ data.likes.length === 1 ? '' : 's' }}
+    </span>
+    } @else {
+    <button (click)="dislikeEvent(data.id)">
+      <i class="fa-solid fa-heart text-xl"></i>
+    </button>
+    <span class="ml-2 text-sm text-gray-600">
+      {{ data.likes.length }} Like{{ data.likes.length === 1 ? '' : 's' }}
+    </span>
+    }
+  </div>
+</div>
+
+@if (isCommentVIsible) {
+  <app-comments [comments]="comments" (onPostCommentOutput)="onPostComment($event)"></app-comments>
+}

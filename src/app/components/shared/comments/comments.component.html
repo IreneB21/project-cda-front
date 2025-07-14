@@ -1,0 +1,9 @@
+@for (comment of comments; track $index) {
+<div>{{ comment.body }}</div>
+} @empty {
+Il n'y a pas encore de commentaire
+}
+<div>
+    <textarea [(ngModel)]="text"></textarea>
+    <button (click)="onPostComment($event)">Publier</button>
+</div>
