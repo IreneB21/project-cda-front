@@ -1,6 +1,10 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ProfileVisitorComponent } from './profile-visitor.component';
+import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
+import { ActivatedRoute } from '@angular/router';
+import { of } from 'rxjs';
 
 describe('ProfileVisitorComponent', () => {
   let component: ProfileVisitorComponent;
@@ -8,7 +12,15 @@ describe('ProfileVisitorComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ProfileVisitorComponent]
+      imports: [ProfileVisitorComponent],
+      providers: [
+        provideHttpClient(),
+        provideHttpClientTesting(),
+        {
+          provide: ActivatedRoute,
+          useValue: of({})
+        }
+      ],
     })
     .compileComponents();
 

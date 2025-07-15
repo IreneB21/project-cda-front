@@ -90,7 +90,7 @@ export class EventCardComponent {
 
     this.eventService.dislikeEvent(dto).subscribe(() => {
       console.log('Event unliked');
-      this.data.likes = this.data.likes.filter(id => id !== this.userId);
+      this.data.likes = this.data?.likes.filter(id => id !== this.userId);
     });
   }
 
@@ -113,6 +113,6 @@ export class EventCardComponent {
   }
 
   isLikedByUser(): boolean {
-    return this.data.likes?.includes(this.userId) ?? false;
+    return this.data?.likes?.includes(this.userId) ?? false;
   }
 }

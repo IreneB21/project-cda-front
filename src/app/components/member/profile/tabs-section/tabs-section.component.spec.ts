@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { TabsSectionComponent } from './tabs-section.component';
+import { ActivatedRoute } from '@angular/router';
+import { of } from 'rxjs';
 
 describe('TabsSectionComponent', () => {
   let component: TabsSectionComponent;
@@ -8,7 +10,12 @@ describe('TabsSectionComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [TabsSectionComponent]
+      imports: [TabsSectionComponent],
+      providers: [
+        {
+          provide: ActivatedRoute,
+          useValue: of({})
+        }]
     })
     .compileComponents();
 

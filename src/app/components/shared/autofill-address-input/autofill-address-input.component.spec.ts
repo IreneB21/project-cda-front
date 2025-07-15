@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AutofillAddressInputComponent } from './autofill-address-input.component';
+import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 
 describe('AutofillAddressInputComponent', () => {
   let component: AutofillAddressInputComponent;
@@ -8,7 +10,11 @@ describe('AutofillAddressInputComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [AutofillAddressInputComponent]
+      imports: [AutofillAddressInputComponent],
+      providers: [
+        provideHttpClient(),
+        provideHttpClientTesting(),
+      ],
     })
     .compileComponents();
 

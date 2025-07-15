@@ -37,6 +37,6 @@ export class InfosVisitorComponent implements OnInit {
   }
 
   get displayPseudonym(): string | null {
-    return this.user.pseudonym ? `@${this.user.pseudonym}` : null;
+    return this.user?.pseudonym ? `@${this.user.pseudonym}` : null;
   }
 }

@@ -29,12 +29,12 @@ export class InfosComponent implements OnInit {
   }
 
   get displayPseudonym(): string | null {
-    return this.user.pseudonym ? `@${this.user.pseudonym}` : null;
+    return this.user?.pseudonym ? `@${this.user.pseudonym}` : null;
   }
 
   editIntroduction() {
     this.isEditing = true;
-    this.introductionForm = this.user.introduction || '';
+    this.introductionForm = this.user?.introduction || '';
   }
 
   cancelEditing() {

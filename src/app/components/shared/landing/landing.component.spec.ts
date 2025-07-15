@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { LandingComponent } from './landing.component';
+import { ActivatedRoute } from '@angular/router';
+import { of } from 'rxjs';
 
 describe('LandingComponent', () => {
   let component: LandingComponent;
@@ -8,7 +10,12 @@ describe('LandingComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [LandingComponent]
+      imports: [LandingComponent],
+      providers: [
+        {
+          provide: ActivatedRoute,
+          useValue: of({})
+        }]
     })
     .compileComponents();
 

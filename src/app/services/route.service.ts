@@ -10,7 +10,7 @@ export class RouteService {
         let currentRoute: ActivatedRoute | null = route;
 
         while (currentRoute) {
-            const id = currentRoute.snapshot.paramMap.get('id');
+            const id = currentRoute.snapshot?.paramMap.get('id');
             if (id) return id;
             currentRoute = currentRoute.parent;
         }

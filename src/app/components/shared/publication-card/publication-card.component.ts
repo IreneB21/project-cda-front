@@ -71,6 +71,6 @@ export class PublicationCardComponent {
   }
 
   isLikedByUser(): boolean {
-    return this.data.likes?.includes(this.userId) ?? false;
+    return this.data?.likes?.includes(this.userId) ?? false;
   }
 }

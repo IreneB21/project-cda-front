@@ -1,6 +1,10 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { InfosTabComponent } from './infos-tab.component';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
+import { provideHttpClient } from '@angular/common/http';
+import { ActivatedRoute } from '@angular/router';
+import { of } from 'rxjs';
 
 describe('InfosTabComponent', () => {
   let component: InfosTabComponent;
@@ -8,7 +12,15 @@ describe('InfosTabComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [InfosTabComponent]
+      imports: [InfosTabComponent],
+      providers: [
+        provideHttpClient(),
+        provideHttpClientTesting(),
+        {
+          provide: ActivatedRoute,
+          useValue: of({})
+        }
+      ],
     })
     .compileComponents();
 
