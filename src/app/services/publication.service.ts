@@ -4,13 +4,14 @@ import { Observable} from 'rxjs';
 
 import { PublicationCreateDto } from '../models/publication-create.dto';
 import { PublicationUpdateLikesDto } from '../models/publication-update-likes.dto';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PublicationService {
 
-  private apiUrl = 'http://localhost:8080/api/rest/hello/neighbors/publication';
+  private readonly apiUrl = `${environment.apiUrl}/api/rest/hello/neighbors/publication`;
   private httpOptions = {
     headers: new HttpHeaders({
       'Content-Type':  'application/json',

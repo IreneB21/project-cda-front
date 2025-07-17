@@ -4,13 +4,14 @@ import { BehaviorSubject, Observable } from 'rxjs';
 
 import { EventGetDto } from '../models/event-get.dto';
 import { PublicationGetDto } from '../models/publication-get.dto';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class HomeService {
 
-  private apiUrl = 'http://localhost:8080/api/rest/hello/neighbors/home';
+  private readonly apiUrl = `${environment.apiUrl}/api/rest/hello/neighbors/home`;
   private httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',

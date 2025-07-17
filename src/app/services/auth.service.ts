@@ -4,13 +4,14 @@ import { RegistrationDto } from '../models/registration.dto';
 import { Observable } from 'rxjs';
 import { LoginDto } from '../models/login.dto';
 import { Router } from '@angular/router';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  private apiUrl = 'http://localhost:8080/api/rest/hello/neighbors/security';
+  private readonly apiUrl = `${environment.apiUrl}/api/rest/hello/neighbors/security`;
 
   constructor(private http: HttpClient, private router: Router) {}
 

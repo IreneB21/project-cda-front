@@ -6,13 +6,14 @@ import { EventCreateDto } from '../models/event-create.dto';
 import { EventUpdateParticipantsDto } from '../models/event-update-participants.dto';
 import { EventGetDto } from '../models/event-get.dto';
 import { EventUpdateLikesDto } from '../models/event-update-likes.dto';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class EventService {
 
-  private apiUrl = 'http://localhost:8080/api/rest/hello/neighbors/event';
+  private readonly apiUrl = `${environment.apiUrl}/api/rest/hello/neighbors/event`;
   private httpOptions = {
     headers: new HttpHeaders({
       'Content-Type':  'application/json',
