@@ -6,7 +6,7 @@ import { BioUpdateDto } from '../models/bio-update.dto';
 import { UserGetForVisitorDto } from '../models/user-get-visitor.dto';
 import { EventGetDto } from '../models/event-get.dto';
 import { PublicationGetDto } from '../models/publication-get.dto';
-import { environment } from '../../environments/environment.development';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
