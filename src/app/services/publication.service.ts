@@ -4,6 +4,8 @@ import { Observable} from 'rxjs';
 
 import { PublicationCreateDto } from '../models/publication-create.dto';
 import { PublicationUpdateLikesDto } from '../models/publication-update-likes.dto';
+import { PublicationUpdateDto } from '../models/publication-update.dto';
+import { PublicationGetDto } from '../models/publication-get.dto';
 import { environment } from '../../environments/environment';
 
 @Injectable({
@@ -43,5 +45,13 @@ export class PublicationService {
 
   dislikePublication(likesData: PublicationUpdateLikesDto): Observable<any> {
     return this.http.put(`${this.apiUrl}/dislike`, likesData, this.httpOptions);
+  }
+
+  updatePublication(updatedPublication: PublicationUpdateDto): Observable<PublicationGetDto> {
+    return this.http.patch<PublicationGetDto>(`${this.apiUrl}/update`, updatedPublication, this.httpOptions);
+  }
+
+  deletePublication(id: number): void { //Observable<boolean>
+    
   }
 }

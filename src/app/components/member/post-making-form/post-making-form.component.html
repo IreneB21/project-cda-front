@@ -1,7 +1,7 @@
 <form [formGroup]="postMakingForm" (ngSubmit)="onSubmit()"
   class="flex flex-col text-gray-800 font-sans rounded-md border px-6 py-4 w-full bg-white">
 
-  <!-- Type de publication -->
+  <!-- Publication type -->
   <select #type formControlName="publicationType" class="bg-gray-100 border border-gray-300 p-2 mb-4 outline-none">
     <option value="" disabled>Choisissez un type de publication</option>
     @for (type of publicationTypes; track type.id) {
@@ -9,7 +9,7 @@
     }
   </select>
 
-  <!-- Inputs spécifiques aux évènements -->
+  <!-- Inputs for events -->
   @if (type.value == "EVENT") {
     <div class ="flex gap-2 mb-4">
       <input type="date" formControlName="startDate" class="bg-gray-100 border border-gray-300 p-2 w-1/2 outline-none" />
@@ -19,7 +19,7 @@
   }
 
   @if (type.value != '') {
-    <!-- Inputs communs aux autres types -->
+    <!-- Inputs for all types -->
     <input placeholder="Titre" type="text" formControlName="title"
       class="bg-gray-100 border border-gray-300 p-2 mb-4 outline-none" />
     <textarea 
@@ -32,7 +32,7 @@
               formControlName="localisation"
     ></app-autofill-address-input>
     <!-- Illustrations -->
-    <div class="flex overflow-hidden bg-white border divide-x rounded-lg rtl:flex-row-reverse dark:bg-gray-900 dark:border-gray-700 dark:divide-gray-700">
+    <div class="flex overflow-hidden bg-white border divide-x rounded-lg rtl:flex-row-reverse dark:bg-gray-900 dark:border-gray-700 dark:divide-gray-700 mt-4 mb-3">
       <button 
         type="button"
         (click)="fileInput.click()"
@@ -42,22 +42,22 @@
           </svg>
           <span>Ajouter des illustrations</span>
       </button>
+       <input 
+        type="file" 
+        (change)="onFileSelected($event)" 
+        #fileInput
+        multiple 
+        accept="image/*"
+        hidden
+      />
     </div>
 
-    <input 
-      type="file" 
-      (change)="onFileSelected($event)" 
-      #fileInput
-      multiple 
-      accept="image/*"
-      hidden
-    />
     <div class="flex flex-wrap gap-2 mb-4">
       <img *ngFor="let url of uploadedImageUrls" [src]="url" class="w-24 h-24 object-cover rounded" />
     </div>    
   }
 
-  <!-- Boutons -->
+  <!-- Buttons -->
   <div class="buttons flex mt-2 gap-3">
     <button class="btn border border-gray-300 p-1 px-4 font-semibold cursor-pointer text-gray-500 ml-auto" (click)="reset()">Annuler</button>
     <button type="submit" [disabled]="!postMakingForm.valid" class="btn bg-black p-1 px-4 font-semibold cursor-pointer text-white ml-2">Publier</button>

@@ -1,4 +1,4 @@
-import { AuthorDto } from "./event-author.dto";
+import { AuthorDto } from "./author.dto";
 
 export interface PublicationGetDto {
     id: number;

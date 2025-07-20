@@ -7,7 +7,7 @@ import { PublicationCreateDto } from '../../../models/publication-create.dto';
 import { PublicationService } from '../../../services/publication.service';
 import { EventCreateDto } from '../../../models/event-create.dto';
 import { EventService } from '../../../services/event.service';
-import { AddressSuggestion, AutofillAddressInputComponent } from '../../shared/autofill-address-input/autofill-address-input.component';
+import { AutofillAddressInputComponent } from '../../shared/autofill-address-input/autofill-address-input.component';
 
 @Component({
   selector: 'app-post-making-form',

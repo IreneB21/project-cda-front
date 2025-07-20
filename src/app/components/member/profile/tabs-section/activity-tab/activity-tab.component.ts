@@ -20,7 +20,7 @@ export class ActivityTabComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.userId) {
-          this.userService.getUserPosts(this.userId);
+      this.userService.getUserPosts(this.userId);
     }    
     this.userService.allPosts$.subscribe((data) => {
       this.posts = data;

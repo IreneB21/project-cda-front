@@ -7,6 +7,7 @@ import { EventUpdateParticipantsDto } from '../models/event-update-participants.
 import { EventGetDto } from '../models/event-get.dto';
 import { EventUpdateLikesDto } from '../models/event-update-likes.dto';
 import { environment } from '../../environments/environment';
+import { EventUpdateDto } from '../models/event-update.dto';
 
 @Injectable({
   providedIn: 'root'
@@ -53,5 +54,13 @@ export class EventService {
 
   dislikeEvent(likesData: EventUpdateLikesDto): Observable<any> {
     return this.http.put(`${this.apiUrl}/dislike`, likesData, this.httpOptions);
+  }
+
+  updateEvent(updatedEvent: EventUpdateDto): Observable<EventGetDto> {
+    return this.http.patch<EventGetDto>(`${this.apiUrl}/update`, updatedEvent, this.httpOptions);
+  }
+
+  cancelEvent(id: number): void { //Observable<boolean>
+
   }
 }

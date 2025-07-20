@@ -1,4 +1,4 @@
-import { AuthorDto } from "./event-author.dto";
+import { AuthorDto } from "./author.dto";
 import { ParticipantDto } from "./event-participant.dto";
 
 export interface EventGetDto {

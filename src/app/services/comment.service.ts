@@ -23,7 +23,7 @@ export class CommentService {
   }
 
   postEventComment(eventId: number, authorId: number, text: string): Observable<any> {
-    return this.http.post<any>(`${this.apiUrl}/post/event/comment`, { parentId: eventId, authorId, text }, this.httpOptions);
+    return this.http.post<any>(`${this.apiUrl}/post/event/comment`, { body: text, authorId, parentId: eventId, parentCommentId: null }, this.httpOptions);
   }
 
   getPublicationComments(publicationId: number): Observable<CommentGetDto[]> {
@@ -31,6 +31,6 @@ export class CommentService {
   }
 
   postPublicationComment(publicationId: number, authorId: number, text: string): Observable<any> {
-    return this.http.post<any>(`${this.apiUrl}/post/publication/comment`, { parentId: publicationId, authorId, text }, this.httpOptions);
+    return this.http.post<any>(`${this.apiUrl}/post/publication/comment`, { body: text, authorId, parentId: publicationId, parentCommentId: null }, this.httpOptions);
   }
 }
