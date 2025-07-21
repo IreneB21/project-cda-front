@@ -1,22 +1,22 @@
 <div
     class="flex justify-center overflow-x-auto gap-1 overflow-y-hidden border-b border-gray-200 whitespace-nowrap dark:border-gray-700">
-    <button routerLink="all" [class]="button">
+    <button routerLink="all" routerLinkActive #all="routerLinkActive" [class]="button + (all.isActive ? active : inactive)">
         Tout
     </button>
 
-    <button routerLink="info" [class]="button">
+    <button routerLink="info" routerLinkActive #info="routerLinkActive" [class]="button + (info.isActive ? active : inactive)">
         Informations
     </button>
 
-    <button routerLink="alert" [class]="button">
+    <button routerLink="alert" routerLinkActive #alert="routerLinkActive" [class]="button + (alert.isActive ? active : inactive)">
         Alertes
     </button>
 
-    <button routerLink="help" [class]="button">
+    <button routerLink="help" routerLinkActive #help="routerLinkActive" [class]="button + (help.isActive ? active : inactive)">
         Entraide
     </button>
 
-    <button routerLink="event" [class]="button">
+    <button routerLink="event" routerLinkActive #event="routerLinkActive" [class]="button + (event.isActive ? active : inactive)">
         Evènements
     </button>
 </div>
