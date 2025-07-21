@@ -1,9 +1,18 @@
 @for (comment of comments; track $index) {
-<div>{{ comment.body }}</div>
+<div>
+    <div class="flex flex-row justify-between">
+        <a><i class="fa-solid fa-user"></i>nom</a>  
+        <span>date</span>
+    </div>
+    text
+</div>
 } @empty {
 Il n'y a pas encore de commentaire
 }
-<div>
-    <textarea [(ngModel)]="text"></textarea>
-    <button (click)="onPostComment($event)">Publier</button>
+<div class="flex flex-row items-end mt-2">
+    
+    <textarea [(ngModel)]="text" class="flex-grow mr-3 bg-gray-100 rounded-md" style="margin-right: 15px;"></textarea>
+    
+    <i class="fa-solid fa-circle-right text-2xl" (click)="onPostComment($event)"></i>
+    
 </div>

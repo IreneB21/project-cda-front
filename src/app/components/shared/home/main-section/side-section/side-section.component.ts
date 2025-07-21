@@ -10,7 +10,8 @@ import { HomeService } from '../../../../../services/home.service';
   standalone: true,
   imports: [SideEventCardComponent, PostMakingFormComponent],
   templateUrl: './side-section.component.html',
-  styleUrl: './side-section.component.css'
+  styleUrl: './side-section.component.css',
+  host: { 'class':'flex flex-col gap-5 pl-7' }
 })
 export class SideSectionComponent implements OnInit {
 

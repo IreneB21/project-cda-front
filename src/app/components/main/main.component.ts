@@ -6,7 +6,8 @@ import { RouterOutlet } from "@angular/router";
   selector: 'app-main',
   imports: [NavbarComponent, RouterOutlet],
   templateUrl: './main.component.html',
-  styleUrl: './main.component.css'
+  styleUrl: './main.component.css',
+  host: { 'class':'flex flex-grow' }
 })
 export class MainComponent {
 

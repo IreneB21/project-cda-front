@@ -13,7 +13,8 @@ L.Icon.Default.mergeOptions({
   standalone: true,
   imports: [],
   templateUrl: './map.component.html',
-  styleUrl: './map.component.css'
+  styleUrl: './map.component.css',
+  host: { 'class': 'flex p-5 bg-gray-100 flex-col', 'style':'width:100%' },
 })
 export class MapComponent implements OnInit, AfterViewInit {
 

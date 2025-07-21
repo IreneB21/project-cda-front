@@ -58,7 +58,14 @@
   </div>
 
   <div>
-    <h4 class="mb-1 text-lg font-semibold">{{ data.title }}</h4>
+    <h4 class="mb-1 text-lg font-semibold">
+      @switch (data.category) {
+        @case ('INFO') { <i class="fa-solid fa-circle-info text-blue-400"></i> }
+        @case ('ALERT') { <i class="fa-solid fa-triangle-exclamation text-red-500"></i> }
+        @case ('HELP') { <i class="fa-solid fa-handshake-angle text-yellow-400"></i> }
+      }
+      {{ data.title }}
+    </h4>
     <p class="text-sm dark:text-gray-600">{{ data.description }}</p>
 
     @if ((data.illustrations).length === 1) {
@@ -118,6 +125,8 @@
   </div>
 
   @if (isCommentVIsible) {
-  <app-comments [comments]="comments" (onPostCommentOutput)="onPostComment($event)"></app-comments>
+    <div class="border-solid border-t border-gray-300 pt-1">
+      <app-comments [comments]="comments" (onPostCommentOutput)="onPostComment($event)"></app-comments>
+    </div>
   }
 }

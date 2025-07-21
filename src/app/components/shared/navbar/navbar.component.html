@@ -19,7 +19,7 @@
         <span class="text-sm font-medium hidden sm:inline lg:inline">Fil d'actualité</span>
       </a>
     </li>
-    <li>
+    <!--<li>
       <a href="#"
         class="flex flex-row items-center h-12 transform hover:translate-x-2 transition-transform text-gray-500 hover:text-gray-800">
         <span class="inline-flex items-center justify-center h-12 w-12 text-lg"><i
@@ -34,7 +34,7 @@
             class="fa-solid fa-right-left"></i></span>
         <span class="text-sm font-medium hidden sm:inline lg:inline">Troc & Co</span>
       </a>
-    </li>
+    </li>-->
     <li>
       <a routerLink="map"
         class="flex flex-row items-center h-12 transform hover:translate-x-2 transition-transform text-gray-500 hover:text-gray-800">
@@ -43,16 +43,16 @@
         <span class="text-sm font-medium hidden sm:inline lg:inline">Carte</span>
       </a>
     </li>
-    <li class="mb-3">
+    <!-- <li class="mb-3">
       <a href="#"
         class="flex flex-row items-center h-12 transform hover:translate-x-2 transition-transform text-gray-500 hover:text-gray-800">
         <span class="inline-flex items-center justify-center h-12 w-12 text-lg"><i
             class="fa-regular fa-message"></i></span>
         <span class="text-sm font-medium hidden sm:inline lg:inline">Messagerie</span>
       </a>
-    </li>
+    </li>-->
     <li class="border-t border-gray-100">
-      <a href="#" (click)="logout()"
+      <a href="" (click)="logout()"
         class="flex flex-row items-center h-12 transform hover:translate-x-2 transition-transform text-gray-500 hover:text-gray-800">
         <span class="inline-flex items-center justify-center h-12 w-12 text-lg"><i
             class="fa-solid fa-right-from-bracket"></i></span>
@@ -65,17 +65,17 @@
 <!-- NAVBAR MOBILE -->
 <nav
   class="lg:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 z-50 shadow h-16 flex justify-around items-center">
-  <a [routerLink]="['/hello/neighbors/profile/informations']"
+  <a routerLink="profile/informations"
     class="flex flex-col items-center text-gray-500 hover:text-black text-xs">
     <i class="fa-regular fa-user text-lg"></i>
   </a>
-  <a routerLink="/hello/neighbors/home" class="flex flex-col items-center text-gray-500 hover:text-black text-xs">
+  <a routerLink="home/all" class="flex flex-col items-center text-gray-500 hover:text-black text-xs">
     <i class="fa-solid fa-house text-lg"></i>
   </a>
-  <a routerLink="/hello/neighbors/map" class="flex flex-col items-center text-gray-500 hover:text-black text-xs">
+  <a routerLink="map" class="flex flex-col items-center text-gray-500 hover:text-black text-xs">
     <i class="fa-solid fa-map-pin text-lg"></i>
   </a>
-  <a href="#" class="flex flex-col items-center text-gray-500 hover:text-black text-xs">
+  <a href="#" (click)="logout()" class="flex flex-col items-center text-gray-500 hover:text-black text-xs">
     <i class="fa-solid fa-right-from-bracket text-lg"></i>
   </a>
 </nav>

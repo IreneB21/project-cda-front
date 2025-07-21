@@ -1,11 +1,21 @@
-import { Component } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
+import { PublicationCardComponent } from '../../../../publication-card/publication-card.component';
+import { EventCardComponent } from '../../../../event-card/event-card.component';
+import { HomeService } from '../../../../../../services/home.service';
 
 @Component({
   selector: 'app-all-notifications',
-  imports: [],
+  imports: [PublicationCardComponent, EventCardComponent],
   templateUrl: './all-notifications.component.html',
   styleUrl: './all-notifications.component.css'
 })
-export class AllNotificationsComponent {
+export class AllNotificationsComponent implements OnInit {
 
+  private homeService = inject(HomeService);
+  posts: Array<any> = [];
+
+  ngOnInit(): void {
+    this.homeService.getNearbyposts();
+    this.homeService.allPosts$.subscribe((data) => this.posts = data);
+  }
 }

@@ -1,28 +1,16 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { RouterOutlet, RouterLink } from '@angular/router';
-
-import { PublicationCardComponent } from '../../../publication-card/publication-card.component';
-import { EventCardComponent } from '../../../event-card/event-card.component';
-import { HomeService } from '../../../../../services/home.service';
 
 @Component({
   selector: 'app-flow-section',
   standalone: true,
-  imports: [PublicationCardComponent, EventCardComponent, RouterOutlet, RouterLink],
-  templateUrl: './flow-section.component.html'
+  imports: [RouterOutlet, RouterLink],
+  templateUrl: './flow-section.component.html',
+  host: { 'class':'flex flex-col flex-grow' }
 })
-export class FlowSectionComponent implements OnInit {
-
-  private homeService = inject(HomeService);
-
-  posts: Array<any> = [];
+export class FlowSectionComponent {
 
   button = "inline-flex items-center h-10 px-10 -mb-px text-sm text-center bg-transparent border-b-2 sm:text-base whitespace-nowrap focus:outline-none";
   active = "";
   inactive = "";
-
-  ngOnInit(): void {
-    this.homeService.getNearbyposts();
-    this.homeService.allPosts$.subscribe((data) => this.posts = data);
-  }
 }

@@ -7,7 +7,7 @@ import { TabsSectionComponent } from './tabs-section/tabs-section.component';
   standalone: true,
   imports: [InfosComponent, TabsSectionComponent],
   templateUrl: './profile.component.html',
-  styleUrl: './profile.component.scss'
+  styleUrl: './profile.component.scss',
 })
 export class ProfileComponent {
 
