@@ -9,7 +9,7 @@
     <a rel="noopener noreferrer" href="#" class="text-sm font-semibold">{{ data?.author?.firstname }} {{
       data?.author?.lastname }}</a>
     }
-    <span class="text-xs dark:text-gray-600">{{ data?.creationDate }}</span>
+    <span class="text-xs dark:text-gray-600">{{ data?.creationDate | date:'medium' }}</span>
   </div>
 </div>
 
@@ -45,7 +45,7 @@
 
 <div class="flex items-center mt-3 px-4">
   <i class="fa-solid fa-calendar-days"></i>
-  <span class="ml-4">Du {{ data?.startDate }} au {{ data?.endDate }}</span>
+  <span class="ml-4">Du {{ data?.startDate | date:'mediumDate' }} au {{ data?.endDate | date:'mediumDate' }}</span>
 </div>
 <div class="flex items-center px-4">
   <i class="fa-solid fa-map-pin"></i>

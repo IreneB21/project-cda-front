@@ -1,4 +1,4 @@
-import { Component, inject, Input, OnInit } from '@angular/core';
+import { Component, inject, Input, LOCALE_ID, OnInit } from '@angular/core';
 import { CommonModule, NgFor } from '@angular/common';
 
 import { EventGetDto } from '../../../models/event-get.dto';
@@ -11,11 +11,11 @@ import { AbstractControl, FormBuilder, FormGroup, ReactiveFormsModule, Validatio
 import { AutofillAddressInputComponent } from '../autofill-address-input/autofill-address-input.component';
 import { EventUpdateDto } from '../../../models/event-update.dto';
 
-
 @Component({
   selector: 'app-event-card',
   standalone: true,
   imports: [CommonModule, CommentsComponent, CommentsComponent, ReactiveFormsModule, AutofillAddressInputComponent, NgFor],
+  providers: [{provide: LOCALE_ID, useValue:'fr-FR'}],
   templateUrl: './event-card.component.html',
   styleUrl: './event-card.component.css',
   host: { 'class': 'w-xl space-y-6 overflow-hidden font-sans rounded-md border px-6 py-4 bg-white' }

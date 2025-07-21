@@ -1,5 +1,6 @@
 import { Component, inject, Input, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { DatePipe } from '@angular/common';
 
 import { UserService } from '../../../../services/user.service';
 import { BioUpdateDto } from '../../../../models/bio-update.dto';
@@ -8,7 +9,7 @@ import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-infos',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, DatePipe],
   templateUrl: './infos.component.html',
 })
 export class InfosComponent implements OnInit {

@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import localeFr from '@angular/common/locales/fr';
+import { registerLocaleData } from '@angular/common';
 import { FooterComponent } from './components/shared/footer/footer.component';
+registerLocaleData(localeFr, 'fr');
 
 @Component({
   selector: 'app-root',

@@ -1,4 +1,4 @@
-import { Component, inject, Input, OnInit } from '@angular/core';
+import { Component, inject, Input, LOCALE_ID, OnInit } from '@angular/core';
 import { DatePipe, NgFor } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 
@@ -14,6 +14,7 @@ import { AutofillAddressInputComponent } from '../autofill-address-input/autofil
   selector: 'app-publication-card',
   standalone: true,
   imports: [DatePipe, CommentsComponent, ReactiveFormsModule, AutofillAddressInputComponent, NgFor],
+  providers: [{provide: LOCALE_ID, useValue:'fr-FR'}],
   templateUrl: './publication-card.component.html',
   styleUrl: './publication-card.component.css',
   host: { 'class': 'w-xl space-y-6 overflow-hidden font-sans rounded-md border px-6 py-4 bg-white' },
