@@ -17,13 +17,13 @@ export class EventService {
   private readonly apiUrl = `${environment.apiUrl}/api/rest/hello/neighbors/event`;
   private httpOptions = {
     headers: new HttpHeaders({
-      'Content-Type':  'application/json',
+      'Content-Type': 'application/json',
       Authorization: `Bearer ${sessionStorage.getItem('token')}`
     })
   };
   private userId = sessionStorage.getItem("userId");
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   getUserEvents(): Observable<any> {
     return this.http.get(`${this.apiUrl}/user/${this.userId}/events`, this.httpOptions);
@@ -35,14 +35,14 @@ export class EventService {
 
   saveEvent(eventData: EventCreateDto): Observable<any> {
     return this.http.post(`${this.apiUrl}/create`, eventData, this.httpOptions)
-    .pipe(
+      .pipe(
       //catchError()
     );
   }
 
   participate(participationData: EventUpdateParticipantsDto): Observable<any> {
     return this.http.put(`${this.apiUrl}/join`, participationData, this.httpOptions);
-  } 
+  }
 
   cancelParticipation(participationData: EventUpdateParticipantsDto): Observable<any> {
     return this.http.put(`${this.apiUrl}/leave`, participationData, this.httpOptions);
@@ -60,7 +60,10 @@ export class EventService {
     return this.http.patch<EventGetDto>(`${this.apiUrl}/update`, updatedEvent, this.httpOptions);
   }
 
-  cancelEvent(id: number): void { //Observable<boolean>
-
+  cancelEvent(id: number): Observable<boolean> {
+    return this.http.request<boolean>('delete', `${this.apiUrl}/cancel`, {
+      body: { eventId: id },
+      ...this.httpOptions
+    });
   }
 }

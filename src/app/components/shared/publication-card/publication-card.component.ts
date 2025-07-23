@@ -111,7 +111,10 @@ export class PublicationCardComponent implements OnInit {
   }
 
   deletePublication(id: number): void {
-    this.publicationService.deletePublication(id);
+    //@Todo : afficher message de confirmation (en fonction du booléen)
+    this.publicationService.deletePublication(id).subscribe();
+
+    //window.location.reload();
   }
 
   likePublication(publicationId: number) {

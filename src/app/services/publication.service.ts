@@ -51,7 +51,10 @@ export class PublicationService {
     return this.http.patch<PublicationGetDto>(`${this.apiUrl}/update`, updatedPublication, this.httpOptions);
   }
 
-  deletePublication(id: number): void { //Observable<boolean>
-    
+  deletePublication(id: number): Observable<boolean> {
+    return this.http.request<boolean>('delete', `${this.apiUrl}/delete`, {
+      body: { publicationId: id },
+      ...this.httpOptions
+    });
   }
 }
