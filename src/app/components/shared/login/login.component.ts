@@ -10,7 +10,8 @@ import { HeaderAuthentificationComponent } from '../header-authentification/head
   standalone: true,
   imports: [ReactiveFormsModule, HeaderAuthentificationComponent, RouterLink],
   templateUrl: './login.component.html',
-  styleUrl: './login.component.css'
+  styleUrl: './login.component.css',
+  host: { 'class':'flex-grow' }
 })
 export class LoginComponent {
 

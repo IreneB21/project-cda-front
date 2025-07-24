@@ -13,7 +13,8 @@ import { AddressSuggestion, AutofillAddressInputComponent } from '../../shared/a
   standalone: true,
   imports: [HeaderAuthentificationComponent, ReactiveFormsModule, AutofillAddressInputComponent, CommonModule, NgIf, RouterLink],
   templateUrl: './signup.component.html',
-  styleUrl: './signup.component.css'
+  styleUrl: './signup.component.css',
+  host: { 'class':'flex-grow' }
 })
 export class SignupComponent {
 

@@ -7,6 +7,7 @@ import { RouterLink } from '@angular/router';
   selector: 'app-landing',
   imports: [HeaderComponent, ButtonComponent, RouterLink],
   templateUrl: './landing.component.html',
+  host: { 'class':'flex-grow flex flex-col' }
 })
 export class LandingComponent {
   label = "C'est parti !"
