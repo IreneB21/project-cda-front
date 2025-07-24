@@ -1,10 +1,13 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
+import { EventCardComponent } from '../../../event-card/event-card.component';
+import { PublicationCardComponent } from '../../../publication-card/publication-card.component';
+import { HomeService } from '../../../../../services/home.service';
 
 @Component({
   selector: 'app-flow-section',
   standalone: true,
-  imports: [RouterOutlet, RouterLink, RouterLinkActive],
+  imports: [RouterOutlet, RouterLink, RouterLinkActive, PublicationCardComponent, EventCardComponent],
   templateUrl: './flow-section.component.html',
   host: { 'class':'flex flex-col flex-grow' }
 })

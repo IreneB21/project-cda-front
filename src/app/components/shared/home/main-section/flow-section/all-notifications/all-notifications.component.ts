@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, Input, OnInit } from '@angular/core';
 import { PublicationCardComponent } from '../../../../publication-card/publication-card.component';
 import { EventCardComponent } from '../../../../event-card/event-card.component';
 import { HomeService } from '../../../../../../services/home.service';
@@ -9,7 +9,7 @@ import { HomeService } from '../../../../../../services/home.service';
   templateUrl: './all-notifications.component.html',
   styleUrl: './all-notifications.component.css'
 })
-export class AllNotificationsComponent implements OnInit {
+export class AllNotificationsComponent {
 
   private homeService = inject(HomeService);
   posts: Array<any> = [];

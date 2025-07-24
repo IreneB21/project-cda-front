@@ -20,13 +20,21 @@ export class SideSectionComponent implements OnInit {
 
   events: Array<EventGetDto> = [];
   randomPics: Array<string> = [];
+  nextThreeEvents: Array<EventGetDto> = [];
+  totalUsersAround!: number;
   
   ngOnInit(): void {
     this.homeService.getRandomUserPictures().subscribe((data) => {
       this.randomPics = data;
     })
-    /* this.homeService.getNearbyposts();
-    //this.homeService.allPosts$.subscribe((data) => console.log(data));
-    this.homeService.lastEvents$.subscribe(); */
+
+    this.homeService.getTotalUsersAround().subscribe((data) => {
+      this.totalUsersAround = data;
+    });
+    
+    this.homeService.getNextThreeNearbyEvents().subscribe((data) => {
+      this.nextThreeEvents = data;
+      console.log(data);
+    })
   }
 }

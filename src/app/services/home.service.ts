@@ -73,7 +73,21 @@ export class HomeService {
     });
   }
 
+  getNextThreeNearbyEvents(): Observable<EventGetDto[]> {
+    return this.http.get<EventGetDto[]>(
+      `${this.apiUrl}/display/next/three/nearby?userId=${this.userId}`,
+      this.httpOptions
+    );
+  }
+
   getRandomUserPictures(): Observable<any> {
     return this.http.get(`${this.apiUrl}/display/random/user/pictures`, this.httpOptions);
+  }
+
+  getTotalUsersAround(): Observable<number> {
+    return this.http.get<number>(
+      `${this.apiUrl}/calculate/users/around?userId=${this.userId}`,
+      this.httpOptions
+    );
   }
 }
