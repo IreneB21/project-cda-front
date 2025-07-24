@@ -33,7 +33,7 @@
 
 <app-post-making-form></app-post-making-form>
 
-<div class="flex flex-col items-center gap-3">
+<div class="flex flex-col gap-3">
     @for (event of nextThreeEvents; track event.id) {
         <app-side-event-card [data]="event"></app-side-event-card>
     }

@@ -6,6 +6,7 @@ import { EventGetDto } from '../../../../../../models/event-get.dto';
   imports: [],
   templateUrl: './side-event-card.component.html',
   styleUrl: './side-event-card.component.css',
+  host: { 'class':'w-full rounded-xl border shadow-lg transition-colors duration-500' }
 })
 export class SideEventCardComponent {
   @Input() data!: EventGetDto;
