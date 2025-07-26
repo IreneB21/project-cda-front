@@ -41,7 +41,7 @@ export class PublicationCardComponent implements OnInit {
       city: [this.data.city],
       postalCode: [this.data.postalCode],
       street: [this.data.street],
-      address: [`${this.data.street}, ${this.data.postalCode} ${this.data.city}`],
+      address: [`${this.data.street} ${this.data.postalCode} ${this.data.city}`],
       illustrations: [[]]
     });
 

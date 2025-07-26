@@ -1,7 +1,7 @@
 
 <form [formGroup]="profileInfosTabForm" (ngSubmit)="submitForm()" class="pt-3 md:pt-8 gap-4 w-full flex flex-col justify-center bg-gray-100 py-4 px-2 lg:p-32">
 
-    <!-- Nom et Prénom -->
+    <!-- Lastname and firstname -->
     <div class="flex gap-2">
         <label for="lastname" class="relative grow">
             <input type="text" id="lastname" formControlName="lastname" class="peer mt-0.5 w-full rounded bg-white border-gray-300 
@@ -14,7 +14,7 @@
             sm:text-sm p-2" placeholder="Prénom" />
         </label>
     </div>
-    <!-- Pseudonyme et Date de naissance -->
+    <!-- Pseudonym and Birthdate -->
     <div class="flex gap-2 mb-3">
         <label for="pseudonym" class="relative grow">
             <input type="text" id="pseudonym" formControlName="pseudonym" class="peer mt-0.5 w-full rounded bg-white border-gray-300 

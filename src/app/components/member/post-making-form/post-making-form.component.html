@@ -12,20 +12,26 @@
   <!-- Inputs for events -->
   @if (type.value == "EVENT") {
     <div class ="flex gap-2 mb-4">
-      <input type="date" formControlName="startDate" class="bg-gray-100 border border-gray-300 p-2 w-1/2 outline-none" />
-      <input type="date" formControlName="endDate" class="bg-gray-100 border border-gray-300 p-2 w-1/2 outline-none" />
-    </div>
+      <div class="flex flex-col">
+        <label for="">Date de début *</label>
+        <input type="date" formControlName="startDate" class="place-items-stretch bg-gray-100 border border-gray-300 p-2 w-1/2 outline-none" />
+      </div>
+      <div class="flex flex-col">
+        <label for="">Date de fin *</label>
+        <input type="date" formControlName="endDate" class="grow bg-gray-100 border border-gray-300 p-2 w-1/2 outline-none" />
+      </div>
+      </div>
     <input placeholder="Capacité maximale" type="number" formControlName="maxCapacity"class="bg-gray-100 border border-gray-300 p-2 mb-4 outline-none" />
   }
 
   @if (type.value != '') {
     <!-- Inputs for all types -->
-    <input placeholder="Titre" type="text" formControlName="title"
+    <input placeholder="Titre *" type="text" formControlName="title"
       class="bg-gray-100 border border-gray-300 p-2 mb-4 outline-none" />
     <textarea 
       formControlName="description" 
       rows="3"
-      placeholder="Décrivez votre publication ici"
+      placeholder="Décrivez votre publication ici *"
       class="description bg-gray-100 sec p-3 border border-gray-300 outline-none mb-4">
     </textarea>
     <app-autofill-address-input
@@ -40,7 +46,7 @@
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 sm:w-6 sm:h-6">
               <path stroke-linecap="round" stroke-linejoin="round" d="M12 16.5V9.75m0 0l3 3m-3-3l-3 3M6.75 19.5a4.5 4.5 0 01-1.41-8.775 5.25 5.25 0 0110.233-2.33 3 3 0 013.758 3.848A3.752 3.752 0 0118 19.5H6.75z" />
           </svg>
-          <span>Ajouter des illustrations</span>
+          <span>Ajouter 1 à 3 illustrations</span>
       </button>
        <input 
         type="file" 
@@ -59,7 +65,13 @@
 
   <!-- Buttons -->
   <div class="buttons flex mt-2 gap-3">
-    <button class="btn border border-gray-300 p-1 px-4 font-semibold cursor-pointer text-gray-500 ml-auto" (click)="reset()">Annuler</button>
-    <button type="submit" [disabled]="!postMakingForm.valid" class="btn bg-black p-1 px-4 font-semibold cursor-pointer text-white ml-2">Publier</button>
+    <button class="btn flex-grow border border-gray-300 p-1 px-4 font-semibold cursor-pointer text-gray-500 ml-auto" (click)="reset()">Annuler</button>
+    <button type="submit" [disabled]="!postMakingForm.valid" class="btn flex-grow bg-black p-1 px-4 font-semibold cursor-pointer text-white ml-2" (click)="''">Publier</button>
   </div>
+
+  @if (formSubmitted && postMakingForm.invalid) {
+  <div class="text-red-600 mt-2">
+      Merci de remplir tous les champs obligatoires.
+  </div>
+  }
 </form>

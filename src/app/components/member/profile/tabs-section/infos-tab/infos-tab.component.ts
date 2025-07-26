@@ -35,14 +35,14 @@ export class InfosTabComponent implements OnInit {
     const connectedUserId = sessionStorage.getItem('userId');
 
     this.profileInfosTabForm = this.fb.group({
-      lastname: ['', [Validators.required]],
-      firstname: ['', [Validators.required]],
-      pseudonym: [''], 
+      lastname: ['', [Validators.required, Validators.pattern(/^[A-Za-zÀ-ÖØ-öø-ÿ' -]{2,50}$/)]],
+      firstname: ['', [Validators.required, Validators.pattern(/^[A-Za-zÀ-ÖØ-öø-ÿ' -]{2,50}$/)]],
+      pseudonym: ['', [Validators.pattern(/^[a-zA-Z0-9_.-]{3,20}$/)]], 
       birthdate: [''], 
       fullAddress: ['', [Validators.required]],
       phone: [''], 
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(6)]],
+      password: ['', [Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z\d]).{8,}$/)]],
       isInCity: [null, [Validators.required]],
       notificationPreferences: [0],
     });
@@ -53,18 +53,20 @@ export class InfosTabComponent implements OnInit {
         firstname: userInfos.firstname,
         pseudonym: userInfos.pseudonym,
         birthdate: userInfos.birthdate,
-        fullAddress: `${userInfos.street}, ${userInfos.postalCode} ${userInfos.city}`,
+        fullAddress: `${userInfos.street} ${userInfos.postalCode} ${userInfos.city}`,
         isInCity: userInfos.isInCity,
         phone: userInfos.phone,
+        email: userInfos.email,
       })
+
+      console.log(userInfos);
     });
   }
 
   submitForm(): void {
     if (this.profileInfosTabForm.valid) {
       const formData = this.profileInfosTabForm.value;
-      console.log('Données du formulaire:', formData);
-      // Traitement des données ici
+      this.userService.updateProfile(formData).subscribe();
     } else {
       console.warn('Formulaire invalide');
     }

@@ -1,9 +1,11 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, LOCALE_ID, OnInit } from '@angular/core';
 import { EventGetDto } from '../../../../../../models/event-get.dto';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-side-event-card',
-  imports: [],
+  imports: [DatePipe],
+  providers: [{provide: LOCALE_ID, useValue:'fr-FR'}],
   templateUrl: './side-event-card.component.html',
   styleUrl: './side-event-card.component.css',
   host: { 'class':'w-full rounded-xl border shadow-lg transition-colors duration-500' }

@@ -16,32 +16,33 @@ import { AutofillAddressInputComponent } from '../../shared/autofill-address-inp
   templateUrl: './post-making-form.component.html',
   styleUrl: './post-making-form.component.css'
 })
-export class PostMakingFormComponent implements OnInit {  
+export class PostMakingFormComponent implements OnInit {
 
   private formBuilder = inject(FormBuilder);
   private userId = sessionStorage.getItem("userId");
+  formSubmitted = false;
 
   constructor(
-    private publicationService: PublicationService, 
+    private publicationService: PublicationService,
     private eventService: EventService,
     private router: Router
-  ) {}
+  ) { }
 
   publicationTypes = [
     { label: 'information', id: "INFO" },
     { label: 'alerte', id: "ALERT" },
     { label: 'aide', id: "HELP" },
-    { label: 'évènement', id: "EVENT" },
+    { label: 'événement', id: "EVENT" },
   ];
 
   private dateRangeValidator: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
     const start = control.get('startDate')?.value;
     const end = control.get('endDate')?.value;
-  
+
     if (start && end && new Date(start) >= new Date(end)) {
       return { invalidDateRange: true };
     }
-  
+
     return null;
   };
 
@@ -60,7 +61,7 @@ export class PostMakingFormComponent implements OnInit {
     this.postMakingForm.get('publicationType')?.valueChanges.subscribe((type) => {
       const startDateControl = this.postMakingForm.get('startDate');
       const endDateControl = this.postMakingForm.get('endDate');
-  
+
       if (type === 'EVENT') {
         startDateControl?.addValidators(Validators.required);
         endDateControl?.addValidators(Validators.required);
@@ -68,7 +69,7 @@ export class PostMakingFormComponent implements OnInit {
         startDateControl?.clearValidators();
         endDateControl?.clearValidators();
       }
-  
+
       startDateControl?.updateValueAndValidity();
       endDateControl?.updateValueAndValidity();
     });
@@ -83,27 +84,27 @@ export class PostMakingFormComponent implements OnInit {
     const target = event.target as HTMLInputElement;
     if (target.files) {
       const files = Array.from(target.files);
-  
+
       files.forEach(file => {
         const formData = new FormData();
         formData.append('file', file);
         formData.append('upload_preset', this.uploadPreset);
-  
+
         fetch(`https://api.cloudinary.com/v1_1/${this.cloudName}/image/upload`, {
           method: 'POST',
           body: formData
         })
-        .then(res => res.json())
-        .then(data => {
-          this.uploadedImageUrls.push(data.secure_url);
-          this.postMakingForm.get('illustrations')?.setValue(this.uploadedImageUrls);
-        })
-        .catch(err => {
-          console.error('Erreur upload Cloudinary:', err);
-        });
+          .then(res => res.json())
+          .then(data => {
+            this.uploadedImageUrls.push(data.secure_url);
+            this.postMakingForm.get('illustrations')?.setValue(this.uploadedImageUrls);
+          })
+          .catch(err => {
+            console.error('Erreur upload Cloudinary:', err);
+          });
       });
     }
-  }  
+  }
 
   reset() {
     /*
@@ -120,6 +121,12 @@ export class PostMakingFormComponent implements OnInit {
   }
 
   onSubmit() {
+    this.formSubmitted = true;
+
+    if (this.postMakingForm.invalid) {
+      return;
+    }
+
     const formValue = this.postMakingForm.value;
     const address = formValue.localisation ?? '';
     const { street, city, postalCode } = this.splitAddress(address);
@@ -176,11 +183,11 @@ export class PostMakingFormComponent implements OnInit {
       });
     }
   }
-  
+
   private splitAddress(address: string): { street: string; city: string; postalCode: string } {
     const regex = /^(.+),\s*(\d{5})\s+(.+)$/;
     const match = address.match(regex);
-  
+
     if (match) {
       return {
         street: match[1],

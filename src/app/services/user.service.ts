@@ -7,6 +7,7 @@ import { UserGetForVisitorDto } from '../models/user-get-visitor.dto';
 import { EventGetDto } from '../models/event-get.dto';
 import { PublicationGetDto } from '../models/publication-get.dto';
 import { environment } from '../../environments/environment';
+import { ProfileUpdateDto } from '../models/profile-update.dto';
 
 @Injectable({
   providedIn: 'root'
@@ -35,6 +36,10 @@ export class UserService {
 
   getUserInfosForVisitor(id: string): Observable<UserGetForVisitorDto> {
     return this.http.get<UserGetForVisitorDto>(`${this.apiUrl}/user/${id}/infos/visitor`, this.httpOptions);
+  }
+
+  updateProfile(infosUser: ProfileUpdateDto): Observable<any> {
+    return this.http.put<any>(`${this.apiUrl}/update`, infosUser, this.httpOptions);
   }
 
   updateIntroduction(bio: BioUpdateDto): void {
