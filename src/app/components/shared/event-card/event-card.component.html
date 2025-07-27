@@ -54,12 +54,7 @@
     <img alt="" [src]="data.author.picture" class="object-cover w-12 h-12 rounded-full shadow dark:bg-gray-500">
     }
     <div class="flex flex-col space-y-1">
-      @if (data.author.pseudonym !== null) {
-      <a rel="noopener noreferrer" href="#" class="text-sm font-semibold">{{ data.author.pseudonym }}</a>
-      } @else {
-      <a rel="noopener noreferrer" href="#" class="text-sm font-semibold">{{ data.author.firstname }} {{
-        data.author.lastname }}</a>
-      }
+      <a rel="noopener noreferrer" [routerLink]="'/hello/neighbors/user/' + data.author.id" class="text-sm font-semibold">{{ data.author.pseudonym || data.author.firstname + " " + data.author.lastname }}</a>
       <span class="text-xs dark:text-gray-600">{{ data.creationDate | date:'medium' }}</span>
     </div>
   </div>
@@ -104,11 +99,11 @@
 
 <div class="flex items-center mt-3 px-4">
   <i class="fa-solid fa-calendar-days"></i>
-  <span class="ml-4">Du {{ data.startDate | date:'mediumDate' }} au {{ data.endDate | date:'mediumDate' }}</span>
+  <span class="ml-6">Du {{ data.startDate | date:'mediumDate' }} au {{ data.endDate | date:'mediumDate' }}</span>
 </div>
 <div class="flex items-center px-4">
   <i class="fa-solid fa-map-pin"></i>
-  <span class="ml-5">{{ data.street }} {{ data.city }} {{ data.postalCode }}</span>
+  <span class="ml-7">{{ data.street }} {{ data.city }} {{ data.postalCode }}</span>
 </div>
 <div class="flex items-center px-4">
   <i class="fa-solid fa-users"></i>
@@ -158,9 +153,9 @@
   </div>
 </div>
 
-@if (isCommentVIsible) {
-<div class="border-solid border-t border-gray-300 pt-1">
-  <app-comments [comments]="comments" (onPostCommentOutput)="onPostComment($event)"></app-comments>
-</div>
-}
+  @if (isCommentVIsible) {
+  <div class="border-solid border-gray-300">
+    <app-comments [comments]="comments" (onPostCommentOutput)="onPostComment($event)"></app-comments>
+  </div>
+  }
 }

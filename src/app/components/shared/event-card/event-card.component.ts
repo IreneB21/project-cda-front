@@ -9,11 +9,12 @@ import { CommentsComponent } from '../comments/comments.component';
 import { CommentGetDto } from '../../../models/comment-get.dto';
 import { AbstractControl, FormBuilder, FormGroup, ReactiveFormsModule, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { EventUpdateDto } from '../../../models/event-update.dto';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-event-card',
   standalone: true,
-  imports: [CommonModule, CommentsComponent, CommentsComponent, ReactiveFormsModule],
+  imports: [CommonModule, CommentsComponent, CommentsComponent, ReactiveFormsModule, RouterLink],
   providers: [{ provide: LOCALE_ID, useValue: 'fr-FR' }],
   templateUrl: './event-card.component.html',
   styleUrl: './event-card.component.css',
@@ -241,7 +242,7 @@ export class EventCardComponent implements OnInit {
 
   onPostComment(comment: string): void {
     this.commentService.postEventComment(this.data.id, this.userId, comment).subscribe({
-      next: comment => this.comments.push({ id: 1, body: comment, authorName: 'paul' }),//[...this.comments, { id: this.data.id, body: comment, authorId: this.userId }],
+      next: comment => this.comments.push(comment),//[...this.comments, { id: this.data.id, body: comment, authorId: this.userId }],
       error: error => console.log(error)
     });
   }

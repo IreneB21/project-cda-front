@@ -9,11 +9,12 @@ import { CommentGetDto } from '../../../models/comment-get.dto';
 import { CommentsComponent } from '../comments/comments.component';
 import { PublicationUpdateDto } from '../../../models/publication-update.dto';
 import { AutofillAddressInputComponent } from '../autofill-address-input/autofill-address-input.component';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-publication-card',
   standalone: true,
-  imports: [DatePipe, CommentsComponent, ReactiveFormsModule, AutofillAddressInputComponent, NgFor],
+  imports: [DatePipe, CommentsComponent, ReactiveFormsModule, AutofillAddressInputComponent, NgFor, RouterLink],
   providers: [{provide: LOCALE_ID, useValue:'fr-FR'}],
   templateUrl: './publication-card.component.html',
   styleUrl: './publication-card.component.css',
@@ -149,7 +150,7 @@ export class PublicationCardComponent implements OnInit {
 
   onPostComment(comment: string): void {
     this.commentService.postPublicationComment(this.data.id, this.userId, comment).subscribe({
-      next: comment => this.comments.push({ id: 1, body: comment, authorName: 'paul' }),//[...this.comments, { id: this.data.id, body: comment, authorId: this.userId }],
+      next: comment => this.comments.push(comment),//[...this.comments, { id: this.data.id, body: comment, authorId: this.userId }],
       error: error => console.log(error)
     });
   }

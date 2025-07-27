@@ -3,8 +3,5 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-}
-
-img {
-    object-fit: contain;
+    width: 400px;
 }

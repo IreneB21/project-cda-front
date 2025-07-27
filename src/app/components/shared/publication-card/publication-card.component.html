@@ -39,12 +39,7 @@
       <img alt="" [src]="data.author.picture" class="object-cover w-12 h-12 rounded-full shadow dark:bg-gray-500">
       }
       <div class="flex flex-col space-y-1">
-        @if (data.author.pseudonym !== null) {
-        <a rel="noopener noreferrer" href="#" class="text-sm font-semibold">{{ data.author.pseudonym }}</a>
-        } @else {
-        <a rel="noopener noreferrer" href="#" class="text-sm font-semibold">{{ data.author.firstname }} {{
-          data.author.lastname }}</a>
-        }
+        <a rel="noopener noreferrer" [routerLink]="'/hello/neighbors/user/' + data.author.id" class="text-sm font-semibold">{{ data.author.pseudonym || data.author.firstname + " " + data.author.lastname }}</a>
         <span class="text-xs dark:text-gray-600">{{ data.publicationDate | date:'medium' }}</span>
       </div>
     </div>
@@ -130,7 +125,7 @@
   </div>
 
   @if (isCommentVIsible) {
-    <div class="border-solid border-t border-gray-300 pt-1">
+    <div class="border-solid border-gray-300">
       <app-comments [comments]="comments" (onPostCommentOutput)="onPostComment($event)"></app-comments>
     </div>
   }

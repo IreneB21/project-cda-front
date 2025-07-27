@@ -3,13 +3,14 @@ import { RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
 import { EventCardComponent } from '../../../event-card/event-card.component';
 import { PublicationCardComponent } from '../../../publication-card/publication-card.component';
 import { HomeService } from '../../../../../services/home.service';
+import { PostMakingFormComponent } from "../../../../member/post-making-form/post-making-form.component";
 
 @Component({
   selector: 'app-flow-section',
   standalone: true,
-  imports: [RouterOutlet, RouterLink, RouterLinkActive, PublicationCardComponent, EventCardComponent],
+  imports: [RouterOutlet, RouterLink, RouterLinkActive, PublicationCardComponent, EventCardComponent, PostMakingFormComponent],
   templateUrl: './flow-section.component.html',
-  host: { 'class':'flex flex-col flex-grow' }
+  host: { 'class':'flex flex-col flex-grow items-center' }
 })
 export class FlowSectionComponent {
 

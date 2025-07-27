@@ -1,10 +1,11 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommentGetDto } from '../../../models/comment-get.dto';
 import { FormsModule } from '@angular/forms';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-comments',
-  imports: [FormsModule],
+  imports: [FormsModule, RouterLink],
   templateUrl: './comments.component.html',
   styleUrl: './comments.component.css'
 })

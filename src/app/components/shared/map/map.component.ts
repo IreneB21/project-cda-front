@@ -19,6 +19,8 @@ L.Icon.Default.mergeOptions({
 export class MapComponent implements OnInit, AfterViewInit {
 
   userId = sessionStorage.getItem("userId");
+  private userLatitude = sessionStorage.getItem("latitude");
+  private userLongitude = sessionStorage.getItem("longitude");
 
   private homeService = inject(HomeService);
   posts: Array<any> = [];
@@ -36,8 +38,9 @@ export class MapComponent implements OnInit, AfterViewInit {
   }
 
   private initMap() {
-    const baseMapURl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
-    this.map = L.map('map').setView([48.8566, 2.3522], 13); // Paris par exemple
+    const baseMapURl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+    const coordinates: [number, number] = [Number(this.userLatitude), Number(this.userLongitude)];
+    this.map = L.map('map').setView(coordinates, 13); 
     L.tileLayer(baseMapURl, {
       attribution: '&copy; OpenStreetMap contributors'
     }).addTo(this.map);

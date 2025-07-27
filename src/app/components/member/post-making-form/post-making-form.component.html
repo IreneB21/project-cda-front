@@ -12,13 +12,13 @@
   <!-- Inputs for events -->
   @if (type.value == "EVENT") {
     <div class ="flex gap-2 mb-4">
-      <div class="flex flex-col">
+      <div class="flex flex-col flex-grow">
         <label for="">Date de début *</label>
-        <input type="date" formControlName="startDate" class="place-items-stretch bg-gray-100 border border-gray-300 p-2 w-1/2 outline-none" />
+        <input type="date" formControlName="startDate" class="place-items-stretch bg-gray-100 border border-gray-300 p-2 outline-none" />
       </div>
-      <div class="flex flex-col">
+      <div class="flex flex-col flex-grow">
         <label for="">Date de fin *</label>
-        <input type="date" formControlName="endDate" class="grow bg-gray-100 border border-gray-300 p-2 w-1/2 outline-none" />
+        <input type="date" formControlName="endDate" class="grow bg-gray-100 border border-gray-300 p-2 outline-none" />
       </div>
       </div>
     <input placeholder="Capacité maximale" type="number" formControlName="maxCapacity"class="bg-gray-100 border border-gray-300 p-2 mb-4 outline-none" />
