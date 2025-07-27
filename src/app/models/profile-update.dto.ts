@@ -1,10 +1,10 @@
 export interface ProfileUpdateDto {
-    id: number;
-    firstname: string;
+    userId: number;
     lastname: string;
+    firstname: string;
     pseudonym: string;
-    email: string;
     password?: string;
+    email: string;
     city: string;
     postalCode: string;
     street: string;
