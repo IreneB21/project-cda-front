@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, EventEmitter, inject, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgFor } from '@angular/common';
 import { AbstractControl, FormBuilder, ReactiveFormsModule, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
@@ -21,6 +21,8 @@ export class PostMakingFormComponent implements OnInit {
   private formBuilder = inject(FormBuilder);
   private userId = sessionStorage.getItem("userId");
   formSubmitted = false;
+
+  @Output() onPostAdded = new EventEmitter();
 
   constructor(
     private publicationService: PublicationService,
@@ -107,17 +109,8 @@ export class PostMakingFormComponent implements OnInit {
   }
 
   reset() {
-    /*
-    this.postMakingForm = {
-      publicationType: '',
-      startDate: '',
-      endDate: '',
-      maxCapacity: '',
-      title: '',
-      description: '',
-      localisation: '',
-      illustrations: '',
-    };*/
+    this.postMakingForm.reset();
+    this.postMakingForm.patchValue({ publicationType: ""});
   }
 
   onSubmit() {
@@ -154,7 +147,10 @@ export class PostMakingFormComponent implements OnInit {
       this.eventService.saveEvent(eventData).subscribe({
         next: (data) => {
           console.log("Événement enregistré :", data);
-          window.location.reload();
+          this.onPostAdded.emit(data);
+          this.reset();
+          this.formSubmitted = false;
+          //window.location.reload();
         },
         error: (err) => {
           console.error("Erreur création événement :", err);
@@ -178,7 +174,10 @@ export class PostMakingFormComponent implements OnInit {
       this.publicationService.savePublication(publicationData).subscribe({
         next: (data) => {
           console.log(data);
-          window.location.reload();
+          this.onPostAdded.emit(data);
+          this.reset();
+          this.formSubmitted = false;
+          //window.location.reload();
         }
       });
     }

@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, EventEmitter, inject, Input, Output, signal, Signal, WritableSignal } from '@angular/core';
 import { RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
 import { EventCardComponent } from '../../../event-card/event-card.component';
 import { PublicationCardComponent } from '../../../publication-card/publication-card.component';
@@ -8,11 +8,14 @@ import { PostMakingFormComponent } from "../../../../member/post-making-form/pos
 @Component({
   selector: 'app-flow-section',
   standalone: true,
-  imports: [RouterOutlet, RouterLink, RouterLinkActive, PublicationCardComponent, EventCardComponent, PostMakingFormComponent],
+  imports: [RouterOutlet, RouterLink, RouterLinkActive, PostMakingFormComponent],
   templateUrl: './flow-section.component.html',
   host: { 'class':'flex flex-col flex-grow items-center' }
 })
 export class FlowSectionComponent {
+
+  @Input() posts: Array<any> = [];
+  @Output() onPostAdded = new EventEmitter();
 
   button = "inline-flex items-center h-10 px-10 -mb-px text-sm text-center bg-transparent border-b-2 sm:text-base whitespace-nowrap focus:outline-none";
   active = "text-black border-black dark:border-blue-400 dark:text-blue-300";

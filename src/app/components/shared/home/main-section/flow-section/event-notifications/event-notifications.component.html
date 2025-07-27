@@ -1,1 +1,16 @@
-<p>event-notifications works!</p>
+<div class="w-full flex flex-col justify-center items-center gap-3">
+    @if (posts().length === 0) {
+    <div class="flex justify-center items-center gap-5 mt-5">
+        <img src="/desert.jpg" class="my-8 w-80" alt="">
+        <h4 class="">
+            On dirait que la communauté 
+            <br>n'a pas encore publié d'évènement.
+            <br>Alors, à vous de jouer !
+        </h4>
+    </div>
+    } @else {
+        @for (post of posts(); track post.id) {
+        <app-event-card [data]="post"></app-event-card>
+        }
+    }
+</div>

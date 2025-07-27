@@ -1,5 +1,5 @@
 <div class="w-full flex flex-col justify-center items-center gap-3">
-    @if (posts.length === 0) {
+    @if (posts().length === 0) {
     <div class="flex justify-center items-center gap-5 mt-5">
         <img src="/desert.jpg" class="my-8 w-80" alt="">
         <h4 class="">
@@ -9,7 +9,7 @@
         </h4>
     </div>
     } @else {
-        @for (post of posts; track post.id) {
+        @for (post of posts(); track $index) {
             @if (post.category) {
             <app-publication-card [data]="post"></app-publication-card>
             } @else {

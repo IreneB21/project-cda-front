@@ -1,2 +1,2 @@
-<app-flow-section></app-flow-section>
-<app-side-section></app-side-section>
+<app-flow-section [posts]="posts" (onPostAdded)="onPostAdded($event)"></app-flow-section>
+<app-side-section (onPostAdded)="onPostAdded($event)"></app-side-section>

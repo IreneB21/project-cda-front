@@ -23,8 +23,17 @@ export class ActivityTabComponent implements OnInit {
       this.userService.getUserPosts(this.userId);
     }    
     this.userService.allPosts$.subscribe((data) => {
-      this.posts = data;
-      console.log(data);
+      this.posts = data.sort((post1, post2) => { 
+        const date1 = "category" in post1 ? post1.publicationDate.valueOf() : post1.creationDate.valueOf();
+        const date2 = "category" in post2 ? post2.publicationDate.valueOf() : post2.creationDate.valueOf();
+       
+        return date2 - date1;
+      });
+      //console.log(data);
     });
+  }
+
+  onPostAdded(event: any): void {
+    this.posts.unshift(event);
   }
 }

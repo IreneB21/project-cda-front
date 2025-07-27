@@ -1,7 +1,8 @@
-import { Component, inject, Input, OnInit } from '@angular/core';
+import { Component, inject, Input, OnInit, Signal, WritableSignal } from '@angular/core';
 import { PublicationCardComponent } from '../../../../publication-card/publication-card.component';
 import { EventCardComponent } from '../../../../event-card/event-card.component';
 import { HomeService } from '../../../../../../services/home.service';
+import { ROUTER_OUTLET_DATA } from '@angular/router';
 
 @Component({
   selector: 'app-all-notifications',
@@ -9,13 +10,10 @@ import { HomeService } from '../../../../../../services/home.service';
   templateUrl: './all-notifications.component.html',
   styleUrl: './all-notifications.component.css'
 })
-export class AllNotificationsComponent {
+export class AllNotificationsComponent implements OnInit {
 
   private homeService = inject(HomeService);
-  posts: Array<any> = [];
+  posts = inject(ROUTER_OUTLET_DATA) as WritableSignal<Array<any>>;
 
-  ngOnInit(): void {
-    this.homeService.getNearbyposts();
-    this.homeService.allPosts$.subscribe((data) => this.posts = data);
-  }
+  ngOnInit(): void {}
 }

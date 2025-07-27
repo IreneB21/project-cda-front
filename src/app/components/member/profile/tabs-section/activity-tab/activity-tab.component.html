@@ -6,9 +6,9 @@
             <i class="fa-regular fa-circle-down animate-bounce"></i>
         </h6>
     </div>
-    <app-post-making-form class="w-full"></app-post-making-form>
+    <app-post-making-form (onPostAdded)="onPostAdded($event)" class="w-full"></app-post-making-form>
 } @else {
-    <app-post-making-form class="w-full mb-3"></app-post-making-form>
+    <app-post-making-form (onPostAdded)="onPostAdded($event)" class="w-full mb-3"></app-post-making-form>
     <div class="flex flex-col gap-3 w-full mt-3">
         <div class="flex flex-col gap-3">
             @for (post of posts; track post.id) {

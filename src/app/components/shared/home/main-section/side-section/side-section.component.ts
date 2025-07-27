@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, EventEmitter, inject, OnInit, Output } from '@angular/core';
 import { SideEventCardComponent } from './side-event-card/side-event-card.component';
 import { PostMakingFormComponent } from '../../../../member/post-making-form/post-making-form.component';
 import { EventGetDto } from '../../../../../models/event-get.dto';
@@ -22,6 +22,8 @@ export class SideSectionComponent implements OnInit {
   randomPics: Array<string> = [];
   nextThreeEvents: Array<EventGetDto> = [];
   totalUsersAround!: number;
+
+  @Output() onPostAdded = new EventEmitter();
   
   ngOnInit(): void {
     this.homeService.getRandomUserPictures().subscribe((data) => {

@@ -48,7 +48,7 @@ export class PublicationCardComponent implements OnInit {
 
     this.uploadedImageUrls = [...this.data.illustrations];
 
-    console.log(this.data);
+    //console.log(this.data);
   }
 
   enterEditMode(): void {
