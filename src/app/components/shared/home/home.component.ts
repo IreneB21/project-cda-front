@@ -20,12 +20,15 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.homeService.getNearbyposts();
-    this.homeService.allPosts$.subscribe(data => this.posts = data.sort((post1, post2) => { 
-        const date1 = "category" in post1 ? post1.publicationDate.valueOf() : post1.creationDate.valueOf();
-        const date2 = "category" in post2 ? post2.publicationDate.valueOf() : post2.creationDate.valueOf();
+    this.homeService.allPosts$.subscribe(data => {this.posts = data.sort((post1, post2) => { 
+        const date1 = "category" in post1 ? new Date(post1.publicationDate).valueOf() : new Date(post1.creationDate).valueOf();
+        const date2 = "category" in post2 ? new Date(post2.publicationDate).valueOf() : new Date(post2.creationDate).valueOf();
        
         return date2 - date1;
-      }));
+      });
+      console.log(this.posts);
+    }
+    );
   }
 
   onPostAdded(event: any) {

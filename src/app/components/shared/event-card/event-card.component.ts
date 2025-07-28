@@ -1,4 +1,4 @@
-import { Component, inject, Input, LOCALE_ID, OnInit } from '@angular/core';
+import { Component, EventEmitter, inject, Input, LOCALE_ID, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { EventGetDto } from '../../../models/event-get.dto';
@@ -9,18 +9,19 @@ import { CommentsComponent } from '../comments/comments.component';
 import { CommentGetDto } from '../../../models/comment-get.dto';
 import { AbstractControl, FormBuilder, FormGroup, ReactiveFormsModule, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { EventUpdateDto } from '../../../models/event-update.dto';
+import { AutofillAddressInputComponent } from '../autofill-address-input/autofill-address-input.component';
 import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-event-card',
   standalone: true,
-  imports: [CommonModule, CommentsComponent, CommentsComponent, ReactiveFormsModule, RouterLink],
+  imports: [CommonModule, CommentsComponent, ReactiveFormsModule, RouterLink, AutofillAddressInputComponent],
   providers: [{ provide: LOCALE_ID, useValue: 'fr-FR' }],
   templateUrl: './event-card.component.html',
   styleUrl: './event-card.component.css',
   host: { 'class': 'w-xl space-y-6 overflow-hidden font-sans rounded-md border px-6 py-4 bg-white' }
 })
-export class EventCardComponent implements OnInit {
+export class EventCardComponent implements OnInit, OnChanges {
   private eventService = inject(EventService);
   private commentService = inject(CommentService);
   private fb = inject(FormBuilder);
@@ -35,6 +36,8 @@ export class EventCardComponent implements OnInit {
   get data(): EventGetDto {
     return this._data;
   }
+
+  @Output() onDelete = new EventEmitter<number>();
 
   userId = Number(sessionStorage.getItem("userId"));
   comments: CommentGetDto[] = [];
@@ -59,14 +62,31 @@ export class EventCardComponent implements OnInit {
     }, { validators: this.dateRangeValidator });
 
     this.uploadedImageUrls = [...this.data.illustrations];
-
+/*
     this.editForm.get('startDate')?.valueChanges.subscribe(() => {
       this.editForm.get('startDate')?.updateValueAndValidity();
     });
 
     this.editForm.get('endDate')?.valueChanges.subscribe(() => {
       this.editForm.get('endDate')?.updateValueAndValidity();
-    });
+    });*/
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if(changes["data"] && !!this.editForm) {
+      this.editForm.setValue({
+        title: this.data.title,
+        description: this.data.description,
+        startDate: this.data.startDate,
+        endDate: this.data.endDate,
+        //maxCapacity: this.data.maxCapacity,
+        city: this.data.city,
+        postalCode: this.data.postalCode,
+        street: this.data.street,
+        address: `${this.data.street} ${this.data.postalCode} ${this.data.city}`,
+        illustrations: []
+      });
+    }
   }
 
   enterEditMode(): void {
@@ -76,6 +96,19 @@ export class EventCardComponent implements OnInit {
 
   cancelUpdate(): void {
     this.isEditing = false;
+
+    this.editForm.setValue({
+      title: this.data.title,
+      description: this.data.description,
+      startDate: this.data.startDate,
+      endDate: this.data.endDate,
+      //maxCapacity: this.data.maxCapacity,
+      city: this.data.city,
+      postalCode: this.data.postalCode,
+      street: this.data.street,
+      address: `${this.data.street} ${this.data.postalCode} ${this.data.city}`,
+      illustrations: []
+    });
   }
 
   dateRangeValidator: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
@@ -151,12 +184,14 @@ export class EventCardComponent implements OnInit {
 
     const formValues = this.editForm.value;
 
+    const { street, city, postalCode } = this.splitAddress(formValues.address);
+
     const updateDto: EventUpdateDto = {
       eventId: this.data.id,
       title: formValues.title,
-      city: formValues.city,
-      postalCode: formValues.postalCode,
-      street: formValues.street,
+      city,
+      postalCode,
+      street,
       startDate: formValues.startDate,
       endDate: formValues.endDate,
       description: formValues.description,
@@ -175,7 +210,7 @@ export class EventCardComponent implements OnInit {
   cancelEvent(id: number): void {
     //@Todo : afficher message de confirmation (en fonction du booléen)
     this.eventService.cancelEvent(id).subscribe();
-
+    this.onDelete.emit(id);
     //window.location.reload();
   }
 
@@ -256,5 +291,35 @@ export class EventCardComponent implements OnInit {
 
   isLikedByUser(): boolean {
     return this.data?.likes?.includes(this.userId) ?? false;
+  }
+
+  private splitAddress(address: string): { street: string; city: string; postalCode: string } {
+    const postalCodeRegex = /\b\d{5}\b/;
+    const match = address.match(postalCodeRegex);
+  
+    if (match) {
+      const postalCode = match[0];
+      const parts = address.replace(postalCode, '').trim().split(/\s+/);
+      const postalCodeIndex = address.indexOf(postalCode);
+      
+      const before = address.substring(0, postalCodeIndex).trim();
+      const after = address.substring(postalCodeIndex + postalCode.length).trim();
+  
+      let street = before;
+      let city = after;
+  
+      if (!city && parts.length > 0) {
+        city = parts.slice(-1)[0];
+      }
+  
+      return {
+        street,
+        postalCode,
+        city
+      };
+    }
+  
+    console.warn('Adresse non reconnue :', address);
+    return { street: '', postalCode: '', city: '' };
   }
 }

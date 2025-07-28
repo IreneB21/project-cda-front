@@ -24,8 +24,8 @@ export class ActivityTabComponent implements OnInit {
     }    
     this.userService.allPosts$.subscribe((data) => {
       this.posts = data.sort((post1, post2) => { 
-        const date1 = "category" in post1 ? post1.publicationDate.valueOf() : post1.creationDate.valueOf();
-        const date2 = "category" in post2 ? post2.publicationDate.valueOf() : post2.creationDate.valueOf();
+        const date1 = "category" in post1 ? new Date(post1.publicationDate).valueOf() : new Date(post1.creationDate).valueOf();
+        const date2 = "category" in post2 ? new Date(post2.publicationDate).valueOf() : new Date(post2.creationDate).valueOf();
        
         return date2 - date1;
       });
@@ -35,5 +35,13 @@ export class ActivityTabComponent implements OnInit {
 
   onPostAdded(event: any): void {
     this.posts.unshift(event);
+  }
+
+  onDeleteEvent(eventId: number): void {
+    this.posts = this.posts.filter(post => !(!post.category && post.id === eventId));
+  }
+
+  onDeletePublication(publicationId: number): void {
+    this.posts = this.posts.filter(post => !(!!post.category && post.id === publicationId));
   }
 }

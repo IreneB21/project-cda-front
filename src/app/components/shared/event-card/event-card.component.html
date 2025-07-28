@@ -1,6 +1,6 @@
 @if (isEditing) {
 <form [formGroup]="editForm" (ngSubmit)="updateEvent()" class="space-y-4 gap-2">
-  <input formControlName="title" placeholder="Titre" class="bg-gray-100 border border-gray-300 p-2 mb-4 outline-none" />
+  <input formControlName="title" placeholder="Titre" class="bg-gray-100 border rounded border-gray-300 p-2 mb-4 outline-none w-full" />
   <textarea formControlName="description" rows="3" placeholder="Description"
     class="w-full border border-gray-300 px-2 py-1 rounded bg-gray-100 outline-none mb-4"></textarea>
 

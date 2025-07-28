@@ -1,4 +1,4 @@
-import { Component, inject, Input, LOCALE_ID, OnInit } from '@angular/core';
+import { Component, EventEmitter, inject, Input, LOCALE_ID, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { DatePipe, NgFor } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 
@@ -20,13 +20,15 @@ import { RouterLink } from '@angular/router';
   styleUrl: './publication-card.component.css',
   host: { 'class': 'w-xl space-y-6 overflow-hidden font-sans rounded-md border px-6 py-4 bg-white' },
 })
-export class PublicationCardComponent implements OnInit {
+export class PublicationCardComponent implements OnInit, OnChanges {
   private publicationService = inject(PublicationService);
   private commentService = inject(CommentService);
   private fb = inject(FormBuilder);
 
   @Input() data!: PublicationGetDto;
   @Input() isEditable = false;
+
+  @Output() onDelete = new EventEmitter<number>();
 
   userId = Number(sessionStorage.getItem('userId'));
   comments: CommentGetDto[] = [];
@@ -51,12 +53,36 @@ export class PublicationCardComponent implements OnInit {
     //console.log(this.data);
   }
 
+  ngOnChanges(changes: SimpleChanges): void {
+    if(changes["data"] && !!this.editForm) {
+      this.editForm.setValue({
+      title: this.data.title,
+      description: this.data.description,
+      city: this.data.city,
+      postalCode: this.data.postalCode,
+      street: this.data.street,
+      address: `${this.data.street} ${this.data.postalCode} ${this.data.city}`,
+      illustrations: []
+    });
+    }
+  }
+
   enterEditMode(): void {
     this.isEditing = true;
   }
 
   cancelUpdate(): void {
     this.isEditing = false;
+
+    this.editForm.setValue({
+      title: this.data.title,
+      description: this.data.description,
+      city: this.data.city,
+      postalCode: this.data.postalCode,
+      street: this.data.street,
+      address: `${this.data.street} ${this.data.postalCode} ${this.data.city}`,
+      illustrations: []
+    });
   }
 
   selectedFiles: File[] = [];
@@ -92,19 +118,21 @@ export class PublicationCardComponent implements OnInit {
   updatePublication(): void {
     const formValues = this.editForm.value;
 
+    const { street, city, postalCode } = this.splitAddress(formValues.address);
+
     const updateDto: PublicationUpdateDto = {
       publicationId: this.data.id,
       title: formValues.title,
-      city: formValues.city,
-      postalCode: formValues.postalCode,
-      street: formValues.street,
+      city,
+      postalCode,
+      street,
       description: formValues.description,
       illustrations: formValues.illustrations
     };
 
     this.publicationService.updatePublication(updateDto).subscribe({
       next: (updatedData) => {
-        this.data = { ...this.data, ...updateDto };
+        this.data = updatedData;
         this.isEditing = false;
       },
       error: (err) => console.error(err)
@@ -114,7 +142,7 @@ export class PublicationCardComponent implements OnInit {
   deletePublication(id: number): void {
     //@Todo : afficher message de confirmation (en fonction du booléen)
     this.publicationService.deletePublication(id).subscribe();
-
+    this.onDelete.emit(id);
     //window.location.reload();
   }
 
@@ -164,5 +192,35 @@ export class PublicationCardComponent implements OnInit {
 
   isLikedByUser(): boolean {
     return this.data?.likes?.includes(this.userId) ?? false;
+  }
+
+  private splitAddress(address: string): { street: string; city: string; postalCode: string } {
+    const postalCodeRegex = /\b\d{5}\b/;
+    const match = address.match(postalCodeRegex);
+  
+    if (match) {
+      const postalCode = match[0];
+      const parts = address.replace(postalCode, '').trim().split(/\s+/);
+      const postalCodeIndex = address.indexOf(postalCode);
+      
+      const before = address.substring(0, postalCodeIndex).trim();
+      const after = address.substring(postalCodeIndex + postalCode.length).trim();
+  
+      let street = before;
+      let city = after;
+  
+      if (!city && parts.length > 0) {
+        city = parts.slice(-1)[0];
+      }
+  
+      return {
+        street,
+        postalCode,
+        city
+      };
+    }
+  
+    console.warn('Adresse non reconnue :', address);
+    return { street: '', postalCode: '', city: '' };
   }
 }
